@@ -785,6 +785,12 @@
   .four-star {
     flex: 0 0 48px;
   }
+
+  /* Mantiene le tappe non attive chiaramente riconoscibili sui piccoli schermi. */
+  .timeline-step:not(.is-active) .four-star {
+    opacity: 1;
+    transform: scale(0.84);
+  }
 }
 
 @media (max-width: 520px) {
