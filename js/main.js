@@ -12,6 +12,21 @@
   setHeaderState();
   window.addEventListener("scroll", setHeaderState, { passive: true });
 
+  /* Pulsante discreto per tornare all'inizio della pagina. */
+  const backToTop = document.querySelector(".back-to-top");
+  const setBackToTopState = () => {
+    const isVisible = window.scrollY > 520;
+    backToTop?.classList.toggle("is-visible", isVisible);
+    if (backToTop) backToTop.tabIndex = isVisible ? 0 : -1;
+  };
+
+  setBackToTopState();
+  window.addEventListener("scroll", setBackToTopState, { passive: true });
+  backToTop?.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+  });
+
   const desktopDropdownTriggers = [...document.querySelectorAll(".nav-dropdown__trigger")];
   const pinnedDesktopDropdowns = new WeakSet();
   const closeDesktopDropdowns = (except = null) => {
@@ -589,12 +604,6 @@
     return { refresh: () => goTo(firstVisible, false, true) };
   });
 
-  document.querySelectorAll("[data-catalog-cover-link]").forEach((link) => {
-    link.addEventListener("click", (event) => {
-      if (link.getAttribute("href") === "#") event.preventDefault();
-    });
-  });
-
   /* Su mobile lo zoom segue in modo continuo la posizione del pannello nello schermo. */
   const mobileCatalogFocusQuery = window.matchMedia("(max-width: 780px)");
   let mobileCatalogFocusFrame;
@@ -1045,7 +1054,7 @@
     {
       titleLead: "Le origini",
       titleEmphasis: "a Novara",
-      image: "images/timeline-corso-cavour-1900-restored.png",
+      image: "images/timeline-corso-cavour-1900-restored.webp",
       alt: "Corso Cavour a Novara nei primi del Novecento",
       caption: "Corso Cavour · primi del Novecento",
       description: "Nel dopoguerra Pacifico e Giulia diventano un punto di riferimento per l'oreficeria e l'argenteria piemontese, con sede in Corso Cavour 11.",
@@ -1059,7 +1068,7 @@
     {
       titleLead: "La gioielleria",
       titleEmphasis: "di famiglia",
-      image: "images/timeline-viale-roma-1991.png",
+      image: "images/timeline-viale-roma-1991.webp",
       alt: "Veduta aerea in bianco e nero di Viale Roma a Novara nel 1991",
       caption: "Viale Roma vista dall'alto, 1991",
       description: "A metà degli anni '70 la famiglia lascia l'attività di grossista e apre la Gioielleria-Argenteria Di Nucci in Viale Roma, dove resterà per 45 anni.",
@@ -1073,7 +1082,7 @@
     {
       titleLead: "La terza",
       titleEmphasis: "generazione",
-      image: "images/timeline-terza-generazione.jpg",
+      image: "images/timeline-terza-generazione.webp",
       alt: "Mani che sistemano anelli in un espositore",
       caption: "L'ingresso della terza generazione",
       description: "Nel 2000 Giorgia entra in gioielleria e raccoglie un patrimonio fatto di onestà, professionalità, serietà e competenza.",
@@ -1086,15 +1095,14 @@
     {
       titleLead: "Il ritorno in centro a",
       titleEmphasis: "Novara",
-      image: "images/esterno-di-nucci-hero.png",
+      image: "images/esterno-di-nucci-hero.webp",
       alt: "L'ingresso della Gioielleria Di Nucci in Corso Cavour 10C",
       caption: "2018 · Il ritorno in Corso Cavour",
       description: "Nel settembre 2018 la gioielleria torna dove tutto ha avuto origine: la nuova sede apre in Corso Cavour 10C, nel cuore di Novara.",
       position: "87.5%",
       photoLeft: "calc(100% - var(--timeline-control-rail) - var(--timeline-control-gap) - var(--timeline-photo-width))",
       descriptionSide: "left",
-      contain: false,
-      frameAspect: "4 / 3",
+      contain: true,
       objectPosition: "center center",
       enterFrom: "right"
     }

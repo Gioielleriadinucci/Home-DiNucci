@@ -40,15 +40,13 @@
         data-catalog-exhibitor
         data-catalog-brand="${escapeHtml(brand.id)}"
         aria-labelledby="${titleId}">
-        <a class="catalog-exhibitor__cover" href="${escapeHtml(brand.source)}" target="_blank" rel="noopener noreferrer"
-          data-catalog-cover-link aria-label="Visita il sito ufficiale ${escapeHtml(brand.name)}">
+        <div class="catalog-exhibitor__cover">
           <img src="${escapeHtml(brand.cover.image)}" alt="${escapeHtml(brand.cover.alt)}" loading="lazy" decoding="async">
           <span class="catalog-exhibitor__wash" aria-hidden="true"></span>
           <div class="catalog-exhibitor__label">
             <h3 id="${titleId}">${escapeHtml(brand.name)}</h3>
-            <span class="catalog-exhibitor__link-arrow" aria-hidden="true">↗</span>
           </div>
-        </a>
+        </div>
         <nav class="catalog-category-selector" aria-label="Categorie ${escapeHtml(brand.name)}">
           <span class="catalog-category-indicator" aria-hidden="true"></span>
           <button class="catalog-category-control catalog-category-control--previous" type="button"

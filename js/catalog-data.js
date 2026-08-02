@@ -74,10 +74,10 @@
           "Orecchini Anastasia pendenti con perle Oriente e topazi"
         ]),
         makeCategory("MILUNA", "miluna", "gioielli-con-diamanti", "Gioielli con diamanti", "Diamanti", milunaSource, "Selezione generale e non duplicata di anelli, collane, bracciali e orecchini con diamanti.", [
-          { title: "Anello rivière con cinque diamanti a scalare", image: "miluna/diamanti-iconici/01.jpg" },
-          { title: "Bracciale tennis di diamanti in oro bianco", image: "miluna/diamanti-iconici/03.jpg" },
-          { title: "Collana punto luce a valentino in oro bianco", image: "miluna/diamanti-valentino/02.jpg" },
-          { title: "Orecchini di diamanti a cerchio 15 mm", image: "miluna/orecchini-diamanti/01.jpg" }
+          { title: "Anello rivière con cinque diamanti a scalare", image: "miluna/diamanti-iconici/01.webp" },
+          { title: "Bracciale tennis di diamanti in oro bianco", image: "miluna/diamanti-iconici/03.webp" },
+          { title: "Collana punto luce a valentino in oro bianco", image: "miluna/diamanti-valentino/02.webp" },
+          { title: "Orecchini di diamanti a cerchio 15 mm", image: "miluna/orecchini-diamanti/01.webp" }
         ])
       ]
     },
@@ -236,23 +236,23 @@
       },
       categories: [
         makeCategory("GREGGIO ARGENTO", "greggio", "champagne-cocktail", "Champagne e cocktail", "Tavola", "https://www.greggio.com/shop/it/prodotti/tavola/bar-e-vino.html", "Secchi, caraffe e accessori per il servizio di champagne, cocktail e aperitivi.", [
-          { title: "Caraffa Goccia", image: "greggio/bar/01.jpg" },
-          { title: "Secchio Magnum tre bottiglie", image: "greggio/bar/02.jpg" },
-          { title: "Porta salatini", image: "greggio/bar/03.jpg" },
-          { title: "Secchio ghiaccio Manhattan", image: "greggio/bar/04.jpg" }
+          { title: "Caraffa Goccia", image: "greggio/bar/01.webp" },
+          { title: "Secchio Magnum tre bottiglie", image: "greggio/bar/02.webp" },
+          { title: "Porta salatini", image: "greggio/bar/03.webp" },
+          { title: "Secchio ghiaccio Manhattan", image: "greggio/bar/04.webp" }
         ]),
         makeCategory("GREGGIO ARGENTO", "greggio", "servizi-te-caffe", "Servizi tè e caffè", "Tavola", "https://greggio.com/product-category/tavola/accessori-colazione-te/", "Servizi coordinati e accessori Greggio dedicati al rito del tè e del caffè.", [
-          { title: "Servizio caffè / tè Accenti", image: "greggio/servizi-te-caffe/01.jpg", collection: "Accenti", source: "https://greggio.com/prodotto/servizio-caffe-the-accenti/" },
-          { title: "Teiera liscia da due tazze", image: "greggio/servizi-te-caffe/02.jpg", source: "https://greggio.com/prodotto/teiera/" },
-          { title: "Misurino tè e colino tè", image: "greggio/servizi-te-caffe/03.jpg", source: "https://greggio.com/prodotto/misurino-te-e-colino-te/" },
-          { title: "Molla zucchero", image: "greggio/servizi-te-caffe/04.jpg", source: "https://greggio.com/prodotto/molla-zucchero/" },
+          { title: "Servizio caffè / tè Accenti", image: "greggio/servizi-te-caffe/01.webp", collection: "Accenti", source: "https://greggio.com/prodotto/servizio-caffe-the-accenti/" },
+          { title: "Teiera liscia da due tazze", image: "greggio/servizi-te-caffe/02.webp", source: "https://greggio.com/prodotto/teiera/" },
+          { title: "Misurino tè e colino tè", image: "greggio/servizi-te-caffe/03.webp", source: "https://greggio.com/prodotto/misurino-te-e-colino-te/" },
+          { title: "Molla zucchero", image: "greggio/servizi-te-caffe/04.webp", source: "https://greggio.com/prodotto/molla-zucchero/" },
         ]),
         makeCategory("GREGGIO ARGENTO", "greggio", "candelabri-candelieri", "Candelabri e candelieri", "Home Decor", "https://greggio.com/?s=candeliere&post_type=product", "Candelieri e candelabri Greggio per l'illuminazione decorativa della tavola e della casa.", [
-          { title: "Candeliere Colonna h. 15 cm", image: "greggio/candelabri-candelieri/01.jpg", collection: "Colonna", source: "https://greggio.com/prodotto/candeliere-colonna/" },
-          { title: "Candeliere Inglese h. 23 cm", image: "greggio/candelabri-candelieri/02.jpg", collection: "Inglese", source: "https://greggio.com/prodotto/candeliere-h-23-cm/" },
-          { title: "Candeliere Inglese h. 28 cm", image: "greggio/candelabri-candelieri/03.jpg", collection: "Inglese", source: "https://greggio.com/prodotto/candeliere-h-28-cm/" },
-          { title: "Candelabro Inglese a 3 fiamme", image: "greggio/candelabri-candelieri/04.jpg", collection: "Inglese", source: "https://greggio.com/prodotto/candelabro-3-fiamme/" },
-          { title: "Candelabro Inglese a 5 fiamme", image: "greggio/candelabri-candelieri/05.jpg", collection: "Inglese", source: "https://greggio.com/prodotto/candelabro-5-fiamme/" }
+          { title: "Candeliere Colonna h. 15 cm", image: "greggio/candelabri-candelieri/01.webp", collection: "Colonna", source: "https://greggio.com/prodotto/candeliere-colonna/" },
+          { title: "Candeliere Inglese h. 23 cm", image: "greggio/candelabri-candelieri/02.webp", collection: "Inglese", source: "https://greggio.com/prodotto/candeliere-h-23-cm/" },
+          { title: "Candeliere Inglese h. 28 cm", image: "greggio/candelabri-candelieri/03.webp", collection: "Inglese", source: "https://greggio.com/prodotto/candeliere-h-28-cm/" },
+          { title: "Candelabro Inglese a 3 fiamme", image: "greggio/candelabri-candelieri/04.webp", collection: "Inglese", source: "https://greggio.com/prodotto/candelabro-3-fiamme/" },
+          { title: "Candelabro Inglese a 5 fiamme", image: "greggio/candelabri-candelieri/05.webp", collection: "Inglese", source: "https://greggio.com/prodotto/candelabro-5-fiamme/" }
         ])
       ]
     },
@@ -267,52 +267,52 @@
       },
       categories: [
         makeCategory("OTTAVIANI", "ottaviani", "bijoux", "Bijoux", "Bijoux donna", ottavianiDealer, "Selezione trasversale di bracciali, collane e orecchini rodiati con cristalli e zirconi.", [
-          { title: "Bracciale donna 501048B", image: "ottaviani/bracciali/01.jpg" },
-          { title: "Bracciale donna 501131B", image: "ottaviani/bracciali/02.jpg" },
-          { title: "Collana donna 501131C", image: "ottaviani/collane/01.jpg" },
-          { title: "Orecchini donna 501131O", image: "ottaviani/orecchini/01.jpg" },
-          { title: "Orecchini donna 501130O", image: "ottaviani/bijoux-extra/05.jpg", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501130o" },
-          { title: "Orecchini donna 501125O", image: "ottaviani/bijoux-extra/06.jpg", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501125o" },
-          { title: "Orecchini donna 501117O", image: "ottaviani/bijoux-extra/07.jpg", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501117o" },
-          { title: "Collana donna 501130C", image: "ottaviani/bijoux-extra/08.jpg", source: "https://2bgioielli.it/products/collana-ottaviani-donna-501130c" },
-          { title: "Collana donna 501129C", image: "ottaviani/bijoux-extra/09.jpg", source: "https://2bgioielli.it/products/collana-ottaviani-donna-501129c" },
-          { title: "Collana donna 501125C", image: "ottaviani/bijoux-extra/10.jpg", source: "https://2bgioielli.it/products/collana-ottaviani-donna-501125c" },
-          { title: "Bracciale donna 501130B", image: "ottaviani/bijoux-extra/11.jpg", source: "https://2bgioielli.it/products/bracciale-ottaviani-donna-501130b" },
-          { title: "Bracciale donna 501125B", image: "ottaviani/bijoux-extra/12.jpg", source: "https://2bgioielli.it/products/bracciale-ottaviani-donna-501125b" },
-          { title: "Bracciale donna 501117B", image: "ottaviani/bijoux-extra/13.jpg", source: "https://2bgioielli.it/products/bracciale-ottaviani-donna-501117b" },
-          { title: "Orecchini donna 501100O", image: "ottaviani/bijoux-extra/14.jpg", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501100o" }
+          { title: "Bracciale donna 501048B", image: "ottaviani/bracciali/01.webp" },
+          { title: "Bracciale donna 501131B", image: "ottaviani/bracciali/02.webp" },
+          { title: "Collana donna 501131C", image: "ottaviani/collane/01.webp" },
+          { title: "Orecchini donna 501131O", image: "ottaviani/orecchini/01.webp" },
+          { title: "Orecchini donna 501130O", image: "ottaviani/bijoux-extra/05.webp", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501130o" },
+          { title: "Orecchini donna 501125O", image: "ottaviani/bijoux-extra/06.webp", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501125o" },
+          { title: "Orecchini donna 501117O", image: "ottaviani/bijoux-extra/07.webp", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501117o" },
+          { title: "Collana donna 501130C", image: "ottaviani/bijoux-extra/08.webp", source: "https://2bgioielli.it/products/collana-ottaviani-donna-501130c" },
+          { title: "Collana donna 501129C", image: "ottaviani/bijoux-extra/09.webp", source: "https://2bgioielli.it/products/collana-ottaviani-donna-501129c" },
+          { title: "Collana donna 501125C", image: "ottaviani/bijoux-extra/10.webp", source: "https://2bgioielli.it/products/collana-ottaviani-donna-501125c" },
+          { title: "Bracciale donna 501130B", image: "ottaviani/bijoux-extra/11.webp", source: "https://2bgioielli.it/products/bracciale-ottaviani-donna-501130b" },
+          { title: "Bracciale donna 501125B", image: "ottaviani/bijoux-extra/12.webp", source: "https://2bgioielli.it/products/bracciale-ottaviani-donna-501125b" },
+          { title: "Bracciale donna 501117B", image: "ottaviani/bijoux-extra/13.webp", source: "https://2bgioielli.it/products/bracciale-ottaviani-donna-501117b" },
+          { title: "Orecchini donna 501100O", image: "ottaviani/bijoux-extra/14.webp", source: "https://2bgioielli.it/products/orecchini-ottaviani-donna-501100o" }
         ]),
         makeCategory("OTTAVIANI", "ottaviani", "gioielli-in-argento", "Gioielli in argento", "Argento 925", ottavianiSource, "Prodotti verificati in argento 925 sul sito ufficiale e presso rivenditori specializzati.", [
           "Collana in argento 925 con pendente 600083C",
           "Bracciale rigido in argento 925 Elegance 47827",
           "Orecchini Unica in argento rodiato 925 490231",
           "Collana Croce Smeraldo in argento 925 48316",
-          { title: "Bracciale con charms in argento 925 600233B", image: "ottaviani/gioielli-argento-extra/05.jpg", source: "https://www.gioiapura.it/bracciale-con-charms-donna-argento-925-gioiello-ottaviani-600233b-P176340.htm" },
-          { title: "Anello in argento 925 600148A-16", image: "ottaviani/gioielli-argento-extra/06.jpg", source: "https://www.gioiapura.it/anello-donna-gioielli-ottaviani-600148a-16-P152122.htm" },
-          { title: "Anello in argento 925 600147A-12", image: "ottaviani/gioielli-argento-extra/07.jpg", source: "https://www.gioiapura.it/anello-donna-gioielli-ottaviani-600147a-12-P152113.htm" },
-          { title: "Orecchini in argento 925 600151O", image: "ottaviani/gioielli-argento-extra/08.jpg", source: "https://www.gioiapura.it/orecchini-donna-gioielli-ottaviani-600151o-P152132.htm" },
-          { title: "Orecchini in argento 925 600131O", image: "ottaviani/gioielli-argento-extra/09.jpg", source: "https://www.gioiapura.it/orecchini-donna-gioielli-ottaviani-600131o-P152102.htm" },
-          { title: "Collana Elegance in argento 925 501119C", image: "ottaviani/gioielli-argento-extra/10.jpg", source: "https://www.gioiapura.it/collana-argento-925-con-pendente-donna-ottaviani-elegance-501119c-P427548.htm" },
-          { title: "Collana con pendente in argento 925 600082C", image: "ottaviani/gioielli-argento-extra/11.jpg", source: "https://www.gioiapura.it/collana-argento-925-con-pendente-donna-ottaviani-600082c-P313893.htm" },
-          { title: "Collana in argento 925 600171C", image: "ottaviani/gioielli-argento-extra/12.jpg", source: "https://www.gioiapura.it/collana-donna-gioielli-ottaviani-600171c-P152157.htm" },
-          { title: "Collana in argento 925 600131C", image: "ottaviani/gioielli-argento-extra/13.jpg", source: "https://www.gioiapura.it/collana-donna-gioielli-ottaviani-600131c-P152101.htm" },
-          { title: "Collana in argento 925 600149C", image: "ottaviani/gioielli-argento-extra/14.jpg", source: "https://www.gioiapura.it/collana-donna-gioielli-ottaviani-600149c-P152127.htm" }
+          { title: "Bracciale con charms in argento 925 600233B", image: "ottaviani/gioielli-argento-extra/05.webp", source: "https://www.gioiapura.it/bracciale-con-charms-donna-argento-925-gioiello-ottaviani-600233b-P176340.htm" },
+          { title: "Anello in argento 925 600148A-16", image: "ottaviani/gioielli-argento-extra/06.webp", source: "https://www.gioiapura.it/anello-donna-gioielli-ottaviani-600148a-16-P152122.htm" },
+          { title: "Anello in argento 925 600147A-12", image: "ottaviani/gioielli-argento-extra/07.webp", source: "https://www.gioiapura.it/anello-donna-gioielli-ottaviani-600147a-12-P152113.htm" },
+          { title: "Orecchini in argento 925 600151O", image: "ottaviani/gioielli-argento-extra/08.webp", source: "https://www.gioiapura.it/orecchini-donna-gioielli-ottaviani-600151o-P152132.htm" },
+          { title: "Orecchini in argento 925 600131O", image: "ottaviani/gioielli-argento-extra/09.webp", source: "https://www.gioiapura.it/orecchini-donna-gioielli-ottaviani-600131o-P152102.htm" },
+          { title: "Collana Elegance in argento 925 501119C", image: "ottaviani/gioielli-argento-extra/10.webp", source: "https://www.gioiapura.it/collana-argento-925-con-pendente-donna-ottaviani-elegance-501119c-P427548.htm" },
+          { title: "Collana con pendente in argento 925 600082C", image: "ottaviani/gioielli-argento-extra/11.webp", source: "https://www.gioiapura.it/collana-argento-925-con-pendente-donna-ottaviani-600082c-P313893.htm" },
+          { title: "Collana in argento 925 600171C", image: "ottaviani/gioielli-argento-extra/12.webp", source: "https://www.gioiapura.it/collana-donna-gioielli-ottaviani-600171c-P152157.htm" },
+          { title: "Collana in argento 925 600131C", image: "ottaviani/gioielli-argento-extra/13.webp", source: "https://www.gioiapura.it/collana-donna-gioielli-ottaviani-600131c-P152101.htm" },
+          { title: "Collana in argento 925 600149C", image: "ottaviani/gioielli-argento-extra/14.webp", source: "https://www.gioiapura.it/collana-donna-gioielli-ottaviani-600149c-P152127.htm" }
         ]),
         makeCategory("OTTAVIANI", "ottaviani", "sculture-complementi", "Sculture e complementi", "Home Design", ottavianiDealer, "Cristallo, porcellana e complementi decorativi per la casa.", [
           "Scrigno in cristallo",
           "Alzata in cristallo 30 cm",
           "Profumatore in porcellana 9 cm",
           "Candelabro a tre fiamme",
-          { title: "Scultura Toro in cristallo 800488", image: "ottaviani/oggettistica-extra/05.jpg", source: "https://2bgioielli.it/products/scultura-ottaviani-toro-800488" },
-          { title: "Profumatore e candela 31487", image: "ottaviani/oggettistica-extra/06.jpg", source: "https://2bgioielli.it/products/profumatore-e-candela-ottaviani-31487" },
-          { title: "Centrotavola Fiamma 15 cm — 800478N", image: "ottaviani/oggettistica-extra/07.jpg", source: "https://2bgioielli.it/products/centrotavola-ottaviani-800478n" },
-          { title: "Centrotavola Foglie 26 cm — 77217", image: "ottaviani/oggettistica-extra/08.jpg", source: "https://2bgioielli.it/products/centrotavola-ottaviani-77217" },
-          { title: "Vaso Marea in cristallo 800470", image: "ottaviani/oggettistica-extra/09.jpg", source: "https://2bgioielli.it/products/vaso-ottaviani-marea-800470" },
-          { title: "Scultura Pesce dei Desideri 800487", image: "ottaviani/oggettistica-extra/10.jpg", source: "https://2bgioielli.it/products/scultura-ottaviani-pesce-dei-desideri-800487" },
-          { title: "Scultura Navigare in cristallo 800436", image: "ottaviani/oggettistica-extra/11.jpg", source: "https://2bgioielli.it/products/scultura-ottaviani-navigare-800436" },
-          { title: "Scultura Elefantino Rainbow 800434", image: "ottaviani/oggettistica-extra/12.jpg", source: "https://2bgioielli.it/products/scultura-ottaviani-elefantino-rainbow-800434" },
-          { title: "Centrotavola Marea in cristallo 800475", image: "ottaviani/oggettistica-extra/13.jpg", source: "https://2bgioielli.it/products/centrotavola-ottaviani-marea-800475" },
-          { title: "Scultura Gufo in cristallo 80814", image: "ottaviani/oggettistica-extra/14.jpg", source: "https://2bgioielli.it/products/scultura-gufo-ottaviani-80814" }
+          { title: "Scultura Toro in cristallo 800488", image: "ottaviani/oggettistica-extra/05.webp", source: "https://2bgioielli.it/products/scultura-ottaviani-toro-800488" },
+          { title: "Profumatore e candela 31487", image: "ottaviani/oggettistica-extra/06.webp", source: "https://2bgioielli.it/products/profumatore-e-candela-ottaviani-31487" },
+          { title: "Centrotavola Fiamma 15 cm — 800478N", image: "ottaviani/oggettistica-extra/07.webp", source: "https://2bgioielli.it/products/centrotavola-ottaviani-800478n" },
+          { title: "Centrotavola Foglie 26 cm — 77217", image: "ottaviani/oggettistica-extra/08.webp", source: "https://2bgioielli.it/products/centrotavola-ottaviani-77217" },
+          { title: "Vaso Marea in cristallo 800470", image: "ottaviani/oggettistica-extra/09.webp", source: "https://2bgioielli.it/products/vaso-ottaviani-marea-800470" },
+          { title: "Scultura Pesce dei Desideri 800487", image: "ottaviani/oggettistica-extra/10.webp", source: "https://2bgioielli.it/products/scultura-ottaviani-pesce-dei-desideri-800487" },
+          { title: "Scultura Navigare in cristallo 800436", image: "ottaviani/oggettistica-extra/11.webp", source: "https://2bgioielli.it/products/scultura-ottaviani-navigare-800436" },
+          { title: "Scultura Elefantino Rainbow 800434", image: "ottaviani/oggettistica-extra/12.webp", source: "https://2bgioielli.it/products/scultura-ottaviani-elefantino-rainbow-800434" },
+          { title: "Centrotavola Marea in cristallo 800475", image: "ottaviani/oggettistica-extra/13.webp", source: "https://2bgioielli.it/products/centrotavola-ottaviani-marea-800475" },
+          { title: "Scultura Gufo in cristallo 80814", image: "ottaviani/oggettistica-extra/14.webp", source: "https://2bgioielli.it/products/scultura-gufo-ottaviani-80814" }
         ], "oggettistica")
       ]
     }
