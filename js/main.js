@@ -239,9 +239,19 @@
   let heroIndex = 0;
   let heroTimer;
 
+  // La prima foto e' l'unica necessaria al paint iniziale. Le successive vengono
+  // richieste solo quando stanno per essere mostrate, evitando una raffica di
+  // download concorrenti al caricamento della pagina.
+  const loadHeroSlide = (index) => {
+    if (!heroSlides.length) return;
+    const slide = heroSlides[(index + heroSlides.length) % heroSlides.length];
+    if (slide?.dataset.src && !slide.getAttribute("src")) slide.src = slide.dataset.src;
+  };
+
   const showHeroSlide = (nextIndex) => {
     if (!heroSlides.length) return;
     heroIndex = (nextIndex + heroSlides.length) % heroSlides.length;
+    loadHeroSlide(heroIndex);
     heroSlides.forEach((slide, index) => slide.classList.toggle("is-active", index === heroIndex));
   };
 
@@ -252,6 +262,7 @@
   };
 
   restartHeroTimer();
+  window.setTimeout(() => loadHeroSlide(heroIndex + 1), 1200);
 
   /* In mobile allinea il bordo superiore della foto a quello dei CTA. */
   const hero = document.querySelector(".hero");
@@ -336,6 +347,11 @@
     let activeIndex = 0;
     let intervalTimer;
     let initialTimer;
+    let pointerId = null;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let isDragging = false;
+    let suppressNextClick = false;
 
     if (slides.length) {
       const slideWidth = 100 / slides.length;
@@ -378,6 +394,53 @@
       show(activeIndex + 1);
       start();
     });
+
+    carousel.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("button") || slides.length < 2) return;
+      pointerId = event.pointerId;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      isDragging = false;
+      carousel.setPointerCapture?.(pointerId);
+      stop();
+    });
+
+    carousel.addEventListener("pointermove", (event) => {
+      if (event.pointerId !== pointerId) return;
+      const horizontalDistance = event.clientX - pointerStartX;
+      const verticalDistance = event.clientY - pointerStartY;
+      if (Math.abs(horizontalDistance) > 10 && Math.abs(horizontalDistance) > Math.abs(verticalDistance)) {
+        isDragging = true;
+        event.preventDefault();
+      }
+    });
+
+    const finishSwipe = (event) => {
+      if (event.pointerId !== pointerId) return;
+      const horizontalDistance = event.clientX - pointerStartX;
+      const verticalDistance = event.clientY - pointerStartY;
+      const wasSwipe = isDragging && Math.abs(horizontalDistance) > 40 && Math.abs(horizontalDistance) > Math.abs(verticalDistance);
+      if (wasSwipe) show(activeIndex + (horizontalDistance < 0 ? 1 : -1));
+      suppressNextClick = isDragging;
+      pointerId = null;
+      isDragging = false;
+      window.setTimeout(() => { suppressNextClick = false; }, 0);
+      start();
+    };
+
+    carousel.addEventListener("pointerup", finishSwipe);
+    carousel.addEventListener("pointercancel", (event) => {
+      if (event.pointerId !== pointerId) return;
+      pointerId = null;
+      isDragging = false;
+      start();
+    });
+
+    carousel.addEventListener("click", (event) => {
+      if (!suppressNextClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
 
     card?.addEventListener("mouseenter", stop);
     card?.addEventListener("mouseleave", start);
