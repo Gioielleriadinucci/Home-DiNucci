@@ -4612,9 +4612,6 @@ h2:not(.sr-only) {
     border-left-width: 9px;
   }
 
-  .story-review {
-    display: none;
-  }
 }
 
 /* Contatti mobile: titolo, mappa, descrizione e CTA. */
