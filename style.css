@@ -1234,9 +1234,9 @@ h3 em {
 }
 
 .feature-photo__note--polello {
-  width: max-content;
-  max-width: none;
-  white-space: nowrap;
+  width: 92%;
+  max-width: 38ch;
+  white-space: normal;
 }
 
 .duo-panel--fedi .feature-photo__note,
@@ -5037,3 +5037,44 @@ h2:not(.sr-only) {
     max-width: 100%;
   }
 }
+
+/* Contenuti senza fotografie esterne */
+.hero { background: var(--cream); }
+.hero::after, .hero__veil { display: none; }
+.duo-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2vw, 30px); margin-top: clamp(24px, 3vw, 42px); }
+.feature-photo {
+  --feature-cut: 28px;
+  display: flex;
+  position: relative;
+  min-height: 176px;
+  padding: clamp(22px, 2.5vw, 34px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background: rgba(158, 123, 63, 0.48);
+  border: 0;
+  clip-path: polygon(var(--feature-cut) 0, 100% 0, 100% calc(100% - var(--feature-cut)), calc(100% - var(--feature-cut)) 100%, 0 100%, 0 var(--feature-cut));
+}
+.feature-photo::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  background: var(--white);
+  clip-path: polygon(calc(var(--feature-cut) - 1px) 0, 100% 0, 100% calc(100% - var(--feature-cut) + 1px), calc(100% - var(--feature-cut) + 1px) 100%, 0 100%, 0 calc(var(--feature-cut) - 1px));
+}
+.feature-photo > * { position: relative; z-index: 1; }
+.feature-photo__note, .feature-photo__cta { position: static; display: block; text-align: center; }
+.feature-photo__cta { margin-top: 14px; }
+.gold-banner {
+  background-color: #12100e;
+  background-image:
+    linear-gradient(90deg, rgba(17, 81, 94, 0.96) 0%, rgba(23, 100, 116, 0.88) 36%, rgba(30, 118, 135, 0.56) 63%, rgba(33, 121, 137, 0.12) 100%),
+    url("images/compro-oro-hero-generated.png");
+  background-position: center, center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.gold-banner__content { color: var(--white); }
+@media (max-width: 780px) { .duo-photos { grid-template-columns: 1fr; } }
