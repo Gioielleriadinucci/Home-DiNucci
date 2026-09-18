@@ -1,0 +1,74 @@
+/* Contatti — CSS della sola pagina contatti.html.
+   Le classi .contact-* vivono in style.css e le usano anche la home e le sei pagine marchio:
+   tutto quello che segue e' agganciato a .contact-section--contatti, cosi' non esce da qui.
+   Obiettivo: bersagli cliccabili veri. Il minimo raccomandato e' 44x44 (WCAG 2.5.5).
+   (Simone, 08/09/2026 — «le cose cliccabili sono piccole come il logo whatsapp») */
+
+/* Telefoni e mail: la riga era alta 26px, ora il bersaglio e' alto 44 e largo quanto il testo.
+   Il padding verticale passa dal <li> al link, cosi' l'area cliccabile e' quella che si vede. */
+.contact-section--contatti .contact-lines li {
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.contact-section--contatti .contact-lines li:last-child {
+  border-bottom: 0;
+}
+
+.contact-section--contatti .contact-lines a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  text-underline-offset: 4px;
+}
+
+.contact-section--contatti .contact-lines a:not(.contact-lines__whatsapp):hover,
+.contact-section--contatti .contact-lines a:not(.contact-lines__whatsapp):focus-visible {
+  text-decoration: underline;
+}
+
+/* WhatsApp: solo icona, ma l'area cliccabile resta 44x44 (WCAG 2.5.5) anche senza il box intorno. */
+.contact-section--contatti .contact-lines__whatsapp {
+  width: 44px;
+  height: 44px;
+  margin-left: 14px;
+  align-items: center;
+  justify-content: center;
+  transition: color 180ms ease;
+}
+
+.contact-section--contatti .contact-lines__whatsapp svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-section--contatti .contact-lines__whatsapp:hover,
+.contact-section--contatti .contact-lines__whatsapp:focus-visible {
+  color: var(--gold);
+}
+
+/* L'indirizzo e' un link anche lui: stessa altezza utile delle righe di contatto */
+.contact-section--contatti .contact-info address a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  text-underline-offset: 4px;
+}
+
+/* I due bottoni: centrati sotto i contatti e con il testo a una misura leggibile.
+   A 0,64rem stavano stretti dentro 330px in due. */
+.contact-section--contatti .contact-actions {
+  width: min(100%, 430px);
+  margin-inline: auto;
+  justify-content: center;
+}
+
+.contact-section--contatti .contact-call,
+.contact-section--contatti .contact-whatsapp {
+  font-size: clamp(0.68rem, 0.82vw, 0.78rem);
+}

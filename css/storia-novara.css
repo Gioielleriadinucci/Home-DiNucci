@@ -1,0 +1,939 @@
+/* Pagina Storia a Novara — pagine/storia-novara.html. Si carica dopo style.css, che porta navbar, footer, hero e i componenti riusati.
+   Impaginazione dal wireframe Figma «Di Nucci — Storia a Novara — wireframe».
+   Leve del repertorio DESIGN-BRIEF §12, montate il 07/09/2026:
+     sez. 2  → 2.5 apertura a due colonne · 4.5 ornament a rombo · 1.2 drop-cap
+     sez. 3  → 6.2 timeline a tacche · 1.3 cifre come elemento decorativo
+     sez. 4  → 5.2 foto full-bleed inter-sezione
+     sez. 5  → 2.4 griglia a tre colonne compatta
+     sez. 6  → 3.4 / 7.3 panel teal profondo (una sola volta per pagina) · 1.1 pull-quote · 5.1 crop dettaglio
+     sez. 7  → 2.1 split asimmetrico
+     sez. 8  → 6.1 scheda-mostrina · 7.1 panel bianco puro dentro il crema
+     sez. 10 → 5.4 foto con blocco in overlay · 4.5 ornament a rombo
+   Nessun colore, font o valore fuori dal brief. */
+
+/* Sezioni: padding di .catalog-section, fondo crema da .cream-section */
+.storia-section {
+  padding: clamp(28px, 2.5vw, 38px) 0;
+  scroll-margin-top: calc(var(--header-height) + 18px);
+}
+
+/* ⚠️ DEROGA a un invariante confermato. `DESIGN-BRIEF` §14: «Fondo di tutte le sezioni delle pagine
+   interne: sempre crema, categorico. Nessuna alternanza con bianco o altri colori.» E il
+   `PAGE-BRIEF` §2 e §5: crema su tutte le sezioni, la hero unica eccezione.
+   Chiesto da Simone il 07/09/2026: il bianco della hero prosegue nella sezione 2, che diventa
+   il blocco d'apertura della pagina. Il crema riprende dalla sezione 3 in poi.
+   Il cambio di colore segna già lo stacco, quindi sotto serve meno aria: il padding inferiore
+   scende da ~63px a ~32px. Va registrata fra le deroghe alla chiusura. */
+/* Il passaggio al crema è sfumato, non a taglio netto: gli ultimi 120px del bianco
+   scendono nel crema della sezione 3 (Simone, 07/09/2026). */
+.storia-section--bianca {
+  background: linear-gradient(180deg, var(--white) calc(100% - 120px), var(--cream));
+  padding-bottom: clamp(24px, 2.2vw, 34px);
+}
+
+/* In `style.css` la hero chiude con una sfumatura di 20-32px che muore nel crema, perché sotto
+   c'è sempre una sezione crema. Qui sotto la hero c'è la sezione 2, che ora è bianca: la sfumatura
+   lasciava una banda crema (#F8F5EF misurato) fra due bianchi. Su questa pagina si spegne.
+   `style.css` non è toccato: la sfumatura resta per tutte le altre pagine.
+   (Simone, 07/09/2026 — «togli questo orrendo alone») */
+.hero::after {
+  display: none;
+}
+
+.storia-section h2 {
+  margin: 0;
+  /* Dove un H2 deve andare a capo, le due righe si bilanciano invece di lasciare
+     una parola orfana. Stessa tecnica di .gold-banner h2 e .reviews-bar h2 in style.css. */
+  text-wrap: balance;
+}
+
+.storia-section h2 em {
+  color: var(--teal-dark);
+}
+
+/* Testata di sezione: in alto a sinistra sopra tutta la sezione, come nel wireframe */
+.storia-heading--sezione {
+  margin-bottom: clamp(36px, 3.8vw, 52px);
+}
+
+/* Su questa pagina i filetti attorno all'ornamento sono più stretti che nella home:
+   H2 e cappello stanno più vicini (Simone, 07/09/2026). I 17/20 di style.css restano altrove. */
+.storia-heading .heading-ornament {
+  margin: 12px 0 13px;
+}
+
+/* Il cappello sotto l'ornamento: i valori del paragrafo di .section-heading.
+   1200 e non 760: il cappello delle tappe chiede ~1.170px per stendersi su una riga sola, e a 760
+   si spezzava in due pur avendo mezza shell libera (Simone, 07/09/2026). Sopra i 1.330px di finestra
+   sta su una riga; sotto, `balance` divide le due righe in parti uguali invece di lasciarne una monca.
+   ⚠️ Su una riga sono ~147 caratteri, sopra il tetto di 74 di `web-design`: quel tetto vale per il
+   ritorno a capo, che su una riga sola non c'è. Su due righe si torna dentro. */
+.storia-heading .heading-ornament + p {
+  max-width: 1200px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--font-description);
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+/* Leva 4.5 — ornament a rombo: due filetti teal da 52px, rombo oro da 9px, gap 12px, a sinistra */
+.heading-ornament--rombo {
+  width: 137px;
+}
+
+.heading-ornament--rombo::before,
+.heading-ornament--rombo::after {
+  background: var(--teal);
+  flex: 0 0 52px;
+}
+
+.heading-ornament--rombo i {
+  margin-inline: 12px;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+/* Sezione 2 — blocco centrato. La leva 2.5 (apertura a due colonne) è stata tolta il 07/09/2026:
+   con ~110 parole e nessuna foto una delle due colonne restava vuota per metà.
+   Un blocco stretto e centrato legge come scelta, non come buco. */
+.storia-blocco {
+  /* 860 e non 760: sotto gli 835px l'H2 andava a capo pur avendo mezza pagina libera.
+     A 20px Times fanno ~71 caratteri, sotto il tetto di 74 di `web-design`. */
+  max-width: 860px;
+}
+
+.storia-heading--centrata {
+  text-align: center;
+}
+
+.storia-heading--centrata .heading-ornament {
+  margin-inline: auto;
+}
+
+/* Il cappello sotto l'ornamento resta a 760px: centrato, va centrato anche il blocco */
+.storia-heading--centrata .heading-ornament + p {
+  margin-inline: auto;
+}
+
+/* Testo descrittivo */
+.storia-prose p {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: var(--font-description);
+  line-height: 1.65;
+}
+
+.storia-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.storia-prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.storia-prose--stretta {
+  max-width: 760px;
+}
+
+/* Leva 1.1 — pull-quote: la frase che apre il racconto, una volta sola in pagina */
+.storia-prose .storia-quote {
+  margin: 30px 0;
+  padding-left: 22px;
+  border-left: 2px solid var(--gold);
+  color: var(--teal-deep);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-style: italic;
+  line-height: 1.15;
+}
+
+/* Leva 1.2 — drop-cap: apre la prosa della pagina, una volta sola */
+.storia-lead::first-letter {
+  float: left;
+  margin: 0.04em 0.09em 0 0;
+  color: var(--gold-dark);
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 5.5vw, 5rem);
+  font-style: italic;
+  line-height: 0.78;
+}
+
+.storia-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--teal-dark);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.storia-link span {
+  color: var(--gold-dark);
+  font-size: 1rem;
+  transition: transform 180ms ease;
+}
+
+.storia-link:hover,
+.storia-link:focus-visible {
+  color: var(--gold-dark);
+}
+
+.storia-link:hover span,
+.storia-link:focus-visible span {
+  transform: translate(3px, -3px);
+}
+
+/* Due colonne: le misure del wireframe */
+.storia-split {
+  display: grid;
+  align-items: center;
+  gap: 48px;
+}
+
+/* Leva 2.1 — split asimmetrico: la foto porta la sezione, il testo la commenta */
+.storia-split--persone {
+  grid-template-columns: minmax(0, 410fr) minmax(0, 742fr);
+}
+
+.storia-split--mappa {
+  grid-template-columns: minmax(0, 592fr) minmax(0, 560fr);
+  align-items: stretch;
+}
+
+/* Foto in cornice: il filo oro con lo smusso di .hero__aside, costruito come .feature-photo (fondo + interno a 1px) */
+.storia-foto {
+  position: relative;
+  margin: 0;
+  background: rgba(69, 156, 175, 0.9);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+/* L'interno a 1px dal filo: resta visibile finché la foto o la mappa non sono caricate */
+.storia-foto::before,
+.storia-mappa::before {
+  position: absolute;
+  inset: 1px;
+  background: var(--cream-deep);
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  content: "";
+}
+
+.storia-foto img {
+  position: absolute;
+  inset: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  object-fit: cover;
+  object-position: center;
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+}
+
+/* Un po' più grande, e la crescita va in altezza: 4/3 al posto di 19/12, colonna da 410fr
+   invece di 380 (Simone, 07/09/2026). L'originale è verticale, il crop ci sta dentro. */
+.storia-foto--banco {
+  aspect-ratio: 4 / 3;
+}
+
+.storia-foto--banco img {
+  object-position: center 45%;
+}
+
+/* Leva 5.2 — foto full-bleed inter-sezione: la cartolina perfora la sezione crema, senza overlay.
+   Altezza al minimo del range della leva: la sezione 4 era troppo alta (Simone, 07/09/2026). */
+.storia-fullbleed {
+  margin: 0 0 clamp(30px, 2.8vw, 42px);
+}
+
+.storia-fullbleed img {
+  width: 100%;
+  height: clamp(300px, 24vw, 348px);
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.storia-fullbleed figcaption {
+  width: min(90%, 1320px);
+  margin: 12px auto 0;
+  color: var(--teal-deep);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Sezione 4: la prosa e la seconda foto d'epoca occupano tutta la shell, niente vuoti ai lati */
+.storia-cavour {
+  display: grid;
+  grid-template-columns: minmax(0, 640fr) minmax(0, 380fr);
+  align-items: center;
+  gap: clamp(48px, 5vw, 80px);
+}
+
+/* Foto d'epoca in cornice bianca con didascalia, dal componente .timeline-visual__frame di novara.css */
+.storia-epoca {
+  margin: 0;
+}
+
+.storia-epoca__frame {
+  position: relative;
+  padding: 6px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 26px 68px rgba(20, 43, 47, 0.13), 0 2px 8px rgba(20, 43, 47, 0.06);
+  aspect-ratio: 16 / 9;
+}
+
+.storia-epoca__frame::after {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  content: "";
+  pointer-events: none;
+}
+
+.storia-epoca__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.storia-epoca figcaption {
+  min-height: 25px;
+  padding: 7px 10px 6px;
+  color: var(--teal-deep);
+  background: var(--white);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Sezione 3 — le tappe: un markup solo. Righello sopra 780px, linea verticale sotto.
+   Leva 6.2 (le stelle a quattro punte come tacche) e 1.3 (l'anno è la figura). */
+.storia-section--tappe {
+  padding-block: clamp(32px, 2.9vw, 44px);
+}
+
+.tappe {
+  position: relative;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+}
+
+/* La linea: il gradiente e l'ombra di .timeline__line, la punta del suo ::after */
+.tappe::before {
+  position: absolute;
+  top: 27px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(158, 123, 63, 0.26), rgba(158, 123, 63, 0.62) 12%, rgba(158, 123, 63, 0.62) 88%, rgba(158, 123, 63, 0.26));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  content: "";
+}
+
+.tappe::after {
+  position: absolute;
+  top: 21px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid var(--gold-dark);
+  border-right: 2px solid var(--gold-dark);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.tappa {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  padding: 0 8px;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* La stella: 48px visibili come .four-star (il file ha un margine trasparente, da qui i 56px) */
+.tappa__stella {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 8px rgba(20, 43, 47, 0.13));
+}
+
+.tappa__anno {
+  display: block;
+  margin-top: 26px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.3vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.tappa__testo {
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Sezione 5 — leva 2.4: tre colonne compatte. Foto 378×260, testi a sinistra */
+.storia-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.storia-card {
+  text-align: left;
+  /* Senza questo le tre card, stirate alla stessa altezza, distribuiscono lo spazio fra le proprie
+     righe: la card 1 ha un elemento in piu' e si comprimeva (16px fra foto e titolo contro 35).
+     Con `start` il ritmo non dipende piu' da quanti elementi ha la card. (Simone, 07/09/2026) */
+  align-content: start;
+}
+
+.storia-card .feature-photo__image {
+  clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
+  aspect-ratio: 378 / 260;
+}
+
+/* 17/09/2026 — riquadro segnaposto: cornice tratteggiata sul taglio, stessa tecnica di style.css
+   (un border comune verrebbe ritagliato dall'angolo del clip-path). Sostituisce lì il bordo dritto
+   di base perché qui il box è tagliato davvero. */
+.storia-card .feature-photo__image:has(img[src$="placeholder-di-nucci.png"]) {
+  border: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='7.4,0 100,0 100,89.2 92.6,100 0,100 0,10.8' fill='none' stroke='%239e7b3f' stroke-width='0.32' stroke-dasharray='1 1.3'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 46% auto;
+  background-position: 0 0, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.storia-card h3 {
+  /* 26 + gli 8 di gap della griglia = 34, lo stacco che le card 2 e 3 avevano quando erano stirate */
+  margin: 26px 0 0;
+  font-size: clamp(1.08rem, 1.28vw, 1.42rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.12;
+  text-transform: uppercase;
+}
+
+.storia-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.storia-card .feature-photo__cta {
+  margin-top: 6px;
+  justify-self: start;
+}
+
+/* Menu a scomparsa dei sei marchi: la <details> di .faq-item, la freccetta della linea temporale */
+/* Da tendina a lista sempre aperta: via il 'I sei marchi, uno per uno' e la lista sale
+   sotto il titolo (Simone, 08/09/2026) */
+.marchi-menu {
+  margin-top: 4px;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.marchi-menu summary {
+  display: flex;
+  padding: 11px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: clamp(0.82rem, 0.84vw, 0.94rem);
+  font-variant-caps: small-caps;
+  letter-spacing: 0.035em;
+  list-style: none;
+  transition: color 180ms ease;
+}
+
+.marchi-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+/* La freccetta: il chevron di .tappe::after, in giù da chiuso e in su da aperto */
+.marchi-menu summary::after {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--gold-dark);
+  border-bottom: 2px solid var(--gold-dark);
+  content: "";
+  flex: 0 0 auto;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 220ms var(--ease);
+}
+
+.marchi-menu[open] summary::after {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.marchi-menu summary:hover {
+  color: var(--teal-dark);
+}
+
+/* Due colonne da tre: aperto, il menu cresce di tre righe invece che di sei
+   e la card non si allunga oltre le altre due (Simone, 07/09/2026) */
+.marchi-menu__lista {
+  display: grid;
+  margin: 0;
+  /* Coda a zero: il filetto inferiore della <details> fa già da chiusura, e i pixel
+     risparmiati servono a far stare i marchi nello spazio del cappello (vedi sotto) */
+  padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+  list-style: none;
+}
+
+/* Il filetto solo dalla seconda riga in giù: in griglia, il primo di ogni colonna non lo porta */
+.marchi-menu__lista li:nth-child(n+3) {
+  border-top: 1px solid var(--line);
+}
+
+.marchi-menu__lista a {
+  display: block;
+  /* Riga da 26px invece di 30: sotto i 26 il filetto arriva addosso alle lettere.
+     Su mobile torna a 6px, dove la card è sola in colonna e conta il pollice. */
+  padding: 4px 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.marchi-menu__lista a:hover {
+  color: var(--gold-dark);
+}
+
+/* Il cappello della card lascia il posto ai sei marchi: era il comportamento della tendina
+   aperta (Simone, 07/09/2026), ora che la tendina non c'e' piu' vale sempre. Il testo resta
+   nel codice: toglierlo e' una decisione di copy, non di layout. (08/09/2026) */
+.storia-card:has(.marchi-menu) > p {
+  display: none;
+}
+
+/* Sezione 6 — leva 3.4 / 7.3: il panel teal profondo, una sola volta per pagina.
+   È l'unico momento scuro della pagina, come il gold-banner della home. */
+.oro-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 400fr) minmax(0, 744fr);
+  align-items: center;
+  gap: clamp(26px, 2.8vw, 44px);
+  padding: clamp(20px, 2vw, 30px);
+  color: var(--white);
+  background: var(--teal-deep);
+  clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
+}
+
+/* Leva 5.1 — crop dettaglio in colonna, smusso 20px, senza cornice oro */
+.oro-panel__foto {
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+}
+
+.oro-panel__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 78%;
+}
+
+.oro-panel h2 {
+  margin: 0 0 clamp(12px, 1.4vw, 17px);
+  color: var(--white);
+}
+
+/* Un oro solo per gli em su fondo scuro: il token --gold. Qui c'era l'hex sciolto #e3ba78.
+   Uniformato il 08/09/2026. */
+.oro-panel h2 em {
+  color: var(--gold);
+}
+
+/* Leva 1.1 — pull-quote: la frase che regge la sezione */
+.oro-panel__claim {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  border-left: 2px solid var(--gold);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.oro-panel__testo {
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: var(--font-description);
+  line-height: 1.65;
+}
+
+.oro-panel__testo strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* La CTA della sezione: la .storia-link portata in oro, perché qui il fondo è teal profondo.
+   Vive nel margine che il paragrafo ha già e il pannello non cresce: l'altezza la detta la foto
+   (Simone, 07/09/2026). Niente .button--gold: 48px di bottone alzerebbero la banda. */
+.oro-panel__cta {
+  color: var(--gold);
+}
+
+.oro-panel__cta span {
+  color: var(--gold);
+}
+
+.oro-panel__cta:hover,
+.oro-panel__cta:focus-visible {
+  color: var(--white);
+}
+
+/* Il blocco recensioni della home, sotto il testo della sezione 7 */
+.storia-recensioni {
+  margin-top: clamp(46px, 4vw, 62px);
+}
+
+/* I due bottoni delle recensioni affiancati: la colonna stretta di style.css resta alla home,
+   qui la barra ha lo spazio per tenerli in riga (Simone, 07/09/2026) */
+.storia-recensioni .reviews-bar__actions {
+  width: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Sezione 8 — leve 6.1 e 7.1: la scheda a righe su panel bianco, si legge in venti secondi */
+.accesso {
+  margin: 0;
+  padding: clamp(24px, 2.4vw, 34px) clamp(24px, 2.4vw, 36px);
+  background: var(--white);
+  clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+}
+
+.accesso__riga {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(69, 156, 175, 0.28);
+}
+
+.accesso__riga:first-child {
+  padding-top: 0;
+}
+
+.accesso__riga:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.accesso dt {
+  color: var(--teal-dark);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 2.1;
+  text-transform: uppercase;
+}
+
+.accesso dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* Il pannello bianco scende fino in fondo alla mappa: la colonna diventa flex,
+   la scheda si prende quello che avanza sotto l'invito (Simone, 07/09/2026) */
+.storia-split--mappa .storia-testo {
+  display: flex;
+  flex-direction: column;
+}
+
+.storia-split--mappa .accesso {
+  flex: 1;
+}
+
+/* Il link a contatti.html sta sopra la scheda: è l'azione principale della pagina
+   dopo l'eliminazione della sezione 10 (07/09/2026) */
+.accesso__invito {
+  margin: 0 0 22px;
+}
+
+/* La mappa: iframe, link-copertura e filtro della home, dentro la cornice della pagina */
+.storia-mappa {
+  position: relative;
+  min-height: 446px;
+  background: rgba(69, 156, 175, 0.9);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.storia-mappa iframe {
+  position: absolute;
+  inset: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  border: 0;
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  filter: saturate(0.75) contrast(0.95);
+}
+
+.storia-mappa__link {
+  position: absolute;
+  z-index: 1;
+  inset: 1px;
+}
+
+.storia-mappa__link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -5px;
+}
+
+/* Domande frequenti: <details> come lo descrive il DESIGN-BRIEF §9, indicatore = la stella a 8 punte di .heading-ornament */
+.storia-faq {
+  /* Centrata, non a tutta shell: a 1320px fra la domanda e la stella restava mezzo schermo vuoto.
+     860 è la stessa misura di .storia-blocco, il blocco centrato della sezione 2: nessun valore
+     nuovo. Sotto i 780px la shell è già più stretta e il tetto non morde.
+     (Simone, 07/09/2026 — «faq centrate») */
+  max-width: 860px;
+  margin-inline: auto;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item summary {
+  display: flex;
+  min-height: 62px;
+  padding: 18px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: clamp(1.08rem, 2vw, 1.52rem);
+  font-weight: 500;
+  line-height: 1.2;
+  list-style: none;
+  transition: color 180ms ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  content: "";
+  flex: 0 0 auto;
+  transition: transform 220ms var(--ease);
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-item summary:hover {
+  color: var(--teal-dark);
+}
+
+.faq-item__answer {
+  padding: 0 0 22px;
+}
+
+/* La sezione 10 — chiusura a tutta larghezza con pannello sovrapposto, leva 5.4 — è stata eliminata
+   il 07/09/2026 su richiesta di Simone. Il suo CSS è stato tolto con lei: l'unico residuo utile,
+   il link a contatti.html, vive ora sopra la scheda della sezione 8 (.accesso__invito). */
+
+/* Mobile: colonna singola nell'ordine del wireframe, i valori mobile della home */
+@media (max-width: 780px) {
+  .storia-section,
+  .storia-section--tappe {
+    padding-block: 24px 28px;
+  }
+
+  .storia-heading--sezione {
+    margin-bottom: 30px;
+  }
+
+  .storia-prose p,
+  .storia-heading .heading-ornament + p {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .heading-ornament--rombo {
+    width: 108px;
+  }
+
+  .heading-ornament--rombo::before,
+  .heading-ornament--rombo::after {
+    flex: 0 0 40px;
+  }
+
+  .heading-ornament--rombo i {
+    width: 8px;
+    height: 8px;
+    margin-inline: 10px;
+  }
+
+  .storia-cavour,
+  .storia-split,
+  .storia-split--persone,
+  .storia-split--mappa {
+    gap: 30px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .storia-lead::first-letter {
+    font-size: 3.2rem;
+  }
+
+  .storia-fullbleed img {
+    height: 240px;
+  }
+
+  .storia-foto--banco,
+  .storia-epoca__frame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .tappe {
+    display: block;
+  }
+
+  .tappe::before {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 27px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(158, 123, 63, 0.26), rgba(158, 123, 63, 0.62) 12%, rgba(158, 123, 63, 0.62) 88%, rgba(158, 123, 63, 0.26));
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .tappe::after {
+    top: auto;
+    right: auto;
+    bottom: 3px;
+    left: 21px;
+    transform: rotate(135deg);
+  }
+
+  .tappa {
+    display: grid;
+    padding: 0;
+    grid-template-columns: 56px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 18px;
+    text-align: left;
+  }
+
+  .tappa + .tappa {
+    margin-top: 30px;
+  }
+
+  .tappa__stella {
+    grid-row: 1 / span 2;
+  }
+
+  .tappa__anno {
+    margin-top: 12px;
+    font-size: clamp(1.7rem, 6.7vw, 1.85rem);
+  }
+
+  .tappa__testo {
+    margin-top: 8px;
+  }
+
+  .storia-card-grid {
+    width: min(100%, 520px);
+    margin-inline: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .storia-card h3 {
+    font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+  }
+
+  /* Il cappello sparisce all'apertura anche qui: avevo provato a lasciarlo perché con le card in
+     colonna la tendina spinge in giù e basta, ma la card cresceva troppo (Simone, 07/09/2026 —
+     «su mobile non rientra il subtext e si allarga la pagina»).
+     Le righe però tornano a 30px: qui si tocca col pollice, e lo spazio in larghezza c'è. */
+  .marchi-menu__lista {
+    padding-bottom: 8px;
+  }
+
+  .marchi-menu__lista a {
+    padding: 6px 0;
+  }
+
+  .oro-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+    padding: 26px 22px 30px;
+  }
+
+  .oro-panel__foto {
+    aspect-ratio: 16 / 10;
+  }
+
+  .oro-panel__foto img {
+    object-position: center 74%;
+  }
+
+  .oro-panel__testo {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .accesso__riga {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .accesso dt {
+    line-height: 1.6;
+  }
+
+  /* Su mobile la mappa non deve prendersi mezzo schermo: 300px invece di 480
+     (Simone, 07/09/2026). Sotto i 780px la colonna è unica, quindi è il min-height a decidere. */
+  .storia-mappa {
+    min-height: 300px;
+  }
+}

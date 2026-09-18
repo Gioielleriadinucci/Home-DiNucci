@@ -206,6 +206,7 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           window.requestAnimationFrame(() => entry.target.classList.add("is-visible"));
+          if (entry.target.matches(".catalog-exhibitor")) revealObserver.unobserve(entry.target);
         } else {
           entry.target.classList.remove("is-visible");
         }
@@ -400,7 +401,6 @@
       pointerStartX = event.clientX;
       pointerStartY = event.clientY;
       isDragging = false;
-      carousel.setPointerCapture?.(pointerId);
       stop();
     });
 
@@ -409,6 +409,7 @@
       const horizontalDistance = event.clientX - pointerStartX;
       const verticalDistance = event.clientY - pointerStartY;
       if (Math.abs(horizontalDistance) > 10 && Math.abs(horizontalDistance) > Math.abs(verticalDistance)) {
+        if (!isDragging) carousel.setPointerCapture?.(pointerId);
         isDragging = true;
         event.preventDefault();
       }
@@ -501,6 +502,311 @@
   showStorySlide(0);
   restartStoryTimer();
 
+
+  /* Catalogo: sei espositori indipendenti, senza autoplay */
+  const catalogExhibitors = window.catalogBrandCatalogManaged ? [] : [...document.querySelectorAll("[data-catalog-exhibitor]")];
+
+  const getCatalogItemsPerView = () => {
+    if (window.innerWidth <= 520) return 2;
+    if (window.innerWidth <= 1020) return 2;
+    return 3;
+  };
+
+  const catalogDragSensitivity = 1.45;
+  const catalogWheelSensitivity = 1.25;
+
+  const catalogControllers = catalogExhibitors.map((exhibitor) => {
+    const viewport = exhibitor.querySelector("[data-catalog-viewport]");
+    const cards = [...exhibitor.querySelectorAll(".product-card")];
+    const status = exhibitor.querySelector("[data-catalog-status]");
+    const progress = exhibitor.querySelector("[data-catalog-progress]");
+    const rail = exhibitor.querySelector(".catalog-rail");
+    const collectionName = exhibitor.querySelector(".catalog-exhibitor__label h3")?.textContent?.trim() || "questa collezione";
+    const previousButton = document.createElement("button");
+    const nextButton = document.createElement("button");
+
+    previousButton.className = "catalog-control catalog-control--previous";
+    previousButton.type = "button";
+    previousButton.textContent = "‹";
+    previousButton.setAttribute("aria-label", `Mostra i prodotti precedenti di ${collectionName}`);
+    if (viewport?.querySelector(".catalog-track")?.id) {
+      previousButton.setAttribute("aria-controls", viewport.querySelector(".catalog-track").id);
+    }
+
+    nextButton.className = "catalog-control catalog-control--next";
+    nextButton.type = "button";
+    nextButton.textContent = "›";
+    nextButton.setAttribute("aria-label", `Mostra altri prodotti di ${collectionName}`);
+    if (viewport?.querySelector(".catalog-track")?.id) {
+      nextButton.setAttribute("aria-controls", viewport.querySelector(".catalog-track").id);
+    }
+
+    if (rail) {
+      rail.append(previousButton, nextButton);
+    }
+
+    let firstVisible = 0;
+    let scrollFrame;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+    let isDragging = false;
+    let didDrag = false;
+
+    const updateControls = () => {
+      const visible = getCatalogItemsPerView();
+      const maximum = Math.max(0, cards.length - visible);
+      firstVisible = Math.min(firstVisible, maximum);
+      const lastVisible = Math.min(cards.length, firstVisible + visible);
+
+      if (status) status.textContent = `${firstVisible + 1}–${lastVisible} di ${cards.length}`;
+      if (progress && viewport) {
+        const maximumScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+        const scrollProgress = maximumScroll ? Math.min(1, Math.max(0, viewport.scrollLeft / maximumScroll)) : 1;
+        const visibleRatio = viewport.scrollWidth ? Math.min(1, viewport.clientWidth / viewport.scrollWidth) : 1;
+        const completion = visibleRatio + scrollProgress * (1 - visibleRatio);
+        progress.style.width = `${completion * 100}%`;
+      }
+      previousButton.disabled = firstVisible <= 0;
+      nextButton.disabled = firstVisible >= maximum;
+      rail?.classList.toggle("is-static", cards.length <= visible);
+    };
+
+    const goTo = (nextIndex, announce = true, immediate = false) => {
+      const visible = getCatalogItemsPerView();
+      const maximum = Math.max(0, cards.length - visible);
+      firstVisible = Math.max(0, Math.min(nextIndex, maximum));
+      const target = cards[firstVisible];
+
+      if (viewport && target) {
+        viewport.scrollTo({
+          left: target.offsetLeft - (cards[0]?.offsetLeft || 0),
+          behavior: immediate || reducedMotion ? "auto" : "smooth"
+        });
+      }
+
+      updateControls();
+      if (!announce && status) status.setAttribute("aria-live", "off");
+      window.requestAnimationFrame(() => status?.removeAttribute("aria-live"));
+    };
+
+    viewport?.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      goTo(firstVisible + direction * getCatalogItemsPerView());
+    });
+
+    previousButton.addEventListener("click", () => {
+      goTo(firstVisible - getCatalogItemsPerView());
+    });
+
+    nextButton.addEventListener("click", () => {
+      goTo(firstVisible + getCatalogItemsPerView());
+    });
+
+    viewport?.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      isDragging = true;
+      didDrag = false;
+      dragStartX = event.clientX;
+      dragStartScroll = viewport.scrollLeft;
+      viewport.classList.add("is-dragging");
+      viewport.setPointerCapture?.(event.pointerId);
+    });
+
+    viewport?.addEventListener("pointermove", (event) => {
+      if (!isDragging) return;
+      const distance = event.clientX - dragStartX;
+      if (Math.abs(distance) > 4) didDrag = true;
+      viewport.scrollLeft = dragStartScroll - distance * catalogDragSensitivity;
+    });
+
+    const finishCatalogDrag = (event) => {
+      if (!isDragging) return;
+      isDragging = false;
+      viewport.classList.remove("is-dragging");
+      if (viewport.hasPointerCapture?.(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+    };
+
+    viewport?.addEventListener("pointerup", finishCatalogDrag);
+    viewport?.addEventListener("pointercancel", finishCatalogDrag);
+    viewport?.addEventListener("click", (event) => {
+      if (!didDrag) return;
+      event.preventDefault();
+      didDrag = false;
+    }, true);
+
+    viewport?.addEventListener("wheel", (event) => {
+      const hasHorizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+      if (!hasHorizontalIntent && !event.shiftKey) return;
+      const distance = event.shiftKey ? event.deltaY : event.deltaX;
+      if (!distance) return;
+      event.preventDefault();
+      viewport.scrollLeft += distance * catalogWheelSensitivity;
+    }, { passive: false });
+
+    viewport?.addEventListener("scroll", () => {
+      window.cancelAnimationFrame(scrollFrame);
+      scrollFrame = window.requestAnimationFrame(() => {
+        if (!cards.length || !viewport) return;
+        let closest = 0;
+        let distance = Number.POSITIVE_INFINITY;
+        cards.forEach((card, index) => {
+          const nextDistance = Math.abs((card.offsetLeft - (cards[0]?.offsetLeft || 0)) - viewport.scrollLeft);
+          if (nextDistance < distance) {
+            distance = nextDistance;
+            closest = index;
+          }
+        });
+        firstVisible = Math.min(closest, Math.max(0, cards.length - getCatalogItemsPerView()));
+        updateControls();
+      });
+    }, { passive: true });
+
+    goTo(0, false, true);
+    return { refresh: () => goTo(firstVisible, false, true) };
+  });
+
+  /* Su mobile lo zoom segue in modo continuo la posizione del pannello nello schermo. */
+  const mobileCatalogFocusQuery = window.matchMedia("(max-width: 780px)");
+  let mobileCatalogFocusFrame;
+  let mobileFocusedExhibitor = null;
+  let mobileFocusedDuoPanel = null;
+  let catalogMobileModeActive = false;
+  const duoPanels = [...document.querySelectorAll(".duo-panel")];
+  const catalogFocusTargets = catalogExhibitors.map((exhibitor) => ({
+    exhibitor,
+    target: exhibitor.querySelector(".catalog-rail") || exhibitor,
+    figure: exhibitor.querySelector(".product-card figure")
+  }));
+
+  const updateMobileCatalogFocus = () => {
+    window.cancelAnimationFrame(mobileCatalogFocusFrame);
+    mobileCatalogFocusFrame = window.requestAnimationFrame(() => {
+      if (!mobileCatalogFocusQuery.matches) {
+        if (catalogMobileModeActive) {
+          catalogExhibitors.forEach((exhibitor) => {
+            exhibitor.classList.remove("is-mobile-focus");
+            exhibitor.style.removeProperty("--catalog-image-scale");
+            exhibitor.style.removeProperty("--catalog-figure-scale");
+            exhibitor.style.removeProperty("--catalog-product-cut");
+          });
+          catalogMobileModeActive = false;
+        }
+        mobileFocusedDuoPanel?.classList.remove("is-mobile-focus");
+        mobileFocusedExhibitor = null;
+        mobileFocusedDuoPanel = null;
+        return;
+      }
+
+      catalogMobileModeActive = true;
+      const focusTop = window.innerHeight * 0.26;
+      const focusBottom = window.innerHeight * 0.74;
+      const viewportCenter = window.innerHeight / 2;
+      const catalogMetrics = catalogFocusTargets.map(({ exhibitor, target, figure }) => {
+        const targetRect = target.getBoundingClientRect();
+        const cardRect = figure?.parentElement?.getBoundingClientRect() || targetRect;
+        const figureHeight = figure?.offsetHeight || targetRect.height;
+        const figureWidth = figure?.offsetWidth || targetRect.width || 1;
+        const figureRect = {
+          top: cardRect.top,
+          bottom: cardRect.top + figureHeight,
+          height: figureHeight
+        };
+        return {
+          exhibitor,
+          figureRect,
+          figureWidth
+        };
+      });
+      const duoMetrics = duoPanels.map((panel) => ({
+        panel,
+        rect: panel.getBoundingClientRect()
+      }));
+      let focusedExhibitor = null;
+      let greatestProgress = 0;
+      const catalogCenter = window.innerHeight / 2;
+      const fullOpenHold = Math.min(32, Math.max(22, window.innerHeight * 0.032));
+      const smoothProgress = (progress) => progress * progress * (3 - 2 * progress);
+      const figureCenters = catalogMetrics.map(({ figureRect }) => {
+        return (figureRect.top + figureRect.bottom) / 2;
+      });
+
+      catalogMetrics.forEach(({ exhibitor, figureRect, figureWidth }, index) => {
+        const figureCenter = figureCenters[index];
+        const fullyVisibleCenter = window.innerHeight - figureRect.height / 2;
+        let easedProgress = 0;
+
+        if (figureCenter <= fullyVisibleCenter && figureCenter >= catalogCenter) {
+          const openingDistance = Math.max(1, fullyVisibleCenter - catalogCenter);
+          const openingProgress = Math.max(0, Math.min(1, (fullyVisibleCenter - figureCenter) / openingDistance));
+          easedProgress = smoothProgress(openingProgress);
+        } else if (figureCenter < catalogCenter && figureCenter >= catalogCenter - fullOpenHold) {
+          easedProgress = 1;
+        } else if (figureCenter < catalogCenter - fullOpenHold) {
+          const adjacentDistance = index < figureCenters.length - 1
+            ? figureCenters[index + 1] - figureCenter
+            : figureCenter - (figureCenters[index - 1] || figureCenter - window.innerHeight * 0.42);
+          const closingDistance = Math.max(80, (adjacentDistance - fullOpenHold) / 0.83);
+          const travelledAfterHold = catalogCenter - fullOpenHold - figureCenter;
+          const closingProgress = Math.max(0, Math.min(1, 1 - travelledAfterHold / closingDistance));
+          easedProgress = smoothProgress(closingProgress);
+        }
+
+        const imageScale = 1.08 + easedProgress * 0.12;
+        const figureScale = 1 + (12 / figureWidth) * easedProgress;
+        const productCut = 18 * (1 - easedProgress);
+
+        exhibitor.style.setProperty("--catalog-image-scale", imageScale.toFixed(4));
+        exhibitor.style.setProperty("--catalog-figure-scale", figureScale.toFixed(4));
+        exhibitor.style.setProperty("--catalog-product-cut", `${productCut.toFixed(2)}px`);
+
+        if (easedProgress > greatestProgress) {
+          focusedExhibitor = exhibitor;
+          greatestProgress = easedProgress;
+        }
+      });
+
+      if (focusedExhibitor !== mobileFocusedExhibitor) {
+        mobileFocusedExhibitor?.classList.remove("is-mobile-focus");
+        focusedExhibitor?.classList.add("is-mobile-focus");
+        mobileFocusedExhibitor = focusedExhibitor;
+      }
+
+      let focusedDuoPanel = null;
+      let greatestDuoOverlap = 0;
+      let closestDuoToCenter = Number.POSITIVE_INFINITY;
+
+      duoMetrics.forEach(({ panel, rect }) => {
+        const overlap = Math.max(0, Math.min(rect.bottom, focusBottom) - Math.max(rect.top, focusTop));
+        const distanceFromCenter = Math.abs((rect.top + rect.bottom) / 2 - viewportCenter);
+
+        if (overlap > greatestDuoOverlap || (overlap === greatestDuoOverlap && overlap > 0 && distanceFromCenter < closestDuoToCenter)) {
+          focusedDuoPanel = panel;
+          greatestDuoOverlap = overlap;
+          closestDuoToCenter = distanceFromCenter;
+        }
+      });
+
+      if (focusedDuoPanel !== mobileFocusedDuoPanel) {
+        mobileFocusedDuoPanel?.classList.remove("is-mobile-focus");
+        focusedDuoPanel?.classList.add("is-mobile-focus");
+        mobileFocusedDuoPanel = focusedDuoPanel;
+      }
+    });
+  };
+
+  window.addEventListener("scroll", updateMobileCatalogFocus, { passive: true });
+  window.addEventListener("resize", updateMobileCatalogFocus, { passive: true });
+  mobileCatalogFocusQuery.addEventListener?.("change", updateMobileCatalogFocus);
+  updateMobileCatalogFocus();
+
+  document.querySelectorAll("[data-catalog-jump]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const target = document.querySelector(`#catalog-${link.dataset.catalogJump}`);
+      target?.classList.add("is-visible");
+    });
+  });
 
   /* Recensioni miste: scorrimento continuo e lettura estesa senza alzare la sezione. */
   const reviewsCarousel = document.querySelector("[data-review-carousel]");
@@ -806,221 +1112,6 @@
     if (event.key === "Escape" && !reviewReader?.hidden) closeReviewReader();
   });
 
-  /* Timeline Novara: quattro tappe, passaggio ogni 12 secondi */
-  const timelineData = [
-    {
-      titleLead: "Le origini",
-      titleEmphasis: "a Novara",
-      image: null,
-      alt: "Corso Cavour a Novara nei primi del Novecento",
-      caption: "Corso Cavour · primi del Novecento",
-      description: "Nel dopoguerra Pacifico e Giulia diventano un punto di riferimento per l'oreficeria e l'argenteria piemontese, con sede in Corso Cavour 11.",
-      position: "12.5%",
-      photoLeft: "calc(var(--timeline-control-rail) + var(--timeline-control-gap))",
-      descriptionSide: "right",
-      contain: false,
-      objectPosition: "center 20%",
-      enterFrom: "left"
-    },
-    {
-      titleLead: "La gioielleria",
-      titleEmphasis: "di famiglia",
-      image: null,
-      alt: "Veduta aerea in bianco e nero di Viale Roma a Novara nel 1991",
-      caption: "Viale Roma vista dall'alto, 1991",
-      description: "A metà degli anni '70 la famiglia lascia l'attività di grossista e apre la Gioielleria-Argenteria Di Nucci in Viale Roma, dove resterà per 45 anni.",
-      position: "37.5%",
-      photoLeft: "calc(var(--timeline-control-rail) + var(--timeline-control-gap) + clamp(0px, 1.5vw, 24px))",
-      descriptionSide: "right",
-      contain: false,
-      objectPosition: "center center",
-      enterFrom: "left"
-    },
-    {
-      titleLead: "La terza",
-      titleEmphasis: "generazione",
-      image: null,
-      alt: "Mani che sistemano anelli in un espositore",
-      caption: "L'ingresso della terza generazione",
-      description: "Nel 2000 Giorgia entra in gioielleria e raccoglie un patrimonio fatto di onestà, professionalità, serietà e competenza.",
-      position: "62.5%",
-      photoLeft: "calc(100% - var(--timeline-control-rail) - var(--timeline-control-gap) - var(--timeline-photo-width) - clamp(0px, 1.5vw, 24px))",
-      descriptionSide: "left",
-      contain: false,
-      enterFrom: "left"
-    },
-    {
-      titleLead: "Il ritorno in centro a",
-      titleEmphasis: "Novara",
-      image: "images/esterno-di-nucci-hero.webp",
-      alt: "L'ingresso della Gioielleria Di Nucci in Corso Cavour 10C",
-      caption: "2018 · Il ritorno in Corso Cavour",
-      description: "Nel settembre 2018 la gioielleria torna dove tutto ha avuto origine: la nuova sede apre in Corso Cavour 10C, nel cuore di Novara.",
-      position: "87.5%",
-      photoLeft: "calc(100% - var(--timeline-control-rail) - var(--timeline-control-gap) - var(--timeline-photo-width))",
-      descriptionSide: "left",
-      contain: true,
-      objectPosition: "center center",
-      enterFrom: "right"
-    }
-  ];
-
-  const timelineSteps = [...document.querySelectorAll(".timeline-step")];
-  const timelineSection = document.querySelector(".novara-section");
-  const timelineImage = document.querySelector("#timeline-image");
-  const timelineCaption = document.querySelector("#timeline-caption");
-  const timelineDescription = document.querySelector("#timeline-description");
-  const timelineFeature = document.querySelector(".timeline-feature");
-  const timelineVisual = document.querySelector("#timeline-visual");
-  const timelineTitleLead = document.querySelector("#timeline-title-lead");
-  const timelineTitleEmphasis = document.querySelector("#timeline-title-emphasis");
-  const timelineProgress = document.querySelector(".timeline__line i");
-  const timelineScroller = document.querySelector(".timeline");
-  const timelineControls = document.querySelector(".timeline-controls");
-  const timelinePrevious = document.querySelector("#timeline-previous");
-  const timelineNext = document.querySelector("#timeline-next");
-  const timelineWhatsapp = document.querySelector("#timeline-whatsapp");
-  let timelineIndex = 0;
-  let timelineTimer;
-  let timelineTransitionTimer;
-  let timelineScrollFrame;
-  let timelineScrollUnlockTimer;
-  let timelineProgrammaticScroll = false;
-
-  const syncTimelineNarrativeTop = () => {
-    if (!timelineFeature || !timelineVisual || !timelineImage || window.innerWidth <= 780) {
-      timelineFeature?.style.removeProperty("--timeline-narrative-top");
-      return;
-    }
-
-    const imageTop = timelineVisual.offsetTop + timelineImage.offsetTop;
-    timelineFeature.style.setProperty("--timeline-narrative-top", `${imageTop}px`);
-  };
-
-  const showTimeline = (nextIndex, restart = false, immediate = false, syncScroller = true) => {
-    const targetIndex = (nextIndex + timelineData.length) % timelineData.length;
-    const data = timelineData[targetIndex];
-    timelineIndex = targetIndex;
-    window.clearTimeout(timelineTransitionTimer);
-
-    timelineSteps.forEach((step, index) => {
-      const active = index === targetIndex;
-      step.classList.toggle("is-active", active);
-      step.setAttribute("aria-pressed", String(active));
-    });
-
-    timelineSection?.style.setProperty("--timeline-position", data.position);
-    timelineSection?.style.setProperty("--timeline-photo-left", data.photoLeft);
-    timelineFeature?.classList.toggle("is-description-left", data.descriptionSide === "left");
-    timelineFeature?.classList.toggle("is-description-right", data.descriptionSide !== "left");
-    timelineFeature?.classList.toggle("is-mobile-reversed", targetIndex % 2 === 1);
-    window.requestAnimationFrame(syncTimelineNarrativeTop);
-    if (timelineProgress) timelineProgress.style.width = `${(targetIndex * 25) + 12.5}%`;
-    timelineDescription?.classList.add("is-changing");
-    timelineControls?.classList.add("is-changing");
-
-    if (timelineScroller && window.innerWidth <= 780 && syncScroller) {
-      const activeStep = timelineSteps[targetIndex];
-      const targetLeft = activeStep.offsetLeft + activeStep.offsetWidth / 2 - timelineScroller.clientWidth / 2;
-      timelineProgrammaticScroll = true;
-      window.clearTimeout(timelineScrollUnlockTimer);
-      timelineScroller.scrollTo({ left: Math.max(0, targetLeft), behavior: immediate || reducedMotion ? "auto" : "smooth" });
-      timelineScrollUnlockTimer = window.setTimeout(() => {
-        timelineProgrammaticScroll = false;
-      }, immediate || reducedMotion ? 80 : 750);
-    }
-
-    const updateContent = () => {
-      const focusedControl = document.activeElement;
-      if (timelineTitleLead) timelineTitleLead.textContent = data.titleLead;
-      if (timelineTitleEmphasis) timelineTitleEmphasis.textContent = data.titleEmphasis;
-      if (timelineDescription) {
-        timelineDescription.textContent = data.description;
-        timelineDescription.classList.remove("is-changing");
-      }
-      if (timelinePrevious) timelinePrevious.hidden = targetIndex === 0;
-      if (timelineNext) timelineNext.hidden = targetIndex === timelineData.length - 1;
-      if (timelineWhatsapp) timelineWhatsapp.hidden = targetIndex !== timelineData.length - 1;
-      timelineControls?.classList.remove("is-changing");
-
-      if (focusedControl === timelinePrevious && timelinePrevious?.hidden) {
-        timelineNext?.focus({ preventScroll: true });
-      } else if (focusedControl === timelineNext && timelineNext?.hidden) {
-        timelineWhatsapp?.focus({ preventScroll: true });
-      }
-      if (timelineCaption) timelineCaption.textContent = data.caption;
-      timelineVisual?.style.setProperty("--timeline-frame-aspect", data.frameAspect || "16 / 9");
-      if (timelineImage) {
-        timelineImage.hidden = !data.image;
-        if (!data.image) {
-          timelineImage.removeAttribute("src");
-          timelineImage.alt = "";
-          return;
-        }
-        timelineImage.classList.remove("from-left", "from-right", "fit-contain");
-        timelineImage.onerror = data.fallbackImage
-          ? () => {
-              timelineImage.onerror = null;
-              timelineImage.src = data.fallbackImage;
-            }
-          : null;
-        timelineImage.src = data.image;
-        timelineImage.alt = data.alt;
-        timelineImage.style.objectPosition = data.objectPosition || "center";
-        timelineImage.classList.toggle("fit-contain", data.contain);
-        void timelineImage.offsetWidth;
-        if (!immediate && !reducedMotion) timelineImage.classList.add(data.enterFrom === "right" ? "from-right" : "from-left");
-      }
-    };
-
-    if (immediate || reducedMotion) updateContent();
-    else timelineTransitionTimer = window.setTimeout(updateContent, 190);
-
-    if (restart) restartTimelineTimer();
-  };
-
-  const restartTimelineTimer = () => {
-    window.clearInterval(timelineTimer);
-    if (reducedMotion || timelineData.length < 2) return;
-    timelineTimer = window.setInterval(() => showTimeline(timelineIndex + 1), 12000);
-  };
-
-  timelineSteps.forEach((step) => {
-    step.addEventListener("click", () => showTimeline(Number(step.dataset.timelineIndex), true));
-  });
-
-  timelinePrevious?.addEventListener("click", () => {
-    if (timelineIndex > 0) showTimeline(timelineIndex - 1, true);
-  });
-
-  timelineNext?.addEventListener("click", () => {
-    if (timelineIndex < timelineData.length - 1) showTimeline(timelineIndex + 1, true);
-  });
-
-  timelineScroller?.addEventListener("pointerdown", () => {
-    timelineProgrammaticScroll = false;
-    window.clearTimeout(timelineScrollUnlockTimer);
-  }, { passive: true });
-
-  timelineScroller?.addEventListener("scroll", () => {
-    if (window.innerWidth > 780 || timelineProgrammaticScroll) return;
-    window.cancelAnimationFrame(timelineScrollFrame);
-    timelineScrollFrame = window.requestAnimationFrame(() => {
-      if (timelineProgrammaticScroll) return;
-      const scrollerCenter = timelineScroller.scrollLeft + (timelineScroller.clientWidth / 2);
-      const nearestIndex = timelineSteps.reduce((closestIndex, step, index) => {
-        const stepCenter = step.offsetLeft + (step.offsetWidth / 2);
-        const closestStep = timelineSteps[closestIndex];
-        const closestCenter = closestStep.offsetLeft + (closestStep.offsetWidth / 2);
-        return Math.abs(stepCenter - scrollerCenter) < Math.abs(closestCenter - scrollerCenter) ? index : closestIndex;
-      }, 0);
-
-      if (nearestIndex !== timelineIndex) showTimeline(nearestIndex, true, false, false);
-    });
-  }, { passive: true });
-
-  showTimeline(0, false, true);
-  restartTimelineTimer();
 
   /* Contatti: tre fotografie alternate */
   const contactBackgrounds = [...document.querySelectorAll(".contact-bg")];
@@ -1045,13 +1136,11 @@
 
   /* Sospende gli automatismi quando la pagina non è visibile. */
   const stopAutomaticMotion = () => {
-    [heroTimer, storyTimer, timelineTimer, contactTimer].forEach((timer) => window.clearInterval(timer));
+    [heroTimer, storyTimer, contactTimer].forEach((timer) => window.clearInterval(timer));
     stopFeatureCarousels();
     stopReviewsAutoScroll();
     window.clearTimeout(reviewsResumeTimer);
     window.clearTimeout(reviewLongPressTimer);
-    window.clearTimeout(timelineTransitionTimer);
-    showTimeline(timelineIndex, false, true);
   };
 
   const startAutomaticMotion = () => {
@@ -1059,7 +1148,6 @@
     restartStoryTimer();
     startFeatureCarousels();
     restartReviewsAutoScroll();
-    restartTimelineTimer();
     restartContactTimer();
   };
 
@@ -1083,13 +1171,15 @@
       startAutomaticMotion();
     }
 
+    catalogControllers.forEach((controller) => controller.refresh());
   });
 
-  /* Mantiene allineati i componenti quando cambia il breakpoint. */
+  /* Mantiene allineati gli espositori quando cambia il breakpoint. */
   let resizeTimer;
   window.addEventListener("resize", () => {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(() => {
+      catalogControllers.forEach((controller) => controller.refresh());
       normalizeReviewScroll();
       syncTimelineNarrativeTop();
     }, 140);

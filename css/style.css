@@ -94,6 +94,10 @@ h4 {
   line-height: 0.98;
 }
 
+h2 {
+  letter-spacing: 0.02em;
+}
+
 h1,
 h2 {
   text-transform: uppercase;
@@ -103,6 +107,11 @@ h1 em,
 h2 em,
 h3 em {
   font-weight: 500;
+}
+
+h1 em,
+h2 em {
+  font-style: normal;
 }
 
 :focus-visible {
@@ -184,7 +193,7 @@ h3 em {
   display: flex;
   width: 118px;
   height: 12px;
-  margin: 17px 0 20px;
+  margin: 6px 0 8px;
   align-items: center;
 }
 
@@ -292,14 +301,14 @@ h3 em {
 }
 
 .button--gold {
-  --button-fill: rgba(255, 255, 255, 0.96);
-  --button-stroke: rgba(200, 164, 95, 0.72);
+  --button-fill: var(--cream);
+  --button-stroke: var(--gold);
   color: var(--teal-deep);
   box-shadow: 0 10px 30px rgba(16, 55, 63, 0.08);
 }
 
 .button--gold:hover {
-  --button-fill: #fbf7ef;
+  --button-fill: var(--cream);
   --button-stroke: var(--gold);
   box-shadow: 0 13px 34px rgba(16, 55, 63, 0.11);
 }
@@ -309,14 +318,14 @@ h3 em {
 }
 
 .button--deep {
-  --button-fill: var(--teal-deep);
-  --button-stroke: var(--teal-deep);
-  color: var(--white);
+  --button-fill: var(--cream);
+  --button-stroke: var(--gold);
+  color: var(--teal-deep);
 }
 
 .button--deep:hover {
-  --button-fill: var(--teal-dark);
-  --button-stroke: var(--teal-dark);
+  --button-fill: var(--cream);
+  --button-stroke: var(--gold);
 }
 
 .button--outline-light {
@@ -399,7 +408,7 @@ h3 em {
 }
 
 .back-to-top:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--teal-deep);
   outline-offset: 4px;
 }
 
@@ -675,7 +684,7 @@ h3 em {
 }
 
 .hero__subheadline {
-  max-width: 510px;
+  max-width: 560px;
   margin: clamp(20px, 3vh, 30px) auto 0;
   color: rgba(17, 17, 17, 0.82);
   font-size: clamp(1.08rem, 1.45vw, 1.4rem);
@@ -776,7 +785,7 @@ h3 em {
     height: calc(100svh - var(--header-height) - 40px);
     margin: 0 14px;
     align-self: center;
-    border: 1px solid rgba(200, 164, 95, 0.9);
+    border: 1px solid rgba(69, 156, 175, 0.9);
     clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
   }
 
@@ -787,7 +796,6 @@ h3 em {
 
 /* Fedi e fidanzamento */
 .duo-section {
-  --catalog-gold-highlight: #a86f00;
   position: relative;
   padding: 58px 0 54px;
 }
@@ -807,8 +815,8 @@ h3 em {
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(200, 164, 95, 0.46) 16%,
-    rgba(200, 164, 95, 0.46) 84%,
+    rgba(69, 156, 175, 0.46) 16%,
+    rgba(69, 156, 175, 0.46) 84%,
     transparent
   );
   content: "";
@@ -822,14 +830,14 @@ h3 em {
 @media (min-width: 781px) {
   .duo-grid {
     width: 100%;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     align-items: stretch;
   }
 
   .duo-panel {
     display: grid;
     padding-inline: 0;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
     grid-template-rows: subgrid;
     align-content: start;
     row-gap: 0;
@@ -1125,7 +1133,7 @@ h3 em {
 
 .feature-photo__pagination i.is-active {
   width: 17px;
-  background: var(--gold-dark);
+  background: var(--teal-dark);
   border-radius: 999px;
 }
 
@@ -1168,7 +1176,7 @@ h3 em {
 .feature-photo:hover .feature-photo__arrow,
 .feature-photo__arrow:hover,
 .feature-photo__arrow:focus-visible {
-  color: var(--catalog-gold-highlight);
+  color: var(--gold-dark);
   background: transparent;
   opacity: 1;
 }
@@ -1191,7 +1199,8 @@ h3 em {
   max-height: 21px;
 }
 
-.feature-photo__cta {
+.feature-photo__cta,
+.duo-panel__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1208,7 +1217,8 @@ h3 em {
   transition: color 240ms ease;
 }
 
-.feature-photo__cta i {
+.feature-photo__cta i,
+.duo-panel__link i {
   display: inline-flex;
   width: 1.45em;
   height: 1.45em;
@@ -1223,6 +1233,24 @@ h3 em {
   transition: transform 180ms ease;
 }
 
+.duo-panel__link {
+  display: flex;
+  width: max-content;
+  margin-inline: auto;
+  justify-self: center;
+  margin-top: clamp(16px, 1.8vw, 26px);
+}
+
+.duo-panel__link:hover,
+.duo-panel__link:focus-visible {
+  color: var(--gold-dark);
+}
+
+.duo-panel__link:hover i,
+.duo-panel__link:focus-visible i {
+  transform: translate(2px, -2px);
+}
+
 .feature-photo__note {
   width: 92%;
   max-width: 38ch;
@@ -1234,9 +1262,9 @@ h3 em {
 }
 
 .feature-photo__note--polello {
-  width: 92%;
-  max-width: 38ch;
-  white-space: normal;
+  width: max-content;
+  max-width: none;
+  white-space: nowrap;
 }
 
 .duo-panel--fedi .feature-photo__note,
@@ -1267,7 +1295,7 @@ h3 em {
 
 .feature-photo:hover .feature-photo__cta,
 .feature-photo:focus-visible .feature-photo__cta {
-  color: var(--catalog-gold-highlight);
+  color: var(--gold-dark);
 }
 
 .feature-photo:hover .feature-photo__cta i,
@@ -1382,7 +1410,7 @@ h3 em {
   margin: 0;
   font-size: calc(clamp(3.7rem, 5.2vw, 6.3rem) - 18px);
   line-height: 0.86;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .story-wordmark h2 span {
@@ -1542,8 +1570,10 @@ h3 em {
   grid-area: title;
 }
 
+/* Un oro solo per gli em su fondo scuro: il token --gold. Qui c'era l'hex sciolto #e3ba78.
+   Uniformato il 08/09/2026 — vedi la nota sul contrasto in FORMATO-PAGINE-PRODOTTO §4bis. */
 .gold-banner h2 em {
-  color: #e3ba78;
+  color: var(--gold);
 }
 
 .gold-banner__content > .button {
@@ -1571,13 +1601,21 @@ h3 em {
   margin: 0;
   color: rgba(255, 255, 255, 0.82);
   font-size: var(--font-description);
-  text-align: center;
+  text-align: left;
   grid-area: description;
+}
+
+.gold-banner__divider {
+  display: inline-block;
+  width: 1px;
+  height: 0.9em;
+  margin: 0 16px;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* Catalogo */
 .catalog-section {
-  --catalog-gold-highlight: #a86f00;
   padding: clamp(66px, 6vw, 92px) 0;
   background: var(--cream);
 }
@@ -1643,6 +1681,16 @@ h3 em {
   box-shadow: 0 8px 24px rgba(22, 48, 54, 0.055);
   color: inherit;
   text-decoration: none;
+}
+
+/* 17/09/2026 — riquadro segnaposto: nessun clip-path qui (solo border-radius), quindi un border
+   comune non ha il problema dell'angolo tagliato e basta la tecnica semplice. */
+.catalog-exhibitor__cover:has(img[src$="placeholder-di-nucci.png"]) {
+  border: 1px dashed var(--gold-dark);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 42% auto;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .catalog-exhibitor__cover > img {
@@ -1735,14 +1783,14 @@ h3 em {
 
 .catalog-exhibitor__cover:hover .catalog-exhibitor__link-arrow,
 .catalog-exhibitor__cover:focus-visible .catalog-exhibitor__link-arrow {
-  border-color: var(--catalog-gold-highlight);
-  background: var(--catalog-gold-highlight);
-  color: var(--white);
+  border-color: var(--gold);
+  background: var(--cream);
+  color: var(--teal-deep);
   transform: translate(2px, -2px);
 }
 
 .catalog-exhibitor__cover:focus-visible {
-  outline: 2px solid var(--catalog-gold-highlight);
+  outline: 2px solid var(--gold);
   outline-offset: 4px;
 }
 
@@ -1769,7 +1817,7 @@ h3 em {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--catalog-gold-highlight);
+  color: var(--ink-soft);
   cursor: pointer;
   place-items: center;
   font-family: Georgia, serif;
@@ -1791,7 +1839,7 @@ h3 em {
 
 .catalog-control:hover:not(:disabled),
 .catalog-control:focus-visible:not(:disabled) {
-  color: var(--gold-dark);
+  color: var(--teal-dark);
 }
 
 .catalog-control--previous:hover:not(:disabled),
@@ -1904,7 +1952,7 @@ h3 em {
   bottom: 13px;
   width: clamp(64px, 4.5vw, 78px);
   height: 29px;
-  background: url("images/logo-di-nucci-trasparente-nero.png") center / contain no-repeat;
+  background: url("../images/logo-di-nucci-trasparente-nero.png") center / contain no-repeat;
   content: "";
   opacity: 0.58;
   pointer-events: none;
@@ -1953,7 +2001,7 @@ h3 em {
 
 .product-card:hover h4,
 .product-card h4:hover {
-  color: var(--catalog-gold-highlight);
+  color: var(--gold-dark);
 }
 
 .catalog-progress {
@@ -2034,8 +2082,10 @@ h3 em {
   text-wrap: balance;
 }
 
+/* Un teal solo per gli em su fondo chiaro: --teal-dark. Qui c'era --teal (#459caf), unico
+   caso sul sito e senza una ragione registrata. Uniformato il 08/09/2026. */
 .reviews-bar h2 em {
-  color: var(--teal);
+  color: var(--teal-dark);
 }
 
 .reviews-bar__heading .heading-ornament {
@@ -2052,15 +2102,15 @@ h3 em {
 
 .reviews-cta {
   --reviews-cta-cut: 10px;
-  --reviews-cta-fill: var(--white);
-  --reviews-cta-stroke: rgba(23, 42, 45, 0.28);
+  --reviews-cta-fill: var(--cream);
+  --reviews-cta-stroke: var(--gold);
   position: relative;
   display: flex;
   min-height: 38px;
   align-items: center;
   justify-content: space-between;
   padding: 8px 13px;
-  color: var(--teal-dark);
+  color: var(--teal-deep);
   background-color: var(--reviews-cta-stroke);
   border: 0;
   clip-path: polygon(var(--reviews-cta-cut) 0, 100% 0, 100% calc(100% - var(--reviews-cta-cut)), calc(100% - var(--reviews-cta-cut)) 100%, 0 100%, 0 var(--reviews-cta-cut));
@@ -2091,17 +2141,17 @@ h3 em {
 }
 
 .reviews-cta--google {
-  --reviews-cta-fill: var(--teal-dark);
-  --reviews-cta-stroke: var(--teal-dark);
-  color: var(--white);
+  --reviews-cta-fill: var(--cream);
+  --reviews-cta-stroke: var(--gold);
+  color: var(--teal-deep);
 }
 
 .reviews-cta:hover,
 .reviews-cta:focus-visible {
-  --reviews-cta-fill: var(--gold-dark);
-  --reviews-cta-stroke: var(--gold-dark);
-  color: var(--white);
-  background-color: var(--gold-dark);
+  --reviews-cta-fill: var(--cream);
+  --reviews-cta-stroke: var(--gold);
+  color: var(--teal-deep);
+  background-color: var(--gold);
   transform: translateY(-1px);
 }
 
@@ -2561,7 +2611,7 @@ h3 em {
 }
 
 .contact-slides-indicator span.is-active {
-  background: var(--gold);
+  background: var(--teal-dark);
 }
 
 /* Footer */
@@ -2621,7 +2671,8 @@ h3 em {
   line-height: 1.55;
 }
 
-.footer-column a {
+.footer-column a,
+.footer-hours {
   color: var(--ink);
   font-size: clamp(1.05rem, 1vw, 1.15rem);
   font-weight: 500;
@@ -2648,6 +2699,17 @@ h3 em {
 .footer-address-copy {
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 781px) {
+  .footer-contacts {
+    justify-self: end;
+    transform: translateX(34px);
+  }
+
+  .footer-address-copy span {
+    white-space: nowrap;
+  }
 }
 
 .footer-location-link {
@@ -2678,6 +2740,12 @@ h3 em {
   margin-left: -3px;
 }
 
+.footer-hours {
+  align-items: flex-start;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
 .footer-location-link svg,
 .footer-contact-link svg {
   width: 18px;
@@ -2690,7 +2758,8 @@ h3 em {
   stroke-width: 1.7;
 }
 
-.footer-location-link svg {
+.footer-location-link svg,
+.footer-hours svg {
   margin-top: 4px;
 }
 
@@ -2727,7 +2796,9 @@ h3 em {
 }
 
 .footer-legal__rights {
-  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 10px;
 }
 
 .footer-legal a {
@@ -2737,15 +2808,15 @@ h3 em {
 }
 
 .footer-legal .footer-photo-credit {
-  font-size: 2px;
-  line-height: 1;
-  opacity: 0.28;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  opacity: 0.75;
   letter-spacing: 0;
 }
 
 .footer-legal a:hover,
 .footer-legal a:focus-visible {
-  color: var(--catalog-gold-highlight, var(--gold-dark));
+  color: var(--teal);
 }
 
 /* Entrate ripetibili */
@@ -3177,7 +3248,7 @@ h3 em {
   .duo-panel + .duo-panel {
     padding-top: 46px;
     border-top: 1px solid transparent;
-    border-image: linear-gradient(90deg, transparent, rgba(200, 164, 95, 0.52), transparent) 1;
+    border-image: linear-gradient(90deg, transparent, rgba(69, 156, 175, 0.52), transparent) 1;
   }
 
   .duo-panel:last-child {
@@ -3617,8 +3688,7 @@ h3 em {
 
   .duo-section,
   .story-section,
-  .catalog-section,
-  .novara-section {
+  .catalog-section {
     background: var(--cream);
   }
 
@@ -3808,7 +3878,7 @@ h3 em {
     width: clamp(138px, 40vw, 176px);
     min-height: 0;
     height: calc(clamp(320px, 52svh, 380px) - 28px);
-    border: 1px solid rgba(200, 164, 95, 0.9);
+    border: 1px solid rgba(69, 156, 175, 0.9);
     box-shadow: 0 20px 42px rgba(14, 38, 43, 0.22);
     clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
   }
@@ -3862,20 +3932,12 @@ h3 em {
     right: 10%;
     left: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(158, 123, 63, 0.62), transparent);
+    background: linear-gradient(90deg, transparent, rgba(69, 156, 175, 0.62), transparent);
     content: "";
   }
 
   .duo-panel .section-heading h2 {
     font-size: clamp(1.7rem, 6.7vw, 1.85rem);
-  }
-
-  .duo-panel--fidanzamento .section-heading h2 {
-    white-space: normal;
-  }
-
-  .duo-panel--fidanzamento .section-heading h2 em {
-    display: block;
   }
 
   .duo-panel .section-heading > p:last-child {
@@ -4052,7 +4114,7 @@ h3 em {
   .catalog-exhibitor__link-arrow {
     width: 32px;
     height: 32px;
-    color: var(--catalog-gold-highlight);
+    color: var(--gold-dark);
   }
 
   .catalog-viewport {
@@ -4226,7 +4288,8 @@ h3 em {
 
   .footer-column a,
   .footer-column address,
-  .footer-contacts address {
+  .footer-contacts address,
+  .footer-hours {
     font-size: 0.86rem;
     line-height: 1.3;
   }
@@ -4397,7 +4460,7 @@ h3 em {
   }
 
   .duo-panel.is-mobile-focus .feature-photo__cta {
-    color: var(--catalog-gold-highlight);
+    color: var(--gold-dark);
     transition-delay: 360ms;
     transition-duration: 420ms;
   }
@@ -4421,7 +4484,7 @@ h3 em {
   }
 
   .catalog-exhibitor.is-mobile-focus .product-card h4 {
-    color: var(--catalog-gold-highlight);
+    color: var(--gold-dark);
   }
 
   .product-card h4 {
@@ -4515,7 +4578,7 @@ h2:not(.sr-only) {
   padding: 7px 28px;
   color: var(--teal-deep);
   background-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 36' preserveAspectRatio='none'%3E%3Cpath d='M12 .75H239.25V24L227.25 35.25H.75V12Z' fill='none' stroke='%23459caf' stroke-width='1.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 36' preserveAspectRatio='none'%3E%3Cpath d='M12 .75H239.25V24L227.25 35.25H.75V12Z' fill='none' stroke='%23c8a45f' stroke-width='1.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -4620,6 +4683,9 @@ h2:not(.sr-only) {
     border-left-width: 9px;
   }
 
+  .story-review {
+    display: none;
+  }
 }
 
 /* Contatti mobile: titolo, mappa, descrizione e CTA. */
@@ -4680,7 +4746,7 @@ h2:not(.sr-only) {
 }
 
 .catalog-category-tab:focus-visible {
-  outline: 2px solid var(--catalog-gold-highlight);
+  outline: 2px solid var(--teal-deep);
   outline-offset: 3px;
 }
 
@@ -4699,7 +4765,7 @@ h2:not(.sr-only) {
   min-height: 342px;
   margin-right: clamp(18px, 2vw, 34px);
   overflow: hidden;
-  border-left: 1px solid rgba(168, 111, 0, 0.3);
+  border-left: 1px solid rgba(69, 156, 175, 0.3);
   background: transparent;
 }
 
@@ -4738,7 +4804,7 @@ h2:not(.sr-only) {
   left: 8px;
   width: 3px;
   height: 28px;
-  background: var(--catalog-gold-highlight);
+  background: var(--teal-dark);
   border-radius: 0 2px 2px 0;
   opacity: 0.92;
   pointer-events: none;
@@ -4779,7 +4845,7 @@ h2:not(.sr-only) {
 }
 
 .catalog-category-tab[aria-selected="true"] {
-  background: linear-gradient(90deg, rgba(168, 111, 0, 0.09), rgba(168, 111, 0, 0));
+  background: linear-gradient(90deg, rgba(69, 156, 175, 0.09), rgba(69, 156, 175, 0));
   color: var(--teal-dark);
   transform: translateX(3px);
 }
@@ -4950,7 +5016,7 @@ h2:not(.sr-only) {
     padding: 0;
     border: 0;
     background: linear-gradient(90deg, rgba(247, 243, 236, 0.98), rgba(247, 243, 236, 0.76));
-    color: rgba(168, 111, 0, 0.58);
+    color: var(--ink-soft);
     cursor: pointer;
     place-items: center;
     font-family: Georgia, serif;
@@ -4970,7 +5036,7 @@ h2:not(.sr-only) {
 
   .catalog-category-control:hover:not(:disabled),
   .catalog-category-control:focus-visible:not(:disabled) {
-    color: rgba(168, 111, 0, 0.82);
+    color: var(--teal-dark);
   }
 
   .catalog-category-control:focus-visible {
@@ -4989,7 +5055,7 @@ h2:not(.sr-only) {
   }
 
   .catalog-category-tab[aria-selected="true"] {
-    background: linear-gradient(180deg, rgba(168, 111, 0, 0), rgba(168, 111, 0, 0.055));
+    background: linear-gradient(180deg, rgba(69, 156, 175, 0), rgba(69, 156, 175, 0.055));
     transform: none;
   }
 
@@ -5043,43 +5109,679 @@ h2:not(.sr-only) {
   }
 }
 
-/* Contenuti senza fotografie esterne */
-.hero { background: var(--cream); }
-.hero::after, .hero__veil { display: none; }
-.duo-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2vw, 30px); margin-top: clamp(24px, 3vw, 42px); }
-.feature-photo {
-  --feature-cut: 28px;
+/* ==========================================================================
+   contatti.html - 07/09/2026
+   1) Regole riprese identiche da Website/Home-DiNucci/style.css, blocco
+      "Pagine interne" (righe 5186-5196, 5416-5470, 5490-5560, 5643-5650,
+      5680-5686). Alla fusione dei due branch vanno deduplicate.
+   2) Regole proprie di questa pagina: .contact-section--contatti,
+      .hub-section, .hub-cards, .hub-card, .faq-section.
+   ========================================================================== */
+
+/* 1) Sezioni di pagina */
+.page-section {
+  padding: clamp(66px, 6vw, 92px) 0;
+}
+
+.page-section + .page-section {
+  padding-top: 0;
+}
+
+.page-section .section-heading--center {
+  max-width: 720px;
+}
+
+/* 17/09/2026 — deroga: #laboratorio ha un blocco più largo, il contenitore .shell arriva a
+   1320px. 960px restava ancora piccolo: niente gabbia, come .section-open--center già usa
+   su fedi-nuziali e anelli-fidanzamento (8/09/2026). Vale solo per questa sezione. */
+#laboratorio .section-heading--center {
+  max-width: none;
+}
+
+#laboratorio .section-heading--center > p:last-child {
+  max-width: none;
+}
+
+
+/* 1) FAQ (accordion nativo, nessun JS) */
+.faq-list {
+  max-width: 780px;
+  margin: clamp(34px, 3.6vw, 52px) auto 0;
+}
+
+.faq-item {
+  border-top: 1px solid var(--line);
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item__q {
   display: flex;
+  padding: clamp(18px, 2vw, 24px) 34px clamp(18px, 2vw, 24px) 0;
   position: relative;
-  min-height: 176px;
-  padding: clamp(22px, 2.5vw, 34px);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 1.5vw, 1.28rem);
+  font-weight: 500;
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+  transition: color 180ms ease;
+}
+
+.faq-item__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__q::after {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  content: "";
+  transform: translateY(-50%);
+  transition: transform 220ms var(--ease);
+}
+
+.faq-item[open] .faq-item__q::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-item__q:hover {
+  color: var(--teal-dark);
+}
+
+.faq-item__a {
+  padding: 0 34px clamp(20px, 2.2vw, 26px) 0;
+}
+
+.faq-item__a p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--font-description);
+  line-height: 1.75;
+}
+
+/* 1) chi-siamo - link ai servizi */
+.service-link {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.service-link a {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 180ms ease;
+}
+
+.service-link a:hover,
+.service-link a:focus-visible {
+  color: var(--teal-dark);
+}
+
+.service-link p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 1) contatti - blocco informazioni */
+.contact-info {
+  display: grid;
+  gap: clamp(22px, 2.4vw, 32px);
+}
+
+.contact-info address {
+  display: grid;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  font-style: normal;
+  line-height: 1.55;
+  gap: 2px;
+}
+
+.contact-info address strong {
+  font-weight: 600;
+}
+
+.contact-hours,
+.contact-lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-hours li {
+  display: flex;
+  padding: 7px 0;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.contact-hours li:last-child {
+  border-bottom: 0;
+}
+
+.contact-hours span {
+  min-width: 148px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+}
+
+.contact-hours strong {
+  color: var(--white);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.contact-lines li {
+  padding: 5px 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+.contact-lines a {
+  color: var(--white);
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.contact-lines a:hover,
+.contact-lines a:focus-visible {
+  color: var(--gold);
+}
+
+@media (max-width: 780px) {
+  .page-section {
+    padding: 52px 0 60px;
+  }
+
+  .page-section + .page-section {
+    padding-top: 0;
+  }
+
+  .faq-item__a p {
+    font-size: 16px;
+  }
+
+  .contact-hours li {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+/* 2) Hero - impianto della sezione #contatti della home, sotto la navbar fissa.
+   Alta quanto il contenuto piu' i 88 di padding della home sopra e sotto. */
+.contact-section--contatti {
+  min-height: 0;
+  padding-top: var(--header-height);
+}
+
+/* Raccordo con il crema della sezione sotto: il gradiente di .hero::after della home,
+   alto quanto il padding verticale della sezione (88). Sta sotto il contenuto (z-index 1). */
+.contact-section--contatti::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 88px;
+  background: linear-gradient(to bottom, rgba(247, 243, 236, 0) 0%, rgba(247, 243, 236, 0.68) 58%, var(--cream) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.contact-section--contatti .contact-heading h1 {
+  margin: 0;
+  font-size: calc(clamp(2.45rem, 3vw, 3.75rem) - 11px);
+  line-height: 0.86;
+}
+
+.contact-section--contatti .contact-heading h1 em {
+  color: var(--gold);
+}
+
+/* I tre riquadri (NAP, orari, contatti) prendono la cornice della .map-wrap */
+.contact-section--contatti .contact-info {
+  gap: 12px;
+}
+
+.contact-section--contatti .contact-info > * {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.54);
+}
+
+.contact-section--contatti .contact-actions {
+  width: min(100%, 456px);
+  margin-top: 18px;
+  gap: 16px;
+}
+
+.contact-section--contatti .contact-call {
+  width: 200px;
+  flex: none;
+}
+
+.contact-section--contatti .contact-whatsapp {
+  width: 240px;
+  flex: none;
+  white-space: nowrap;
+}
+
+/* Titolo a tutta larghezza sopra le due colonne. La mappa si stira all'altezza della colonna
+   dei contatti, cosi' il suo bordo inferiore pareggia i bottoni; .contact-map e' un subgrid
+   per tenere Indicazioni nella riga sotto senza cambiare il markup della home. */
+.contact-section--contatti .contact-layout {
+  grid-template-rows: auto auto auto;
+  row-gap: 0;
+}
+
+.contact-section--contatti .contact-heading {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-bottom: 34px;
+  text-align: center;
+}
+
+.contact-section--contatti .contact-copy,
+.contact-section--contatti .contact-divider {
+  grid-row: 2;
+}
+
+.contact-section--contatti .contact-map {
+  display: grid;
+  grid-row: 2 / 4;
+  grid-template-rows: subgrid;
+  align-items: stretch;
+}
+
+.contact-section--contatti .map-wrap {
+  height: auto;
+}
+
+/* Riquadri con i dati centrati. Indirizzo e icona WhatsApp sono link come nel footer:
+   stessa icona, stesso tratto (18px, stroke 1.7, capi tondi). */
+.contact-section--contatti .contact-info > * {
+  text-align: center;
+}
+
+.contact-section--contatti .contact-hours li {
+  justify-content: center;
+}
+
+.contact-section--contatti .contact-hours span {
+  min-width: 0;
+}
+
+.contact-section--contatti .contact-info address a {
+  color: var(--white);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.contact-section--contatti .contact-info address a:hover,
+.contact-section--contatti .contact-info address a:focus-visible {
+  color: var(--gold);
+}
+
+.contact-lines__whatsapp {
+  display: inline-flex;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.contact-lines__whatsapp svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+/* 2) Sezione 2 - hub di link: tre card 402 / gap 45 / foto 402x300, coda a 720 */
+.hub-section .section-heading h2 em {
+  color: var(--teal-dark);
+}
+
+/* Il titolo sta su una riga: il contenitore si allarga alla shell, il testo sotto resta a 720 */
+.hub-section .section-heading--center {
+  max-width: none;
+}
+
+
+.hub-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 34px;
+  gap: 45px;
+}
+
+.hub-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.hub-card__media {
+  --photo-cut: 30px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--cream-deep);
+  aspect-ratio: 402 / 300;
+  clip-path: polygon(var(--photo-cut) 0, 100% 0, 100% calc(100% - var(--photo-cut)), calc(100% - var(--photo-cut)) 100%, 0 100%, 0 var(--photo-cut));
+}
+
+/* 17/09/2026 — riquadro segnaposto: cornice tratteggiata sul taglio (angoli alto-sinistra/
+   basso-destra, come il clip-path sopra) + scritta, stessa tecnica delle altre famiglie di box. */
+.hub-card__media:has(img[src$="placeholder-di-nucci.png"]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='7.5,0 100,0 100,90 92.5,100 0,100 0,10' fill='none' stroke='%239e7b3f' stroke-width='0.3' stroke-dasharray='0.9 1.2'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 46% auto;
+  background-position: 0 0, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.hub-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hub-card .service-link {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.hub-card .service-link h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  line-height: 1.25;
+}
+
+.hub-card .service-link p {
+  margin-bottom: 18px;
+}
+
+.hub-card .service-link a {
+  margin: auto 0 0;
+  align-self: flex-start;
+}
+
+/* 2) Sezione 3 - accordion a colonna centrata 900 */
+.faq-section .faq-list {
+  max-width: 900px;
+  margin-top: 34px;
+}
+
+@media (max-width: 1020px) {
+  /* Colonna singola: le posizioni di griglia tornano automatiche */
+  .contact-section--contatti .contact-layout {
+    grid-template-rows: none;
+  }
+
+  .contact-section--contatti .contact-heading {
+    grid-column: auto;
+    grid-row: auto;
+    margin-bottom: 0;
+  }
+
+  .contact-section--contatti .contact-copy,
+  .contact-section--contatti .contact-divider,
+  .contact-section--contatti .contact-map {
+    grid-row: auto;
+  }
+
+  .contact-section--contatti .contact-map {
+    display: block;
+  }
+
+  .contact-section--contatti .map-wrap {
+    height: 300px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hub-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 780px) {
+  /* La home riordina la sezione con display: contents; qui vale la sequenza del wireframe */
+  .contact-section--contatti .contact-copy,
+  .contact-section--contatti .contact-map {
+    display: block;
+  }
+
+  .contact-section--contatti .contact-layout {
+    gap: 30px;
+  }
+
+  .contact-section--contatti .contact-copy {
+    text-align: left;
+  }
+
+  .contact-section--contatti .contact-hours li {
+    align-items: center;
+  }
+
+  .contact-section--contatti .contact-heading h1 {
+    font-size: clamp(1.7rem, 6.7vw, 1.85rem);
+  }
+
+
+  .contact-section--contatti .contact-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-section--contatti .contact-call,
+  .contact-section--contatti .contact-whatsapp {
+    width: 100%;
+  }
+
+  .contact-section--contatti .map-directions {
+    display: flex;
+    margin: 13px 0 0;
+  }
+
+
+  .hub-card__media {
+    --photo-cut: 16px;
+  }
+
+  .contact-section--contatti::after {
+    height: 48px;
+  }
+}
+
+/* 15/09/2026 — al posto delle foto di prodotto, il riquadro col logo.
+   16/09/2026 — selettore attributo raddoppiato: i CSS di pagina (fedi-nuziali,
+   anelli-fidanzamento, marchi, storia-novara) si caricano dopo questo foglio e hanno
+   `object-fit: cover` sulla stessa specificità, quindi vincevano loro e il logo veniva
+   tagliato. Specificità piu' alta invece di riordinare i fogli o usare !important. */
+/* 17/09/2026 (2) — Simone: l'immagine porta un fondo proprio che a logo rimpicciolito si vede
+   come un alone rettangolare. Il file (invariato) si nasconde del tutto e la scritta si ridisegna
+   in CSS — stessi valori di famiglia e di caso della scritta reale del sito (Times New Roman,
+   maiuscolo, i due filetti attorno a "GIOIELLERIA"): niente rettangolo, nessun font nuovo. */
+img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
+  opacity: 0;
+}
+
+/* 17/09/2026 — il riquadro prende la scritta al centro e, dove il box e' tagliato ad angolo, una
+   cornice tratteggiata sottile che segue il taglio (non un bordo dritto: un border comune verrebbe
+   ritagliato dall'angolo del clip-path, stesso problema di DESIGN-BRIEF §7). La scritta e' un
+   secondo layer di background-image con la sua proporzione vera (preserveAspectRatio di default):
+   nello stesso layer del tratteggio, che invece deve seguire il taglio del box e per farlo usa
+   preserveAspectRatio="none", verrebbe deformata. */
+.feature-photo__image:has(img[src$="placeholder-di-nucci.png"]) {
+  border: 1px dashed var(--gold-dark);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 58% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.product-card figure:has(> img[src$="placeholder-di-nucci.png"]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='0,0 96.7,0 100,4.7 100,100 3.3,100 0,95.3' fill='none' stroke='%239e7b3f' stroke-width='0.3' stroke-dasharray='0.8 1'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 44% auto;
+  background-position: 0 0, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.duo-photos .feature-photo:first-child .feature-photo__image:has(img[src$="placeholder-di-nucci.png"]) {
+  border: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='0,0 89,0 100,11 100,100 11,100 0,89' fill='none' stroke='%239e7b3f' stroke-width='0.4' stroke-dasharray='1.2 1.6'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 58% auto;
+  background-position: 0 0, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.duo-photos .feature-photo:last-child .feature-photo__image:has(img[src$="placeholder-di-nucci.png"]) {
+  border: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='11,0 100,0 100,89 89,100 0,100 0,11' fill='none' stroke='%239e7b3f' stroke-width='0.4' stroke-dasharray='1.2 1.6'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 58% auto;
+  background-position: 0 0, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+/* 17/09/2026 — sezione "Il laboratorio", scheda-lavorazione (leva 6.5 del DESIGN-BRIEF §12):
+   bordo teal con la tecnica del fondo colorato + ::before bianco a inset 1px (DESIGN-BRIEF
+   §7). Sostituisce .forme/.forma qui: quel componente resta per le otto forme di taglio di
+   #pietre in anelli-fidanzamento.css.
+   17/09/2026 (2) — tolta l'icona: il riquadro si restringe al contenuto, il nome è centrato.
+   17/09/2026 (3) — tavola C3: due colonne (cappello a sinistra, lavorazioni in griglia 2×2
+   separate da filetti). Le schede teal escono, .laboratorio-grid è il contenitore nuovo.
+   17/09/2026 (4) — valori definitivi: si torna alla scheda leva 6.5, ma piena cella (non si
+   restringe più al contenuto), stessa griglia e stesso min-height 92px di "tavola C3". Il
+   filetto (border-left/border-top) lascia il posto al bordo teal della scheda. */
+.laboratorio-grid {
+  display: grid;
+  grid-template-columns: 480px 1fr;
+  column-gap: 120px;
+  align-items: start;
+}
+
+.laboratorio-grid__intro {
+  max-width: none;
+  text-align: left;
+}
+
+.laboratorio-grid__intro h2 {
+  margin-bottom: 0;
+}
+
+.laboratorio-grid__intro h2 em {
+  color: var(--teal-dark);
+}
+
+.laboratorio-grid__intro > p:last-child {
+  max-width: none;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--font-description);
+  line-height: 1.7;
+}
+
+.lavorazioni {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lavorazione {
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 14px;
+  min-height: 92px;
+  padding: 17px 20px;
   text-align: center;
-  background: rgba(158, 123, 63, 0.48);
-  border: 0;
-  clip-path: polygon(var(--feature-cut) 0, 100% 0, 100% calc(100% - var(--feature-cut)), calc(100% - var(--feature-cut)) 100%, 0 100%, 0 var(--feature-cut));
+  background: var(--teal);
+  clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  isolation: isolate;
 }
-.feature-photo::before {
-  content: "";
+
+.lavorazione::before {
   position: absolute;
+  z-index: -1;
   inset: 1px;
-  z-index: 0;
   background: var(--white);
-  clip-path: polygon(calc(var(--feature-cut) - 1px) 0, 100% 0, 100% calc(100% - var(--feature-cut) + 1px), calc(100% - var(--feature-cut) + 1px) 100%, 0 100%, 0 calc(var(--feature-cut) - 1px));
+  clip-path: polygon(19px 0, 100% 0, 100% calc(100% - 19px), calc(100% - 19px) 100%, 0 100%, 0 19px);
+  content: "";
 }
-.feature-photo > * { position: relative; z-index: 1; }
-.feature-photo__note, .feature-photo__cta { position: static; display: block; text-align: center; }
-.feature-photo__cta { margin-top: 14px; }
-.gold-banner {
-  background-color: #12100e;
-  background-image:
-    linear-gradient(90deg, rgba(17, 81, 94, 0.96) 0%, rgba(23, 100, 116, 0.88) 36%, rgba(30, 118, 135, 0.56) 63%, rgba(33, 121, 137, 0.12) 100%),
-    url("images/compro-oro-hero-generated.png");
-  background-position: center, center;
-  background-repeat: no-repeat;
-  background-size: cover;
+
+.lavorazione svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: #000;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
 }
-.gold-banner__content { color: var(--white); }
-@media (max-width: 780px) { .duo-photos { grid-template-columns: 1fr; } }
+
+.lavorazione svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+.lavorazione img {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.lavorazione span {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .laboratorio-grid {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+
+  .lavorazioni {
+    grid-template-columns: 1fr;
+  }
+
+  .lavorazione {
+    min-height: 78px;
+    padding: 20px;
+  }
+
+  .lavorazione span {
+    font-size: 20px;
+  }
+}

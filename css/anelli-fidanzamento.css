@@ -1,0 +1,1596 @@
+/* Pagine interne — classi che style.css non ha.
+   Valori da brief/DESIGN-BRIEF.md e da PAGE-BRIEF-FEDI-NUZIALI.md §5. Nessun colore fuori dai token di :root. */
+
+/* Sezione di pagina: 86 px sopra e sotto; due di fila si toccano a 172 px con --spaced. */
+.page-section {
+  padding: clamp(66px, 6vw, 92px) 0;
+  background: var(--cream);
+}
+
+.page-section + .page-section {
+  padding-top: 0;
+}
+
+.page-section.page-section--spaced {
+  padding-top: clamp(66px, 6vw, 92px);
+}
+
+/* Apertura di sezione: occhiello, H2, ornamento, lead */
+.section-open h2 {
+  margin: 0;
+}
+
+/* Teal come su storia-novara e sulle pagine marchio. Il DESIGN-BRIEF §4 autorizza per il
+   territorio A sia --gold-dark sia --teal-dark: la scelta fra i due l'ha chiusa Simone il
+   08/09/2026 sul teal. (FORMATO-PAGINE-PRODOTTO §4.5) */
+.section-open h2 em {
+  color: var(--teal-dark);
+}
+
+.section-open .heading-ornament {
+  margin: 17px 0 26px;
+}
+
+.section-open--center {
+  /* Niente gabbia da 720: titolo e lead usano la larghezza della shell, cosi' l'H2 sta
+     su una riga sola invece di spezzarsi (Simone, 08/09/2026) */
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-open--center .heading-ornament {
+  margin-inline: auto;
+}
+
+/* Il rombo (leva 4.5) nasce allineato a sinistra per le aperture a due colonne. Nelle tre
+   aperture portate al centro l'08/09/2026 va centrato come l'ornamento sopra. */
+.section-open--center .ornament-rombo {
+  justify-content: center;
+  margin-inline: auto;
+  margin-bottom: 26px;
+}
+
+/* Gabbie di larghezza tolte: il testo prende la colonna che ha e fa meno righe possibile
+   (Simone, 08/09/2026) */
+.section-open__lead {
+  max-width: none;
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--font-description);
+  line-height: 1.7;
+}
+
+.section-open--center .section-open__lead {
+  max-width: none;
+  margin-inline: auto;
+}
+
+/* Titolo di gruppo dei marchi: niente H2, solo l'occhiello grande il doppio con la linea
+   di fianco invece che sotto (Simone, 08/09/2026) */
+.section-open--label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.section-open--label .eyebrow {
+  margin-bottom: 0;
+  font-size: 1.4rem;
+}
+
+.section-open.section-open--label .heading-ornament {
+  margin: 0;
+}
+
+/* Prosa */
+.prose {
+  max-width: none;
+  color: var(--ink-soft);
+  font-size: var(--font-description);
+  line-height: 1.65;
+}
+
+.prose p {
+  margin: 0 0 16px;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+.prose strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.prose a {
+  color: var(--teal-dark);
+  border-bottom: 1px solid currentColor;
+  transition: color 180ms ease;
+}
+
+.prose a:hover,
+.prose a:focus-visible {
+  color: var(--teal);
+}
+
+.prose a > span {
+  margin-left: 4px;
+}
+
+/* Titoli di terzo livello: 22 px maiuscolo (leva 2.6) dove la tabella §5 non fissa una misura */
+.momento h3,
+.panel h3 {
+  font-size: 22px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+/* La domanda della FAQ tiene i 22 px ma esce dal maiuscolo e respira come .faq-item__q di
+   style.css: interlinea 1,3. Nessun'altra pagina del sito scrive le domande in maiuscolo, e
+   l'1,05 stava sotto il minimo di 1,1 di `web-design` per i titoli — le domande su due righe
+   si toccavano. (FORMATO-PAGINE-PRODOTTO §4.3, applicato il 08/09/2026) */
+.faq-item h3 {
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+/* Badge teal (leva 3.2, era Badge in oro — passata a teal il 17/09/2026) */
+.badge-gold {
+  display: inline-block;
+  padding: 4px 10px;
+  color: var(--teal-deep);
+  background: rgba(69, 156, 175, 0.18);
+  clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* Hero: i due marchi al posto della foto dell'ingresso, copy centrato nel suo
+   blocco come nella home: nessun override di allineamento. */
+.hero--fedi .hero__lead .eyebrow {
+  position: relative;
+  z-index: 1;
+}
+
+/* La sottotestata e la riga del luogo cadono sopra la foto e il solo text-shadow non le stacca:
+   stesso alone di .hero h1::before in style.css, con le opacita' alzate come sulla firma dei
+   marchi, perche' qui sotto c'e' una foto chiara e non il fondo della hero (Simone, 08/09/2026).
+   Sotto i 781px l'alone dell'H1 e' gia' spento in style.css: qui si segue la stessa soglia. */
+@media (min-width: 781px) {
+  .hero--fedi .hero__subheadline,
+  .hero--fedi .hero__place {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+  }
+
+  .hero--fedi .hero__subheadline::before,
+  .hero--fedi .hero__place::before {
+    position: absolute;
+    z-index: -1;
+    inset: -12px -26px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.55) 48%, rgba(255, 255, 255, 0) 78%);
+    content: "";
+    filter: blur(13px);
+    pointer-events: none;
+  }
+}
+
+.hero--fedi .hero__aside {
+  display: flex;
+  height: auto;
+  min-height: 0;
+  padding: 0 clamp(24px, 3vw, 48px);
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  clip-path: none;
+  align-self: center;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.hero--fedi .hero__aside::after {
+  content: none;
+}
+
+.brand-sign {
+  margin: 0;
+}
+
+.brand-sign__mark {
+  position: relative;
+  display: flex;
+  height: 130px;
+  padding: 18px 28px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(69, 156, 175, 0.48);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  isolation: isolate;
+}
+
+.brand-sign__mark::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  background: var(--white);
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  content: "";
+}
+
+/* La foto del marchio: sta sopra il pannello bianco del ::before e sotto l'alone. Stesso taglio
+   d'angolo del pannello, cosi' la cornice oro resta di 1px su tutti i lati.
+   z-index 0 e non -1: a pari livello negativo il pannello bianco del ::before le finisce sopra. */
+.brand-sign__mark .brand-sign__photo {
+  position: absolute;
+  z-index: 0;
+  top: 1px;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+/* Le due cover sono verticali e il box e' largo e basso: l'inquadratura si porta sul soggetto,
+   altrimenti resta una fetta di sfondo. Miluna: il filo di perle e la mano con l'anello.
+   Comete: le mani dell'artigiano e la stella di diamanti. */
+.brand-sign--miluna .brand-sign__photo {
+  object-position: center 48%;
+}
+
+.brand-sign--comete .brand-sign__photo {
+  object-position: center 55%;
+}
+
+/* Alone dietro la firma: stessa ricetta di .hero h1::before in style.css, con le opacita' alzate
+   perche' qui sta sopra una foto e non sopra il fondo chiaro della hero. */
+.brand-sign__mark::after {
+  position: absolute;
+  z-index: 1;
+  inset: 16% 10%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 48%, rgba(255, 255, 255, 0) 78%);
+  content: "";
+  filter: blur(13px);
+  pointer-events: none;
+}
+
+.brand-sign__mark img {
+  width: auto;
+  max-width: 100%;
+  height: 44px;
+  object-fit: contain;
+}
+
+.brand-sign__mark .brand-sign__logo {
+  position: relative;
+  z-index: 2;
+}
+
+/* Vince sulla figcaption assoluta e bianca di .hero__aside in style.css */
+.hero--fedi .brand-sign figcaption {
+  position: static;
+  display: block;
+  width: auto;
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Fascia finanziamento standalone: banda larga quanto la sezione sotto, nota alta 68, 49 px sopra e sotto.
+   Il wrap sta dentro .shell: width 100% lo porta a min(90%, 1320px), la stessa misura del contenuto.
+   Il gradiente della nota resta quello di style.css: distendendosi, chiude sui bordi del contenuto. */
+/* Metrica delle pagine marchio: la fascia sta stretta fra la hero e la prima sezione — è
+   un'apertura, non due sezioni separate. (FORMATO-PAGINE-PRODOTTO §4.6, 08/09/2026) */
+.finance-strip {
+  padding: 34px 0;
+  background: var(--cream);
+}
+
+.finance-strip + .page-section {
+  padding-top: clamp(34px, 3.2vw, 48px);
+}
+
+.finance-strip .finance-wrap {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+}
+
+.finance-strip .finance-note {
+  min-height: 68px;
+}
+
+/* Registro delle pagine marchio: corsivo Times in teal profondo, peso normale. Il 600 della
+   .finance-note__text di style.css su Times si risolve in grassetto pieno, che qui pesa troppo.
+   Il simbolo resta com'era. (FORMATO-PAGINE-PRODOTTO §4.7, 08/09/2026) */
+.finance-strip .finance-note__text {
+  color: var(--teal-deep);
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.finance-strip .finance-note__symbol--euro {
+  width: 32px;
+  height: 32px;
+  font-size: 1.33rem;
+}
+
+/* Sezione 2: tre momenti numerati (leva 2.6, senza card) */
+.momenti {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 72px;
+  gap: 30px;
+}
+
+.momento__figure {
+  margin: 0 0 18px;
+  overflow: hidden;
+  background: var(--cream-deep);
+  aspect-ratio: 5 / 3;
+}
+
+.momento__figure img,
+.split__figure img,
+.metal__figure img,
+.profilo__thumb img,
+.page-photo-band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.momento__n {
+  margin-bottom: 10px;
+  color: var(--teal-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.35;
+}
+
+.momento h3 {
+  margin: 0 0 12px;
+}
+
+/* Sezione 3: le montature, senza descrizione dal 17/09/2026 — foto e nome in riga.
+   justify-content: center solo per la riga singola (nowrap) del desktop: quando il contenuto
+   e' piu' stretto dello shell resta centrato invece che appeso a sinistra. In modalita' impilata
+   (sotto, @media max-width:1300px) ogni voce e' gia' larga il 100% e non ha spazio da centrare:
+   niente da azzerare li'. */
+.profili {
+  margin-top: 72px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.profilo {
+  display: flex;
+  align-items: center;
+}
+
+/* Divisorio fra una voce e l'altra: elemento a se' (.profilo__divider), non piu' generato da
+   .profilo + .profilo::before. Da pseudo-elemento "apparteneva" al profilo che seguiva: se la
+   riga andava a capo con quel profilo da solo, il filetto restava appeso, orfano — visto piu'
+   volte a video intorno a 1440px, stessa regola qui per coerenza fra le due pagine gemelle. Da
+   elemento indipendente sparisce col profilo quando la riga va a capo, mai orfano. align-self:
+   center lo centra nella riga: ora e' figlio diretto di .profili (flex) e non piu' di .profilo.
+   Margine 16px e non 20 (come .gold-banner__divider di style.css): sulla pagina fedi, con 20
+   le quattro voci non stavano più su una riga sola a 1440px — stessa regola qui per coerenza
+   fra le due pagine gemelle, verificato il 17/09/2026.
+   Spessore 3px e non 1: a 1px, cadendo su posizioni non intere date dalla larghezza variabile
+   del testo, il filetto viene anti-aliasato in modo diverso da un divisorio all'altro e alcuni
+   sembrano più sottili — segnalato da Simone il 17/09/2026 sulla pagina fedi (a 2px il divisorio
+   centrale restava comunque più sottile degli altri due), stessa regola qui. Alto 48px e non
+   tutta l'altezza (3/4 dei 64px del thumb, chiesto da Simone). */
+.profilo__divider {
+  width: 3px;
+  height: 48px;
+  margin: 0 8px;
+  background: rgba(69, 156, 175, 0.4);
+  align-self: center;
+}
+
+/* Sopra i 1300px .profili non va piu' a capo (flex-wrap: nowrap sulla regola base): il capo a
+   meta' con l'ultima voce orfana — successo piu' volte a video sulla pagina fedi intorno a
+   1440px — non puo' piu' succedere. La soglia vecchia (1441px) faceva impilare anche i portatili
+   piu' comuni (1366, 1280): a 1441 il contenuto sta su una riga solo per 30-40px di margine, lo
+   stesso equilibrio fragile del bug che questa modifica risolve, solo spostato piu' in basso.
+   Misurato a video il 17/09/2026, stessa regola qui per coerenza fra le due pagine gemelle: gia'
+   a 1280px il contenuto sta su una riga sola senza restringersi, ma proprio a 1279px esatti il
+   breakpoint non scattava per un arrotondamento subpixel del viewport — lo stesso tipo di
+   equilibrio al millimetro da evitare. 1300px da' margine reale. Sotto i 1300px si passa alla
+   versione impilata, con .profili che torna a incapo (flex-wrap: wrap, qui insieme a
+   .profilo{width:100%}) e la riga orizzontale che sotto i 780px, cosi' non c'e' piu' una fascia
+   di larghezze dove si rompe. */
+@media (max-width: 1300px) {
+  .profili {
+    flex-wrap: wrap;
+  }
+
+  .profilo {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  /* Altezza 3px e non 2: a 2px la riga orizzontale cade su una posizione verticale non
+     intera e viene anti-aliasata in modo diverso da una voce all'altra — stesso problema
+     del divisorio verticale del desktop, stessa soglia che l'ha risolto (Simone, 17/09/2026). */
+  .profilo__divider {
+    width: 75%;
+    height: 3px;
+    margin: 0 0 8px;
+  }
+}
+
+.profilo__head {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.profilo__thumb {
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 50%;
+  flex: 0 0 64px;
+}
+
+/* 17/09/2026 — riquadro segnaposto: stesso logo delle altre famiglie, non un motivo diverso.
+   Qui il border-radius:50% c'è già, quindi un border dritto normale (non serve clip-path+SVG)
+   diventa già tondo da solo. */
+.profilo__thumb:has(img[src$="placeholder-di-nucci.png"]) {
+  position: relative;
+  border: 1px dashed var(--gold-dark);
+}
+
+.profilo__thumb:has(img[src$="placeholder-di-nucci.png"])::before {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 90% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  content: "";
+}
+
+/* Come le date delle tappe di storia-novara (.tappa__anno): corsivo, peso 400, niente maiuscolo.
+   La misura resta 30 px: a 48 come le tappe, in colonna da 224 i nomi andrebbero a capo. */
+.profilo h3 {
+  margin: 0;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: none;
+}
+
+.profilo .badge-gold {
+  margin-top: 8px;
+}
+
+/* Sezione 4: le quattro pietre, ognuna con la sua descrizione sotto la foto (chiesto da Simone
+   l'08/09/2026). Stessa forma dei tre momenti della sezione 2: figura, titolo, testo. */
+.metals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 72px;
+  gap: 30px;
+}
+
+.metal__figure {
+  margin: 0 0 18px;
+  overflow: hidden;
+  background: var(--cream-deep);
+  aspect-ratio: 2 / 1;
+}
+
+/* La foto del solitario è 650x464: dentro il box 2:1 il cover toglie il 15% sopra, cioè
+   proprio il diamante. L'inquadratura si porta in alto. Stesso metodo di .brand-sign--miluna. */
+.metal__figure--alto img {
+  object-position: center top;
+}
+
+/* Il filetto teal resta, ma scende sotto la foto: separa l'immagine dal suo testo */
+.metal h3 {
+  margin: 0 0 12px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(69, 156, 175, 0.4);
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.metal .badge-gold {
+  margin-bottom: 12px;
+}
+
+/* Pannello (leva 7.2 crema profondo; --deep = leva 3.4, una sola volta per pagina) */
+.panel {
+  margin-top: 60px;
+  padding: 46px;
+  background: var(--cream-deep);
+  clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
+}
+
+.panel h3 {
+  margin: 0 0 14px;
+}
+
+.panel .prose {
+  max-width: none;
+}
+
+.panel .prose p {
+  margin-bottom: 10px;
+}
+
+.panel--deep {
+  margin-top: 0;
+  padding: 46px 32px;
+  color: var(--white);
+  background: var(--teal-deep);
+  text-align: center;
+}
+
+/* Split a due colonne (leva 2.1) */
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 80px;
+}
+
+.split--data {
+  grid-template-columns: 2fr 1fr;
+}
+
+.split--shop {
+  grid-template-columns: 5fr 4fr;
+  align-items: start;
+}
+
+.split__figure {
+  margin: 0;
+  overflow: hidden;
+  background: var(--cream-deep);
+  aspect-ratio: 7 / 4;
+}
+
+.split__stack {
+  display: grid;
+  gap: 20px;
+}
+
+.split__stack .split__figure {
+  aspect-ratio: 2 / 1;
+}
+
+.split .prose {
+  max-width: none;
+}
+
+/* Scheda marchio: pannello bianco con filo oro, smusso 28, padding 38 */
+.feature-photo--brand {
+  position: relative;
+  padding: 38px;
+  background: rgba(69, 156, 175, 0.48);
+  clip-path: polygon(28px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%, 0 28px);
+  isolation: isolate;
+}
+
+.feature-photo--brand::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  background: var(--white);
+  clip-path: polygon(27px 0, 100% 0, 100% calc(100% - 27px), calc(100% - 27px) 100%, 0 100%, 0 27px);
+  content: "";
+}
+
+/* Segno di marchio nudo dentro la scheda, come su fedi-nuziali: niente cornice,
+   il logo del marchio al posto del nome composto. (deciso da Simone il 08/09/2026) */
+.feature-photo--brand .brand-mark {
+  width: auto;
+  height: 56px;
+  margin-bottom: 24px;
+}
+
+.feature-photo--brand h2 {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Su fondo chiaro l'em è teal, su fondo scuro è oro: la regola vale su tutto il sito.
+   Questa era l'unica eccezione rimasta — oro su un pannello bianco. Corretta il 08/09/2026. */
+.feature-photo--brand h2 em {
+  color: var(--teal-dark);
+}
+
+.feature-photo--brand .prose {
+  margin-top: 18px;
+}
+
+.feature-photo--brand .button {
+  margin-top: 26px;
+}
+
+/* Cornice oro con smusso su tutte le foto della pagina: e' il componente di storia-novara
+   (.storia-foto) e delle pagine marchio (.marchio-foto), portato qui invariato.
+   Non e' un border: un border verrebbe ritagliato dal clip-path (DESIGN-BRIEF §24). E' un fondo
+   oro con un ::before crema a inset 1px, cosi' lo smusso vale anche per il filo.
+   Nessuna ombra: il DESIGN-BRIEF le esclude sui contenitori foto. (Simone, 08/09/2026) */
+.momento__figure,
+.metal__figure,
+.split__figure,
+.feature-photo__carousel {
+  position: relative;
+  background: rgba(69, 156, 175, 0.9);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+/* 17/09/2026 — questo fondo teal e' pensato per restare sempre coperto da una foto vera
+   (.feature-photo__slides riempie l'inset per intero): con il segnaposto invisibile
+   (opacity:0 globale) restava lui solo, blu pieno, al posto del crema delle altre famiglie. */
+.feature-photo__carousel:has(img[src$="placeholder-di-nucci.png"]) {
+  background-color: var(--cream);
+}
+
+/* L'interno a 1px dal filo: resta visibile finche' la foto non e' caricata */
+.momento__figure::before,
+.metal__figure::before,
+.split__figure::before {
+  position: absolute;
+  inset: 1px;
+  background: var(--cream-deep);
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  content: "";
+}
+
+/* 17/09/2026 — riquadro segnaposto: qui il filo esiste già (tecnica sopra), manca solo la scritta.
+   Va sull'interno crema (::before), non sul box: quel fondo teal pieno sta sotto e la scritta,
+   messa lì, sparirebbe dietro l'interno crema che lo ricopre quasi tutto. */
+.momento__figure:has(img[src$="placeholder-di-nucci.png"])::before,
+.metal__figure:has(img[src$="placeholder-di-nucci.png"])::before,
+.split__figure:has(img[src$="placeholder-di-nucci.png"])::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 80'%3E%3Ctext x='110' y='34' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='30' font-weight='500' letter-spacing='3' fill='%23172a2e'%3EDI NUCCI%3C/text%3E%3Cline x1='28' y1='58' x2='56' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3Ctext x='110' y='62' text-anchor='middle' font-family='Times New Roman, Times, serif' font-size='11' letter-spacing='2' fill='%23172a2e'%3EGIOIELLERIA%3C/text%3E%3Cline x1='164' y1='58' x2='192' y2='58' stroke='%23172a2e' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 46% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.momento__figure img,
+.metal__figure img,
+.split__figure img {
+  position: absolute;
+  inset: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  object-fit: cover;
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+}
+
+/* Il carosello dei marchi ha gia' il suo ::before (la velatura teal di style.css): li' l'interno
+   crema non ci sta, e il filo si ottiene rientrando di 1px il nastro delle slide e la velatura. */
+.feature-photo__carousel .feature-photo__slides {
+  inset: 1px;
+  height: calc(100% - 2px);
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+}
+
+.feature-photo__carousel::before {
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+}
+
+/* Velatura teal sulle foto di catalogo: stessa ricetta di .feature-photo__image::before in
+   style.css — gradiente rgba(69,156,175,.23) che sale dal fondo e muore al 48%. Sta su ::after
+   perche' il ::before qui e' l'interno crema della cornice, e rientra di 1px per non coprire il
+   filo oro. Solo sulle foto prodotto: il negozio e i momenti restano puliti, i due caroselli
+   la velatura ce l'hanno gia' da style.css. (Simone, 08/09/2026) */
+.metal__figure::after,
+.brand-media .split__figure::after {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+  height: 75%;
+  background: linear-gradient(0deg, rgba(69, 156, 175, 0.23), rgba(69, 156, 175, 0) 48%);
+  content: "";
+  pointer-events: none;
+}
+
+/* Invito a passare in negozio, fra il blocco negozio e le recensioni: il bottone resta
+   largo quanto il suo testo e allineato a sinistra (Simone, 08/09/2026) */
+.negozio-cta {
+  margin-top: 26px;
+}
+
+/* Recensioni riusate dalla home, dentro la sezione 9 */
+.reviews-inline {
+  display: grid;
+  margin-top: 72px;
+  gap: 22px;
+}
+
+/* I due bottoni affiancati, come in storia-novara: qui la riga ha lo spazio per tenerli
+   accanto, la colonna stretta di style.css resta alla home (Simone, 08/09/2026) */
+.reviews-inline .reviews-bar {
+  margin-bottom: 0;
+}
+
+.reviews-inline .reviews-bar__actions {
+  width: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Sezione 10: FAQ in colonna da 680, accordion nativo */
+.faq-block__shell {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.faq-list {
+  margin-top: 52px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 0;
+  cursor: pointer;
+  list-style: none;
+  gap: 24px;
+  transition: color 180ms ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item h3 {
+  margin: 0;
+}
+
+.faq-item summary:hover {
+  color: var(--teal-dark);
+}
+
+.faq-item summary i {
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  flex: 0 0 auto;
+  transition: transform 220ms var(--ease);
+}
+
+.faq-item[open] summary i {
+  transform: rotate(45deg);
+}
+
+.faq-item .prose {
+  max-width: none;
+  padding: 0 36px 24px 0;
+}
+
+/* Sezione 11: foto dell'ingresso full-bleed (leva 5.2) e chiusura centrata */
+.page-photo-band {
+  height: clamp(340px, 30vw, 420px);
+  margin: 0;
+  overflow: hidden;
+  background: var(--cream-deep);
+}
+
+.page-photo-band img {
+  object-position: center 40%;
+}
+
+.contact-close {
+  margin-top: 72px;
+}
+
+.contact-close__hours {
+  margin: 28px 0 0;
+  color: var(--ink);
+  font-size: var(--font-description);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.contact-close__hours a {
+  transition: color 180ms ease;
+}
+
+.contact-close__hours a:hover,
+.contact-close__hours a:focus-visible {
+  color: var(--teal-dark);
+}
+
+.contact-close .button {
+  margin-top: 28px;
+}
+
+/* Tablet: l'aside della hero scende sotto il copy, i due marchi affiancati */
+@media (max-width: 900px) {
+  .hero--fedi {
+    min-height: 0;
+  }
+
+  .hero--fedi .hero__aside {
+    display: grid;
+    grid-column: 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0 7vw 48px;
+    gap: 14px;
+  }
+
+  .brand-sign__mark {
+    height: 108px;
+    padding: 14px 20px;
+  }
+
+  .brand-sign__mark img {
+    height: 38px;
+  }
+
+  .split,
+  .split--data,
+  .split--brand,
+  .split--brand-rev,
+  .split--shop {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .metals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 780px) {
+  .page-section {
+    padding: 52px 0 60px;
+  }
+
+  .page-section.page-section--spaced {
+    padding-top: 52px;
+  }
+
+  /* Sotto i 780 px il corpo del testo scende a 16 px come su tutte le altre pagine: è la stessa
+     discesa che fa .storia-prose p. Sopra resta ai 20 px di --font-description.
+     (FORMATO-PAGINE-PRODOTTO §4.2, applicato il 08/09/2026) */
+  .prose {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero--fedi {
+    height: auto;
+    min-height: max(640px, 100svh);
+    padding-bottom: 40px;
+  }
+
+  .hero--fedi .hero__aside {
+    position: relative;
+    z-index: 4;
+    top: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+    margin: 36px 0 0;
+    padding: 0 20px;
+    border: 0;
+    box-shadow: none;
+    clip-path: none;
+  }
+
+  .brand-sign__mark {
+    height: 96px;
+    padding: 12px 16px;
+  }
+
+  .brand-sign__mark img {
+    height: 32px;
+  }
+
+  .hero--fedi .brand-sign figcaption {
+    font-size: 14px;
+  }
+
+  .finance-strip .finance-note {
+    min-height: 60px;
+  }
+
+  .finance-strip .finance-note__text {
+    font-size: 1.02rem;
+  }
+
+  .section-open .heading-ornament {
+    margin-bottom: 20px;
+  }
+
+  .momenti,
+  .profili,
+  .reviews-inline,
+  .contact-close {
+    margin-top: 36px;
+  }
+
+  .momenti {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  /* .profilo e .profilo__divider sono nel @media (max-width: 1300px) sopra .profili, cosi'
+     la stessa regola vale anche nella fascia 781-1300px e non solo sotto i 780. Sotto i 780
+     pero' il thumb scende a 56px e i 3px del divisorio sembrano troppo spessi in proporzione:
+     qui si riporta a 2px, per Simone il 17/09/2026. */
+  .profilo__divider {
+    height: 2px;
+  }
+
+  .profilo__head {
+    gap: 18px;
+  }
+
+  .profilo__thumb {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+
+  .profilo h3 {
+    font-size: 22px;
+  }
+
+  .metals {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+    gap: 32px;
+  }
+
+  .panel {
+    margin-top: 40px;
+    padding: 26px 22px;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+
+  .panel--deep {
+    margin-top: 0;
+  }
+
+  .split {
+    gap: 28px;
+  }
+
+  .split__stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .split__stack .split__figure {
+    aspect-ratio: 1;
+  }
+
+  .feature-photo--brand {
+    padding: 26px 22px;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+
+  .feature-photo--brand::before {
+    clip-path: polygon(19px 0, 100% 0, 100% calc(100% - 19px), calc(100% - 19px) 100%, 0 100%, 0 19px);
+  }
+
+  .faq-block__shell {
+    width: calc(100% - 28px);
+  }
+
+  .faq-list {
+    margin-top: 36px;
+  }
+
+  .faq-item h3 {
+    font-size: 18px;
+  }
+
+  .faq-item .prose {
+    padding-right: 0;
+  }
+
+  .page-photo-band {
+    height: clamp(220px, 60vw, 340px);
+  }
+
+  .contact-close__hours {
+    font-size: 16px;
+  }
+}
+
+/* ============================================================
+   Anelli di fidanzamento — aggiunte del 07/09/2026.
+   Solo classi che le fedi non avevano. Valori da DESIGN-BRIEF §12
+   (leve 2.5, 4.5, 4.2, 3.1, 1.3, 5.4, 7.2) e dalla scala del sito.
+   ============================================================ */
+
+/* Hero: riga di luogo sotto il sottotitolo; segni di marchio composti in tipografia (debito asset) */
+.hero__place {
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.brand-sign__name {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.brand-sign__mark--small {
+  display: inline-flex;
+  height: 56px;
+  margin-bottom: 24px;
+  padding: 12px 20px;
+}
+
+.brand-sign__mark--small .brand-sign__name {
+  font-size: 20px;
+}
+
+/* Apertura a due colonne (leva 2.5): eyebrow + H2 + ornament a sinistra, lead a destra */
+.section-open--split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 80px;
+}
+
+.section-open--split .section-open__lead {
+  max-width: none;
+}
+
+/* Ornament a rombo (leva 4.5), allineato a sinistra */
+.ornament-rombo {
+  display: flex;
+  width: 116px;
+  margin: 17px 0 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.ornament-rombo::before,
+.ornament-rombo::after {
+  width: 52px;
+  height: 1px;
+  background: var(--teal);
+  content: "";
+}
+
+.ornament-rombo i {
+  width: 9px;
+  height: 9px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex: 0 0 auto;
+}
+
+/* Riga di chiusura o di link dopo un blocco */
+.section-note {
+  margin-top: 40px;
+}
+
+.section-note--rule {
+  padding-top: 36px;
+  border-top: 1px solid rgba(69, 156, 175, 0.4);
+}
+
+/* Il blocco si stende su tutta la riga dello shell e il testo resta centrato.
+   (deciso da Simone il 08/09/2026, sezione budget) */
+.section-note--center {
+  max-width: none;
+  text-align: center;
+}
+
+.prose--wide {
+  max-width: none;
+  color: var(--ink);
+  font-size: var(--font-description);
+}
+
+/* Doppia linea (leva 4.2) */
+.double-line {
+  display: block;
+  width: 90px;
+  height: 8px;
+  margin: 60px 0 28px;
+  border-top: 1px solid var(--teal);
+  border-bottom: 1px solid var(--teal);
+}
+
+/* Le otto forme di taglio: sagome SVG al tratto su cella crema profondo */
+.forme {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  margin: 44px 0 0;
+  padding: 0;
+  gap: 30px;
+  list-style: none;
+}
+
+.forma {
+  position: relative;
+  display: grid;
+  isolation: isolate;
+  color: var(--ink-soft);
+  font-size: 16px;
+  gap: 12px;
+  justify-items: center;
+  text-align: center;
+}
+
+.forma svg {
+  width: 100%;
+  padding: 22%;
+  color: var(--teal-dark);
+  background: var(--cream-deep);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  aspect-ratio: 1;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.forma svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Filo oro attorno alla sagoma. Non è un `border`: il clip-path lo taglierebbe e lo smusso
+   resterebbe scoperto (DESIGN-BRIEF riga 295). È un secondo piano oro 1px più largo del
+   riquadro, con lo smusso di conseguenza a 15px, così il filo segue anche l'angolo tagliato. */
+.forma::before {
+  position: absolute;
+  z-index: -1;
+  top: -1px;
+  right: -1px;
+  left: -1px;
+  background: rgba(69, 156, 175, 0.48);
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  aspect-ratio: 1;
+  content: "";
+}
+
+/* 17/09/2026 — sezione "Il laboratorio", due colonne (tavola C3-3): cappello a sinistra,
+   le tre lavorazioni a destra in griglia 2×2 (due sopra, una sotto). Non è più la
+   scheda-lavorazione a bordo teal della versione precedente.
+   17/09/2026 (3) — impaginazione a due colonne con le linee del tavolo C3-3.
+   17/09/2026 (4) — valori definitivi: si torna alla scheda leva 6.5 (DESIGN-BRIEF §12),
+   piena cella, stesso min-height 92px e stessa griglia. Il filetto lascia il posto al
+   bordo teal della scheda (tecnica DESIGN-BRIEF §7); la terza cella continua a spandere
+   su due colonne. */
+.laboratorio-grid {
+  display: grid;
+  grid-template-columns: 480px 1fr;
+  align-items: start;
+  column-gap: 120px;
+}
+
+.laboratorio-grid__intro {
+  text-align: left;
+}
+
+.lavorazioni {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  padding: 0;
+  gap: 16px;
+  list-style: none;
+}
+
+.lavorazione {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 92px;
+  padding: 17px 20px;
+  text-align: center;
+  background: var(--teal);
+  clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  isolation: isolate;
+}
+
+.lavorazione::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  background: var(--white);
+  clip-path: polygon(19px 0, 100% 0, 100% calc(100% - 19px), calc(100% - 19px) 100%, 0 100%, 0 19px);
+  content: "";
+}
+
+.lavorazione svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: var(--teal-dark);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.lavorazione svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+.lavorazione img {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.lavorazione span {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.lavorazione:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* Sezione 5: split allineato in alto, riquadro-dato (leva 3.1) con filo teal e smusso 14 su due angoli */
+.split--start {
+  align-items: start;
+}
+
+.data-box {
+  position: relative;
+  display: grid;
+  padding: 32px;
+  background: var(--teal);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  gap: 12px;
+  isolation: isolate;
+}
+
+.data-box::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  background: var(--white);
+  clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 13px 100%, 0 calc(100% - 13px));
+  content: "";
+}
+
+.data-box__label {
+  color: var(--teal-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+/* Cifra decorativa (leva 1.3): entra quando arriva il prezzo di ingresso */
+.data-box__figure {
+  color: var(--teal-dark);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Segnaposto dei dati non ancora confermati: resta visibile finché non arriva il dato */
+.da-compilare {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Cosa muove il prezzo: quattro celle crema profondo (leva 7.2) */
+.fattori__label {
+  margin-top: 12px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.fattori {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+  list-style: none;
+}
+
+/* Filo oro e testo centrato: stesso doppio strato di .brand-sign__mark e .feature-photo--brand —
+   il fondo fa da bordo, il ::before inset 1px fa da riempimento. Un `border` verrebbe tagliato
+   dal clip-path. (deciso da Simone il 08/09/2026)
+   Le cinque celle stanno sempre su una riga sola, cinque colonne fisse: se il testo non ci sta
+   va a capo dentro la cella, la cella si allunga — mai una sesta colonna o una seconda riga
+   (richiesto da Simone il 17/09/2026). Stessa misura di testo del resto della pagina. */
+.fattori li {
+  position: relative;
+  display: flex;
+  padding: 16px 20px;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal-dark);
+  background: rgba(69, 156, 175, 0.48);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  isolation: isolate;
+}
+
+.fattori li::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  background: var(--cream-deep);
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  content: "";
+}
+
+/* Sezione 6: due marchi affiancati, foto fuori dalla carta (leva 6.4) */
+.brands {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 60px;
+  gap: 80px;
+}
+
+/* Terzo box, più leggero (solo logo + una riga): fuori dalla griglia dei due marchi
+   per non forzarlo alla stessa altezza di colonne con foto e carosello. */
+.brand-custom {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(69, 156, 175, 0.4);
+}
+
+.brand-custom .brand-mark {
+  width: 140px;
+  height: auto;
+  flex: 0 0 140px;
+}
+
+.brand-custom h2 {
+  margin: 0 0 8px;
+}
+
+.brand-custom .prose {
+  margin: 0;
+}
+
+.brand-col > .split__figure {
+  margin-bottom: 28px;
+}
+
+/* Il riquadro foto del marchio: copertina ferma a sinistra, carosello dei prodotti a destra.
+   Il 7/4 sul contenitore è lo stesso della vecchia foto singola, quindi l'altezza non cambia:
+   sono le due figure dentro a perdere il proprio aspect-ratio e a riempire la riga.
+   (deciso da Simone il 08/09/2026) */
+.brand-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 28px;
+  aspect-ratio: 7 / 4;
+  gap: 20px;
+}
+
+.brand-media > figure {
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.feature-photo--brand h3 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+/* Sezione 7: i quattro punti a righe con filetto; caption sulla foto (leva 5.4); panel teal (3.4) dopo lo split */
+.punti {
+  margin-top: 52px;
+}
+
+.punto {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+
+.punto h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.photo-caption {
+  position: relative;
+}
+
+/* Rientrata di 1px: sotto c'e' il filo oro della cornice */
+.photo-caption figcaption {
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  margin: 0;
+  padding: 10px 14px;
+  color: var(--teal-deep);
+  background: var(--cream);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.panel--after {
+  margin-top: 60px;
+}
+
+.panel--deep .prose {
+  max-width: none;
+  margin-inline: auto;
+  color: var(--white);
+  font-size: var(--font-description);
+}
+
+.panel--deep .button {
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .section-open--split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .brands {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* #laboratorio a due colonne: resta a due colonne come sul desktop (due sopra, una
+     sotto), non collassa a colonna unica. */
+  .laboratorio-grid {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+
+  .lavorazione {
+    min-height: 78px;
+    padding: 20px;
+  }
+
+  .lavorazione span {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 780px) {
+  .brand-sign__name {
+    font-size: 20px;
+  }
+
+  .ornament-rombo {
+    width: 90px;
+    gap: 10px;
+  }
+
+  .ornament-rombo::before,
+  .ornament-rombo::after {
+    width: 40px;
+  }
+
+  .ornament-rombo i {
+    width: 8px;
+    height: 8px;
+  }
+
+  .section-note {
+    margin-top: 32px;
+  }
+
+  .section-note--rule {
+    padding-top: 22px;
+  }
+
+  .double-line {
+    margin: 40px 0 22px;
+  }
+
+  .forme {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 32px;
+    gap: 14px;
+  }
+
+  .forma {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .data-box {
+    padding: 24px 22px;
+  }
+
+  .fattori {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .brands {
+    margin-top: 40px;
+    gap: 28px;
+  }
+
+  .feature-photo--brand h3 {
+    font-size: 22px;
+  }
+
+  .punti {
+    margin-top: 36px;
+  }
+
+  .punto {
+    padding: 18px 0;
+  }
+
+  .punto h3 {
+    font-size: 20px;
+  }
+
+  .panel--after {
+    margin-top: 40px;
+  }
+}
