@@ -4928,6 +4928,14 @@ h2:not(.sr-only) {
     display: none;
   }
 
+  /* 10/10/2026 — Simone: su mobile il riquadro del marchio e' solo il nome, senza immagine.
+     La regola del segnaposto (bordo tratteggiato + scritta DI NUCCI) ha specificita' piu' alta
+     e qui ricompariva sopra il nome: la si annulla per i marchi ancora senza foto. */
+  .catalog-exhibitor--brand .catalog-exhibitor__cover:has(img[src$="placeholder-di-nucci.png"]) {
+    border: 0;
+    background-image: none;
+  }
+
   .catalog-exhibitor--brand .catalog-exhibitor__label {
     position: static;
     min-height: 52px;
