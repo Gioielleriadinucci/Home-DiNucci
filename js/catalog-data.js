@@ -210,13 +210,13 @@
           "Collana filo di perle in oro Acquadolce",
           "Girocollo filo di perle Acquadolce in oro",
           "Girocollo filo di perle in oro e diamanti",
-          "Collana filo di perle diamantate in oro"
+          "Collana filo di perle con diamanti in oro"
         ]),
         makeCategory("COMETE", "comete", "acquamarina", "Acquamarina", "Acquamarina", "https://www.comete.it/prodotti/gioielli-donna-collane-orecchini-anelli-bracciali-oro-diamanti-zaffiri-rubini-smeraldi-acquamarina-perle-topazio", "La pietra attraversa anelli, collane e orecchini con tagli diversi.", [
           "Anello in oro, diamanti e acquamarina ovale",
-          "Collana in oro, diamanti e acquamarina cuore",
-          "Orecchini in oro, diamanti e acquamarina goccia",
-          "Orecchini in oro, diamanti e acquamarina cuore"
+          "Collana in oro, diamanti e acquamarina a cuore",
+          "Orecchini in oro, diamanti e acquamarina a goccia",
+          "Orecchini in oro, diamanti e acquamarina a cuore"
         ]),
         makeCategory("COMETE", "comete", "smeraldi", "Smeraldi", "Smeraldi", "https://www.comete.it/prodotti/collane-girocolli-smeraldi-oro-diamanti-gioielli-donna", "La pietra è protagonista in tagli tondi, ovali e antichi.", [
           "Collana in oro, diamante e smeraldo tondo",
@@ -232,7 +232,7 @@
         ]),
         makeCategory("COMETE", "comete", "anelli-trilogy", "Anelli trilogy", "Trilogy", "https://www.comete.it/prodotti/anelli-fedine-trilogy-oro-bianco-giallo-rose-diamanti-pietre-preziose-smeraldi-rubini-zaffiri", "Tipologia autonoma con versioni classica, Valentino e bicolore.", [
           "Trilogy in oro e diamanti",
-          "Trilogy Scalare in oro e diamanti",
+          "Trilogy scalare in oro e diamanti",
           "Trilogy Valentino in oro e diamante",
           "Trilogy bicolore in oro e diamante"
         ]),
@@ -258,7 +258,7 @@
         makeCategory("GREGGIO ARGENTO", "greggio", "champagne-cocktail", "Champagne e cocktail", "Tavola", "https://www.greggio.com/shop/it/prodotti/tavola/bar-e-vino.html", "Secchi, caraffe e accessori per il servizio di champagne, cocktail e aperitivi.", [
           { title: "Caraffa Goccia", image: "greggio/bar/01.webp" },
           { title: "Secchio Magnum tre bottiglie", image: "greggio/bar/02.webp" },
-          { title: "Porta salatini", image: "greggio/bar/03.webp" },
+          { title: "Portasalatini", image: "greggio/bar/03.webp" },
           { title: "Secchio ghiaccio Manhattan", image: "greggio/bar/04.webp" }
         ]),
         makeCategory("GREGGIO ARGENTO", "greggio", "servizi-te-caffe", "Servizi tè e caffè", "Tavola", "https://greggio.com/product-category/tavola/accessori-colazione-te/", "Servizi coordinati e accessori Greggio dedicati al rito del tè e del caffè.", [
