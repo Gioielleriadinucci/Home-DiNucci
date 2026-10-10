@@ -18,10 +18,12 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-  const productMarkup = (product) => `
+  // Foto vera solo per i marchi con `photos: true` in catalog-data.js; gli altri, e i prodotti
+  // con image null, restano sul segnaposto.
+  const productMarkup = (product, photos) => `
     <li class="product-card" data-product-source="${escapeHtml(product.source)}">
       <figure>
-        <img src="${(window.catalogBase || "") + "images/placeholder-di-nucci.png"}" alt="" loading="lazy" decoding="async">
+        <img src="${escapeHtml((window.catalogBase || "") + (photos && product.image ? product.image : "images/placeholder-di-nucci.png"))}" alt="${photos && product.image ? escapeHtml(product.alt) : ""}" loading="lazy" decoding="async">
         <span class="product-brand-badge" aria-hidden="true">${escapeHtml(product.badge)}</span>
       </figure>
       <small>${escapeHtml(product.brand)} &middot; ${escapeHtml(product.collection || product.category)}</small>
@@ -43,7 +45,7 @@
         ${brand.page
           ? `<a class="catalog-exhibitor__cover" href="${escapeHtml(brand.page)}" aria-label="Scopri la collezione ${escapeHtml(brand.name)}">`
           : `<div class="catalog-exhibitor__cover">`}
-          <img src="${(window.catalogBase || "") + "images/placeholder-di-nucci.png"}" alt="" loading="lazy" decoding="async">
+          <img src="${escapeHtml((window.catalogBase || "") + (brand.photos && brand.cover ? brand.cover.image : "images/placeholder-di-nucci.png"))}" alt="${brand.photos && brand.cover ? escapeHtml(brand.cover.alt) : ""}" loading="lazy" decoding="async">
           <span class="catalog-exhibitor__wash" aria-hidden="true"></span>
           <div class="catalog-exhibitor__label">
             <h3 id="${titleId}">${escapeHtml(brand.name)}</h3>
@@ -209,7 +211,7 @@
 
     const renderProducts = () => {
       const category = getCategory();
-      track.innerHTML = category.products.map(productMarkup).join("");
+      track.innerHTML = category.products.map((product) => productMarkup(product, brand.photos)).join("");
       rail.setAttribute("aria-label", `Prodotti ${category.name} di ${brand.name}`);
       previousButton.setAttribute("aria-label", `Prodotti precedenti di ${category.name}, ${brand.name}`);
       nextButton.setAttribute("aria-label", `Altri prodotti di ${category.name}, ${brand.name}`);

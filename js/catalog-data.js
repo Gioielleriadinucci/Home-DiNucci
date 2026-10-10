@@ -16,7 +16,7 @@
         brand,
         category: name,
         title: item.title,
-        image: `${assetRoot}/${item.image || `${brandId}/${folder}/${pad(index + 1)}.jpg`}${brandId === "unoaerre" ? "?v=20260731-hd" : ""}`,
+        image: item.image === null ? null : `${assetRoot}/${item.image || `${brandId}/${folder}/${pad(index + 1)}.webp`}`,
         collection: item.collection || collection,
         alt: `${item.title}, ${brand}`,
         source: item.source || source,
@@ -87,10 +87,11 @@
       name: "UNOAERRE",
       source: unoaerreSource,
       page: "pagine/marchi/unoaerre.html",
+      photos: true,
       cover: {
-        image: `${assetRoot}/unoaerre/cover-licensed.jpg`,
-        alt: "Immagine evocativa di una coppia di sposi con fedi nuziali",
-        source: "https://unsplash.com/photos/a-close-up-of-two-people-holding-hands-fUSKk57u8pI"
+        image: `${assetRoot}/unoaerre/cover.webp`,
+        alt: "Coppia di sposi con le fedi UNOAERRE, campagna Wedding UNOAERRE",
+        source: "Campagna Wedding UNOAERRE (materiali per rivenditori)"
       },
       categories: [
         makeCategory("UNOAERRE", "unoaerre", "fedi-classiche", "Fedi classiche", "Fedi Classiche", "https://www.gioiapura.it/gioielli-fedi-unoaerre-C22B53.htm", "Famiglia tradizionale distinta per peso e larghezza.", [
@@ -115,7 +116,7 @@
           "Fede Classica 40 AFN 4 in oro rosa",
           "Fede Comoda 40 AFC 1 in oro rosa",
           "Fede Anniversario 24 AFC 011 in oro rosa",
-          "Fede Anniversario 50 AFC 53 in oro rosa"
+          "Fede Galassia 50 AFC 9 in oro bianco e rosa con diamante"
         ]),
         makeCategory("UNOAERRE", "unoaerre", "bijoux", "Bijoux", "Bijoux", unoaerreSource, "Accanto alle fedi, UNOAERRE fa anche bijoux in argento.", [
           "Bracciale UNOAERRE in argento",
@@ -124,16 +125,16 @@
           "Orecchini UNOAERRE in argento"
         ]),
         makeCategory("UNOAERRE", "unoaerre", "cornici-argento", "Cornici in argento", "Cornici in argento", unoaerreSource, "UNOAERRE lavora anche cornici in argento per la casa.", [
-          "Cornice UNOAERRE in argento ovale",
-          "Cornice UNOAERRE in argento rettangolare",
-          "Cornice UNOAERRE in argento doppia",
-          "Cornice UNOAERRE in argento con piede"
+          { title: "Cornice UNOAERRE in argento ovale", image: null },
+          { title: "Cornice UNOAERRE in argento rettangolare", image: null },
+          { title: "Cornice UNOAERRE in argento doppia", image: null },
+          { title: "Cornice UNOAERRE in argento con piede", image: null }
         ]),
         makeCategory("UNOAERRE", "unoaerre", "gioielli-uomo", "Gioielli uomo", "Gioielli uomo", unoaerreSource, "Gemelli e catene per uomo, la parte maschile del catalogo UNOAERRE.", [
           "Gemelli UNOAERRE in argento",
-          "Gemelli UNOAERRE in oro",
+          "Gemelli UNOAERRE in argento dorato",
           "Catena UNOAERRE in argento",
-          "Catena UNOAERRE in oro"
+          "Catena UNOAERRE in argento dorato"
         ])
       ]
     },
@@ -142,34 +143,35 @@
       name: "POLELLO",
       source: polelloSource,
       page: "pagine/marchi/polello.html",
+      photos: true,
       cover: {
-        image: `${assetRoot}/polello/cover-licensed.jpg`,
-        alt: "Immagine evocativa di un orafo che lavora un anello in laboratorio",
-        source: "https://unsplash.com/photos/jeweler-working-with-a-ring-in-a-workshop-k8Z_6TJJByM"
+        image: `${assetRoot}/polello/cover.webp`,
+        alt: "Tre fedi POLELLO in oro giallo e oro bianco su marmo, campagna 50 anni POLELLO",
+        source: "Campagna 50 anni POLELLO (materiali per rivenditori)"
       },
       categories: [
         makeCategory("POLELLO", "polello", "fedi-artigianali", "Fedi artigianali personalizzabili", "Fedi artigianali", polelloSource, "Lavorazione artigianale e configurazione di metalli, finiture e dettagli.", [
-          "Fedi Attimo 2337DB",
-          "Fedi Abbracciami 2503DB",
-          "Fedi Amami 2546DB",
-          "Fedi Anima 2693DB"
+          "Fedi Sì lo voglio in oro bianco e diamanti 3268",
+          "Fedi Sì lo voglio in oro bianco lavorato 3275",
+          "Fedi Scelta d'Amore in oro bianco satinato e diamante 3307",
+          "Fedi Linea Marea in oro bianco e diamante 3357"
         ], "oro-bianco"),
         makeCategory("POLELLO", "polello", "petalo-amore", "Petalo d'Amore", "Petalo d'Amore", polelloSource, "Collezione ufficiale con oro bianco o champagne e diamante.", [
           "Fede oro champagne e diamante 3367DCH",
           "Fede oro champagne e diamante 3403DCH",
           "Fede oro bianco e diamante 3405DB",
-          "Fede oro bianco e diamante 3408DB"
+          "Fedi oro rosa e diamanti 3404"
         ]),
         makeCategory("POLELLO", "polello", "bicolore", "Fedi bicolore e tre ori", "Fedi artigianali", polelloSource, "Gli accostamenti di metallo evidenziano incastri e superfici differenti.", [
-          "Fedi Abbagliante 1803DBG",
-          "Fedi Amore 2835DBR",
-          "Fedi Abbraccio Prezioso 2838DBR",
-          "Fedi Alba d'Amore 3115DBR"
+          "Fedi Sì lo voglio in oro bianco, oro rosa e diamanti 3271",
+          "Fedi Sì lo voglio in oro bianco, oro rosa e diamante 3272",
+          "Fedi Sì lo voglio in oro bianco, oro rosa e diamanti 3273",
+          "Fedi Linea Marea in oro rosa, oro bianco e diamanti 3349"
         ]),
         makeCategory("POLELLO", "polello", "oro-champagne", "Fedi in oro Champagne", "Fedi artigianali", polelloSource, "Tonalità distintiva del marchio con incisioni e dettagli di diamante.", [
-          "Fedi A noi 3177DCH",
-          "Fedi Champagne! 3178DCH",
-          "Fedi Brindisi d'amore 3179DCH",
+          "Fedi Scelta d'Amore in oro champagne e diamanti 3306",
+          "Fedi My Clouds in oro champagne, argento e diamante 3457",
+          "Fede Petalo d'Amore in oro champagne e diamante 3403",
           "Fede oro champagne e diamante 3367DCH"
         ]),
         makeCategory("POLELLO", "polello", "platino", "Fedi in platino", "Anniversario 50", polelloSource, "Accostamenti tecnici fra platino, oro, argento e diamanti multiforma.", [
@@ -179,16 +181,16 @@
           "Fedi platino, argento e diamante 3455"
         ]),
         makeCategory("POLELLO", "polello", "fedi-titanio", "Fedi in titanio", "Fedi in titanio", polelloSource, "Il titanio è leggero e resistente, e non tutti i marchi lo lavorano.", [
-          "Fede in titanio spazzolato",
-          "Fede in titanio e oro giallo",
-          "Fede in titanio e oro bianco",
-          "Fede in titanio con diamante"
+          { title: "Fede in titanio spazzolato", image: null },
+          { title: "Fede in titanio e oro giallo", image: null },
+          { title: "Fede in titanio e oro bianco", image: null },
+          { title: "Fede in titanio con diamante", image: null }
         ]),
         makeCategory("POLELLO", "polello", "gioielli", "Gioielli", "Gioielli", polelloSource, "Oltre alle fedi, Polello lavora anche altri gioielli.", [
-          "Anello Polello in oro bianco",
-          "Pendente Polello a cuore",
-          "Bracciale Polello in oro rosa",
-          "Orecchini Polello con diamante"
+          "Anello solitario Polello in oro bianco e diamante",
+          "Pendente Polello a cuore con madreperla e diamanti",
+          "Bracciale tennis Polello in oro e diamanti",
+          "Orecchini a cerchio Polello in oro rosa e diamanti"
         ])
       ]
     },
@@ -197,10 +199,11 @@
       name: "COMETE",
       source: cometeSource,
       page: "pagine/marchi/comete.html",
+      photos: true,
       cover: {
-        image: `${assetRoot}/comete/cover.jpg`,
-        alt: "Segno istituzionale Comete Gioielli",
-        source: cometeSource
+        image: `${assetRoot}/comete/cover.webp`,
+        alt: "Donna con collana di perle COMETE, campagna Perle COMETE",
+        source: "Listino Perle COMETE (app Muraro Lorenzo, materiali per rivenditori)"
       },
       categories: [
         makeCategory("COMETE", "comete", "perle-amore", "Fili di perle", "Fili di Perle Acquadolce", "https://www.comete.it/prodotti/collane-girocolli-fili-ciondolo-perle-oro-diamanti-donna", "Fili classici e diamantati del catalogo donna.", [
@@ -218,25 +221,25 @@
         makeCategory("COMETE", "comete", "smeraldi", "Smeraldi", "Smeraldi", "https://www.comete.it/prodotti/collane-girocolli-smeraldi-oro-diamanti-gioielli-donna", "La pietra è protagonista in tagli tondi, ovali e antichi.", [
           "Collana in oro, diamante e smeraldo tondo",
           "Girocollo in oro, diamanti e smeraldo ovale",
-          "Girocollo in oro, diamante e smeraldo tondo",
-          "Girocollo in oro, diamanti e smeraldo antico"
+          "Girocollo Regina in oro, diamanti e smeraldo 4x5 mm",
+          "Girocollo in oro con smeraldo e diamanti"
         ], "collane-smeraldi"),
         makeCategory("COMETE", "comete", "rubini-zaffiri", "Rubini e zaffiri", "Pietre preziose", "https://www.comete.it/prodotti/orecchini-zaffiri-oro-diamanti-donna", "Rubini e zaffiri riuniti in una selezione verificata di collane, anelli e orecchini.", [
-          "Girocollo in oro, diamanti e rubino goccia",
-          "Orecchini in oro, diamanti e rubini goccia",
-          "Anello in oro, diamanti e zaffiro goccia",
+          "Girocollo Regina in oro, diamanti e rubino 4x6 mm",
+          "Orecchini Regina in oro, diamanti e rubini 4x6 mm",
+          "Anello Regina in oro, diamanti e zaffiro 5x4 mm",
           "Orecchini in oro, diamanti e zaffiri blu ovali"
         ]),
         makeCategory("COMETE", "comete", "anelli-trilogy", "Anelli trilogy", "Trilogy", "https://www.comete.it/prodotti/anelli-fedine-trilogy-oro-bianco-giallo-rose-diamanti-pietre-preziose-smeraldi-rubini-zaffiri", "Tipologia autonoma con versioni classica, Valentino e bicolore.", [
-          "Trilogy classico in oro e diamante 1689",
-          "Trilogy classico in oro e diamante 2132",
+          "Trilogy in oro e diamanti",
+          "Trilogy Scalare in oro e diamanti",
           "Trilogy Valentino in oro e diamante",
           "Trilogy bicolore in oro e diamante"
         ]),
         makeCategory("COMETE", "comete", "gioielli-uomo", "Gioielli uomo", "Uomo", "https://www.comete.it/prodotti/bracciali-collane-acciaio-pvd-pietre-preziose-gioielli-uomo", "Acciaio, PVD, diamanti e pietre naturali costituiscono una linea maschile distinta.", [
           "Bracciale in acciaio PVD rosé e diamanti bianchi",
           "Bracciale in acciaio PVD rosé e diamanti neri",
-          "Bracciale catena bicolore in acciaio",
+          "Collana catena bicolore in acciaio",
           "Bracciale in acciaio con rodocrosite ed ematite"
         ])
       ]

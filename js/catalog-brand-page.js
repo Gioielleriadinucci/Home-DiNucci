@@ -27,10 +27,12 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-  const productMarkup = (product) => `
+  // Foto vera solo per i marchi con `photos: true` in catalog-data.js; gli altri, e i prodotti
+  // con image null, restano sul segnaposto.
+  const productMarkup = (product, photos) => `
     <li class="product-card" data-product-source="${escapeHtml(product.source)}">
       <figure>
-        <img src="${assetBase + "images/placeholder-di-nucci.png"}" alt="" loading="lazy" decoding="async">
+        <img src="${escapeHtml(assetBase + (photos && product.image ? product.image : "images/placeholder-di-nucci.png"))}" alt="${photos && product.image ? escapeHtml(product.alt) : ""}" loading="lazy" decoding="async">
         <span class="product-brand-badge" aria-hidden="true">${escapeHtml(product.badge)}</span>
       </figure>
       <small>${escapeHtml(product.brand)} &middot; ${escapeHtml(product.collection || product.category)}</small>
@@ -175,7 +177,7 @@
       });
     }, { passive: true });
 
-    track.innerHTML = category.products.map(productMarkup).join("");
+    track.innerHTML = category.products.map((product) => productMarkup(product, brand.photos)).join("");
     window.requestAnimationFrame(updateControls);
     refreshers.push(() => goTo(firstVisible, false, true));
   });
