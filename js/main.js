@@ -1181,7 +1181,6 @@
     resizeTimer = window.setTimeout(() => {
       catalogControllers.forEach((controller) => controller.refresh());
       normalizeReviewScroll();
-      syncTimelineNarrativeTop();
     }, 140);
   });
 
