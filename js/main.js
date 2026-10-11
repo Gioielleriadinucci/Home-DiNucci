@@ -687,7 +687,6 @@
         if (catalogMobileModeActive) {
           catalogExhibitors.forEach((exhibitor) => {
             exhibitor.classList.remove("is-mobile-focus");
-            exhibitor.style.removeProperty("--catalog-image-scale");
             exhibitor.style.removeProperty("--catalog-figure-scale");
             exhibitor.style.removeProperty("--catalog-product-cut");
           });
@@ -753,11 +752,9 @@
           easedProgress = smoothProgress(closingProgress);
         }
 
-        const imageScale = 1.08 + easedProgress * 0.12;
         const figureScale = 1 + (12 / figureWidth) * easedProgress;
         const productCut = 18 * (1 - easedProgress);
 
-        exhibitor.style.setProperty("--catalog-image-scale", imageScale.toFixed(4));
         exhibitor.style.setProperty("--catalog-figure-scale", figureScale.toFixed(4));
         exhibitor.style.setProperty("--catalog-product-cut", `${productCut.toFixed(2)}px`);
 

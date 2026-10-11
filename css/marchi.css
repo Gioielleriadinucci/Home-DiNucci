@@ -42,6 +42,48 @@
   mix-blend-mode: darken;
 }
 
+/* Foto di campagna dietro lo stemma: stessa ricetta di .brand-sign__photo in anelli-fidanzamento.css
+   (foto al 70%, alone bianco sotto la firma). Sopra il fondo crema del ::before, sotto alone e firma. */
+.marchio-segno .marchio-segno__foto {
+  position: absolute;
+  z-index: 0;
+  inset: 1px;
+  width: calc(100% - 2px);
+  max-height: none;
+  height: calc(100% - 2px);
+  object-fit: cover;
+  opacity: 0.7;
+  mix-blend-mode: normal;
+  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+}
+
+/* Stesse foto e stesse inquadrature dei riquadri marchio di Fedi e Anelli */
+.marchio-segno--unoaerre .marchio-segno__foto {
+  object-position: center 62%;
+}
+
+.marchio-segno--polello .marchio-segno__foto {
+  object-position: center 58%;
+}
+
+.marchio-segno--comete .marchio-segno__foto {
+  object-position: center 55%;
+}
+
+.marchio-segno:has(.marchio-segno__foto)::after {
+  position: absolute;
+  z-index: 1;
+  inset: 16% 10%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 48%, rgba(255, 255, 255, 0) 78%);
+  content: "";
+  filter: blur(13px);
+  pointer-events: none;
+}
+
+.marchio-segno__foto ~ img {
+  z-index: 2;
+}
+
 @media (min-width: 901px) {
   .hero__aside {
     display: grid;
@@ -177,6 +219,11 @@
   min-height: 0;
 }
 
+/* L'ingresso e' tagliato sopra l'insegna (fuori l'antifurto): si parte dal bordo alto */
+.marchio-foto--hero img {
+  object-position: center top;
+}
+
 /* Le scritte non stanno in colonne strette: ogni blocco di testo riempie il contenitore che
    lo ospita — la .shell nelle sezioni, la larghezza del carosello nelle linee del catalogo. */
 .marchio-heading,
@@ -297,6 +344,13 @@
 
   .marchio-segno img {
     width: min(84%, 150px);
+  }
+
+  /* 11/10/2026 — MILUNA a 150px di larghezza è alto 54px e la riga ne ha 44: sbordava. Il tetto
+     vale per ogni stemma (quelli più bassi non cambiano); la foto di campagna resta fuori. */
+  .marchio-segno img:not(.marchio-segno__foto) {
+    max-height: 44px;
+    object-fit: contain;
   }
 
   .marchio-fascia .finance-note {

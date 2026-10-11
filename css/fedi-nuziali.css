@@ -847,7 +847,10 @@
   height: auto;
   margin-bottom: 16px;
   aspect-ratio: 1;
-  object-fit: cover;
+  /* 11/10/2026 — contain invece di cover: le foto non quadrate (fedi-8-2) perdevano il bordo.
+     Il bianco è il fondo delle foto prodotto: il quadrato resta pieno. */
+  object-fit: contain;
+  background: #fff;
 }
 
 /* Si ferma sotto il puntatore: e' il minimo su un movimento che parte da solo. */
@@ -1538,6 +1541,13 @@
   grid-template-columns: 480px 1fr;
   align-items: start;
   column-gap: 120px;
+}
+
+/* 11/10/2026 — titolo su tre righe al massimo: stessa colonna di style.css sopra i 1440px */
+@media (min-width: 1440px) {
+  .laboratorio-grid {
+    grid-template-columns: 560px 1fr;
+  }
 }
 
 .laboratorio-grid__intro {

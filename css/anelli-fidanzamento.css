@@ -1211,6 +1211,13 @@
   column-gap: 120px;
 }
 
+/* 11/10/2026 — titolo su tre righe al massimo: stessa colonna di style.css sopra i 1440px */
+@media (min-width: 1440px) {
+  .laboratorio-grid {
+    grid-template-columns: 560px 1fr;
+  }
+}
+
 .laboratorio-grid__intro {
   text-align: left;
 }

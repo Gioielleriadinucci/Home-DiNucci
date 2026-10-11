@@ -191,7 +191,6 @@
       focusFrame = window.requestAnimationFrame(() => {
         if (!mobileQuery.matches) {
           exhibitor.classList.remove("is-mobile-focus");
-          exhibitor.style.removeProperty("--catalog-image-scale");
           exhibitor.style.removeProperty("--catalog-figure-scale");
           exhibitor.style.removeProperty("--catalog-product-cut");
           return;
@@ -202,7 +201,6 @@
         const distance = Math.abs(center - window.innerHeight / 2);
         const focus = Math.max(0, Math.min(1, 1 - distance / (window.innerHeight * 0.62)));
         const figureWidth = getCards()[0]?.querySelector("figure")?.offsetWidth || 1;
-        exhibitor.style.setProperty("--catalog-image-scale", (1.08 + focus * 0.12).toFixed(4));
         exhibitor.style.setProperty("--catalog-figure-scale", (1 + (12 / figureWidth) * focus).toFixed(4));
         exhibitor.style.setProperty("--catalog-product-cut", `${(18 * (1 - focus)).toFixed(2)}px`);
         exhibitor.classList.toggle("is-mobile-focus", focus > 0.55);

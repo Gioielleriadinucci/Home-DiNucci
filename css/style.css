@@ -792,6 +792,11 @@ h2 em {
   .hero__aside img {
     object-position: center 18%;
   }
+
+  /* Home: la foto e' gia' tagliata sopra l'insegna (fuori l'antifurto), si parte dal bordo alto */
+  #home .hero__aside img {
+    object-position: center top;
+  }
 }
 
 /* Fedi e fidanzamento */
@@ -1931,6 +1936,9 @@ h2 em {
     0 calc(100% - var(--product-cut))
   );
   place-items: center;
+  /* 11/10/2026 — riga e colonna definite: senza, l'height: 100% dell'img non si risolveva e
+     le foto verticali si allungavano oltre il box (479px in un box da 300), tagliate in basso. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
 }
 
 .product-card figure::before {
@@ -1963,13 +1971,13 @@ h2 em {
   height: 100%;
   object-fit: contain;
   padding: clamp(4px, 0.45vw, 8px);
-  transform: scale(1.08);
-  transition: transform 600ms var(--ease), filter 400ms ease;
+  /* 11/10/2026 — tolto lo zoom (era scale(1.08), hover 1.15, su mobile fino a 1.20): i gioielli
+     fotografati fino al bordo uscivano dal box. La foto sta intera in ogni stato. */
+  transition: filter 400ms ease;
 }
 
 .product-card:hover figure img {
   filter: saturate(1.055);
-  transform: scale(1.15);
 }
 
 .product-card small {
@@ -4441,7 +4449,7 @@ h2 em {
 
   .product-card:hover figure img {
     filter: none;
-    transform: translateZ(0) scale(var(--catalog-image-scale, 1.08));
+    transform: translateZ(0);
   }
 
   .product-card:hover h4 {
@@ -4478,7 +4486,7 @@ h2 em {
     backface-visibility: hidden;
     filter: none;
     transform-origin: center;
-    transform: translateZ(0) scale(var(--catalog-image-scale, 1.08));
+    transform: translateZ(0);
     transition: none;
     will-change: transform;
   }
@@ -4822,6 +4830,15 @@ h2:not(.sr-only) {
   scroll-snap-type: y proximity;
 }
 
+/* 11/10/2026 — UNOAERRE e POLELLO hanno sette categorie e nei 342px l'ultima restava da scorrere:
+   la colonna si allunga quanto serve e le mostra tutte. Sotto i 780px resta la fila orizzontale. */
+@media (min-width: 781px) {
+  .catalog-category-selector__track {
+    height: auto;
+    min-height: 342px;
+  }
+}
+
 .catalog-category-tab {
   display: flex;
   width: 100%;
@@ -4868,6 +4885,12 @@ h2:not(.sr-only) {
   line-height: 1.15;
   text-align: right;
   text-transform: uppercase;
+}
+
+/* 11/10/2026 — fascia libera sotto la foto, alta quanto il nome del marchio (12px dal fondo
+   + una riga da 12px + aria): il gioiello non finisce mai sotto la scritta. */
+.product-card figure:has(.product-brand-badge) img {
+  padding-bottom: 30px;
 }
 
 .catalog-exhibitor--brand .product-card {
@@ -5071,6 +5094,10 @@ h2:not(.sr-only) {
     right: 10px;
     bottom: 9px;
     font-size: 0.52rem;
+  }
+
+  .product-card figure:has(.product-brand-badge) img {
+    padding-bottom: 24px;
   }
 }
 
@@ -5692,6 +5719,14 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
   grid-template-columns: 480px 1fr;
   column-gap: 120px;
   align-items: start;
+}
+
+/* 11/10/2026 — sopra i 1440px l'H2 cresce fino a 49px e nei 480px andava su quattro righe:
+   con 560px «Laboratorio orafo» sta su una riga e il titolo non supera le tre. */
+@media (min-width: 1440px) {
+  .laboratorio-grid {
+    grid-template-columns: 560px 1fr;
+  }
 }
 
 .laboratorio-grid__intro {
