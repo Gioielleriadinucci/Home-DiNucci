@@ -234,7 +234,7 @@
     fadeSections.forEach((section) => sectionObserver.observe(section));
   }
 
-  /* Hero: sei categorie, cambio ogni 2,5 secondi */
+  /* Hero: una foto per categoria, cambio ogni 2,5 secondi */
   const heroSlides = [...document.querySelectorAll(".hero-slide")];
   let heroIndex = 0;
   let heroTimer;
@@ -252,6 +252,7 @@
     if (!heroSlides.length) return;
     heroIndex = (nextIndex + heroSlides.length) % heroSlides.length;
     loadHeroSlide(heroIndex);
+    loadHeroSlide(heroIndex + 1);
     heroSlides.forEach((slide, index) => slide.classList.toggle("is-active", index === heroIndex));
   };
 
