@@ -371,7 +371,7 @@
   max-width: 100%;
   padding: 24px 36px;
   gap: 16px;
-  text-align: left;
+  text-align: center;
 }
 
 /* La frase resta in tondo: una riga intera in maiuscolo spaziato non si legge.
@@ -1379,7 +1379,7 @@
 
   .section-invite__cta {
     padding: 18px 22px;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     gap: 14px;
   }

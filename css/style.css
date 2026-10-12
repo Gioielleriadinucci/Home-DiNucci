@@ -5828,3 +5828,47 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
     font-size: 20px;
   }
 }
+
+/* 12/10/2026 — CTA su una riga dove c'è spazio; quando vanno a capo, il testo è centrato.
+   (Simone: «tutti i cta su 1 riga, o quando su 2 allineati al centro, ma cerca di stenderli») */
+.button,
+.reviews-cta {
+  text-align: center;
+}
+
+/* Hero: il bottone si allarga quanto il testo, mai sotto i 250px di prima */
+.hero__actions .button {
+  width: auto;
+  min-width: 250px;
+  white-space: nowrap;
+}
+
+/* Recensioni: il blocco dei due bottoni prende la larghezza del testo invece dei 248px fissi */
+.reviews-bar__actions {
+  width: auto;
+  max-width: 100%;
+}
+
+.reviews-cta {
+  white-space: nowrap;
+}
+
+@media (max-width: 780px) {
+  /* Su telefono la hero ha la foto in cornice a destra: i bottoni restano larghi uguali,
+     con meno spaziatura fra le lettere, e vanno a capo solo se il testo non ci sta. */
+  .hero__actions .button {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    letter-spacing: 0.04em;
+  }
+
+  .reviews-bar__actions {
+    width: auto;
+  }
+
+  .reviews-cta {
+    white-space: normal;
+    letter-spacing: 0.05em;
+  }
+}
