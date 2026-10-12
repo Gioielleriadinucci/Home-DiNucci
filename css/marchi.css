@@ -508,3 +508,46 @@
     gap: 8px;
   }
 }
+
+/* 12/10/2026 — telefono: la card del marchio (con la foto commerciale dietro il logo) va a tutta
+   larghezza sopra la foto del negozio e la CTA. La foto finisce poco sopra la piega e la CTA parte
+   alla sua altezza, come sulle altre hero (regola in fondo a style.css). */
+@media (max-width: 780px) {
+  .hero:not(.hero--fedi) {
+    --hero-segno-h: 110px;
+    --hero-segno-gap: 14px;
+    --hero-aside-h: calc(clamp(320px, 52svh, 380px) + 70px);
+  }
+
+  .hero:not(.hero--fedi) .hero__aside {
+    right: 20px;
+    left: 20px;
+    width: auto;
+    grid-template-columns: minmax(0, 1fr) clamp(138px, 40vw, 176px);
+    grid-template-rows: var(--hero-segno-h) minmax(0, 1fr);
+    gap: var(--hero-segno-gap) 0;
+    pointer-events: none;
+  }
+
+  .hero__aside > * {
+    pointer-events: auto;
+  }
+
+  .hero__aside .marchio-segno {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .hero__aside .marchio-foto {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .marchio-segno img:not(.marchio-segno__foto) {
+    max-height: 70px;
+  }
+
+  .hero:not(.hero--fedi) .hero__actions {
+    top: calc(100% + var(--hero-segno-h) + var(--hero-segno-gap));
+  }
+}

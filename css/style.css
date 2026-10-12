@@ -2665,11 +2665,12 @@ h2 em {
   gap: 12px;
 }
 
-.footer-column h2 {
+.footer-column .footer-title {
   margin: 0 0 8px;
   font-family: var(--font-body);
   font-size: calc(var(--footer-text-size) - 5px);
   font-weight: 600;
+  line-height: 0.98;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -4289,7 +4290,7 @@ h2 em {
     gap: 6px;
   }
 
-  .footer-column h2 {
+  .footer-column .footer-title {
     margin-bottom: 3px;
     font-size: 0.62rem;
   }
@@ -4311,7 +4312,7 @@ h2 em {
     row-gap: 6px;
   }
 
-  .footer-shop h2 {
+  .footer-shop .footer-title {
     flex-basis: 100%;
   }
 
@@ -4324,7 +4325,7 @@ h2 em {
     row-gap: 8px;
   }
 
-  .footer-contacts h2,
+  .footer-contacts .footer-title,
   .footer-contacts address,
   .footer-contact-link {
     margin: 0;
@@ -4568,7 +4569,7 @@ h2:not(.sr-only) {
 }
 
 /* Sottotitoli e intestazioni secondarie conservano la scala originale. */
-.footer-column h2 {
+.footer-column .footer-title {
   font-size: calc(var(--footer-text-size) - 5px);
 }
 
@@ -5870,5 +5871,57 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
   .reviews-cta {
     white-space: normal;
     letter-spacing: 0.05em;
+  }
+}
+
+@media (max-width: 780px) {
+  /* 12/10/2026 — hero con la foto in cornice (home, storia, pagine marchio): la foto scende fino
+     a poco sopra la piega, la CTA parte alla stessa altezza della foto e il titolo si centra nello
+     spazio che resta sopra. Fedi e anelli (.hero--fedi) hanno le due card sotto e restano fuori. */
+  .hero:not(.hero--fedi) {
+    --hero-aside-h: calc(clamp(320px, 52svh, 380px) - 28px);
+    --hero-aside-bottom: 28px;
+  }
+
+  .hero:not(.hero--fedi) .hero__aside {
+    top: auto;
+    bottom: var(--hero-aside-bottom);
+    height: var(--hero-aside-h);
+  }
+
+  .hero:not(.hero--fedi) .hero__copy {
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    bottom: calc(var(--hero-aside-bottom) + var(--hero-aside-h));
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: clamp(28px, 6svh, 48px) 20px 12px;
+  }
+
+  /* Titolo e sottotitolo centrati: l'alone bianco dietro diventa radiale, non più da sinistra */
+  .hero:not(.hero--fedi) .hero__lead {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero:not(.hero--fedi) h1,
+  .hero:not(.hero--fedi) .hero__subheadline {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero:not(.hero--fedi) h1::before,
+  .hero:not(.hero--fedi) .hero__subheadline::before {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.76) 60%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .hero:not(.hero--fedi) .hero__actions {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    margin: 0;
   }
 }
