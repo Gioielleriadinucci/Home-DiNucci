@@ -704,6 +704,7 @@ h2 em {
   width: 250px;
   min-height: 58px;
   margin-top: 0;
+  font-size: calc(0.69rem + 1px); /* 12/10/2026 — +1px sul bottone base: in hero si leggeva male */
 }
 
 @media (min-width: 901px) {
@@ -3866,7 +3867,7 @@ h2 em {
     margin-top: 0;
     padding-inline: 8px;
     flex: 1 1 0;
-    font-size: clamp(0.5rem, 2.3vw, 0.62rem);
+    font-size: calc(clamp(0.5rem, 2.3vw, 0.62rem) + 1px);
     letter-spacing: 0.08em;
   }
 
