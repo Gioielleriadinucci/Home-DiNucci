@@ -1102,6 +1102,15 @@
    accanto, la colonna stretta di style.css resta alla home (Simone, 08/09/2026) */
 .reviews-inline .reviews-bar {
   margin-bottom: 0;
+  /* 12/10/2026 — se voto e bottoni non stanno in riga, i bottoni scendono sotto invece di schiacciare il voto */
+  flex-wrap: wrap;
+  row-gap: 18px;
+}
+
+@media (min-width: 781px) {
+  .reviews-inline .reviews-bar__heading {
+    flex: 1 1 360px;
+  }
 }
 
 .reviews-inline .reviews-bar__actions {

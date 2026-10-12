@@ -640,6 +640,18 @@
   gap: 10px;
 }
 
+/* 12/10/2026 — se voto e bottoni non stanno in riga, i bottoni scendono sotto invece di schiacciare il voto */
+.storia-recensioni .reviews-bar {
+  flex-wrap: wrap;
+  row-gap: 18px;
+}
+
+@media (min-width: 781px) {
+  .storia-recensioni .reviews-bar__heading {
+    flex: 1 1 360px;
+  }
+}
+
 /* Sezione 8 — leve 6.1 e 7.1: la scheda a righe su panel bianco, si legge in venti secondi */
 .accesso {
   margin: 0;
