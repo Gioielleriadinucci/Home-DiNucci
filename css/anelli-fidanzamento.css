@@ -901,6 +901,18 @@
     padding-bottom: 40px;
   }
 
+  /* 12/10/2026 — le card dei marchi scendono in fondo alla hero: finiscono a fine piega,
+     con lo spazio fra la CTA e le card. Su schermi bassi resta il distacco minimo di 36px. */
+  .hero--fedi {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero--fedi .hero__copy {
+    margin-bottom: 36px;
+  }
+
   .hero--fedi .hero__aside {
     position: relative;
     z-index: 4;
@@ -908,7 +920,8 @@
     right: auto;
     width: auto;
     height: auto;
-    margin: 36px 0 0;
+    margin: auto 0 0;
+    align-self: stretch;
     padding: 0 20px;
     border: 0;
     box-shadow: none;
