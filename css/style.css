@@ -2722,7 +2722,7 @@ h2 em {
 
 .footer-location-link {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   color: var(--ink-soft);
   gap: 8px;
 }
@@ -2766,7 +2766,6 @@ h2 em {
   stroke-width: 1.7;
 }
 
-.footer-location-link svg,
 .footer-hours svg {
   margin-top: 4px;
 }
@@ -2830,29 +2829,29 @@ h2 em {
 /* Entrate ripetibili */
 .has-js .reveal,
 .has-js .reveal-photo {
-  transition: opacity 700ms ease, transform 850ms var(--ease);
+  transition: opacity 450ms ease, transform 600ms var(--ease);
 }
 
 .has-js .reveal:not(.is-visible) {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(14px);
 }
 
 .has-js .reveal-photo:not(.is-visible) {
   opacity: 0;
-  transform: translateX(-58px) scale(0.965);
+  transform: translateX(-32px) scale(0.98);
 }
 
 .has-js .reveal-photo--right:not(.is-visible) {
-  transform: translateX(58px) scale(0.965);
+  transform: translateX(32px) scale(0.98);
 }
 
 .has-js .reveal-photo--rise:not(.is-visible) {
-  transform: translateY(84px) scale(0.955);
+  transform: translateY(44px) scale(0.97);
 }
 
 .has-js .duo-section .reveal-photo {
-  transition: opacity 760ms ease, transform 950ms var(--ease);
+  transition: opacity 500ms ease, transform 650ms var(--ease);
 }
 
 .has-js .duo-section .feature-photo.is-visible:nth-child(2) {
@@ -2867,7 +2866,7 @@ h2 em {
 
 .has-js .fade-section {
   opacity: 1;
-  transition: opacity 650ms ease;
+  transition: opacity 450ms ease;
 }
 
 .has-js .fade-section.section-visible {
@@ -3153,7 +3152,7 @@ h2 em {
   }
 
   .has-js .duo-section .reveal-photo--rise:not(.is-visible) {
-    transform: translateY(84px) scale(0.955);
+    transform: translateY(44px) scale(0.97);
   }
 
   .hero {
@@ -3945,7 +3944,7 @@ h2 em {
   }
 
   .duo-panel .section-heading h2 {
-    font-size: clamp(1.7rem, 6.7vw, 1.85rem);
+    font-size: clamp(1.35rem, 6.7vw, 1.85rem);
   }
 
   .duo-panel .section-heading > p:last-child {
@@ -4546,7 +4545,7 @@ h2:not(.sr-only) {
 @media (max-width: 780px) {
   h2:not(.sr-only),
   .hero h1 {
-    font-size: clamp(1.7rem, 6.7vw, 1.85rem);
+    font-size: clamp(1.35rem, 6.7vw, 1.85rem);
   }
 }
 
@@ -5621,7 +5620,7 @@ h2:not(.sr-only) {
   }
 
   .contact-section--contatti .contact-heading h1 {
-    font-size: clamp(1.7rem, 6.7vw, 1.85rem);
+    font-size: clamp(1.35rem, 6.7vw, 1.85rem);
   }
 
 
@@ -5716,8 +5715,8 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
    filetto (border-left/border-top) lascia il posto al bordo teal della scheda. */
 .laboratorio-grid {
   display: grid;
-  grid-template-columns: 480px 1fr;
-  column-gap: 120px;
+  grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
+  column-gap: clamp(48px, 8vw, 120px);
   align-items: start;
 }
 
@@ -5725,7 +5724,7 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
    con 560px «Laboratorio orafo» sta su una riga e il titolo non supera le tre. */
 @media (min-width: 1440px) {
   .laboratorio-grid {
-    grid-template-columns: 560px 1fr;
+    grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
   }
 }
 
@@ -5752,7 +5751,7 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
 
 .lavorazioni {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin: 0;
   padding: 0;
@@ -5811,7 +5810,7 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
 
 @media (max-width: 900px) {
   .laboratorio-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     row-gap: 48px;
   }
 

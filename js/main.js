@@ -211,7 +211,7 @@
           entry.target.classList.remove("is-visible");
         }
       });
-    }, { threshold: 0.14, rootMargin: "0px 0px -4%" });
+    }, { threshold: 0, rootMargin: "0px 0px 8% 0px" });
 
     revealElements.forEach((element) => revealObserver.observe(element));
 
@@ -229,7 +229,7 @@
 
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.target.classList.toggle("section-visible", entry.isIntersecting));
-    }, { threshold: 0.08 });
+    }, { threshold: 0, rootMargin: "0px 0px 8% 0px" });
 
     fadeSections.forEach((section) => sectionObserver.observe(section));
   }

@@ -72,3 +72,16 @@
 .contact-section--contatti .contact-whatsapp {
   font-size: clamp(0.68rem, 0.82vw, 0.78rem);
 }
+
+/* 12/10/2026 — su telefono l'H1 si alleggerisce e la sezione parte più in alto, così il bottone
+   «Chiama» entra nella prima schermata (Simone: «alleggerisci l'H1 in modo che Chiama entri nella piega»). */
+@media (max-width: 780px) {
+  .contact-section--contatti .contact-layout {
+    padding-top: 24px;
+  }
+
+  .contact-section--contatti .contact-heading h1 {
+    font-size: 1.15rem;
+    line-height: 1.15;
+  }
+}

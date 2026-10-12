@@ -214,6 +214,16 @@
   object-position: center 58%;
 }
 
+/* 12/10/2026 — «Perché da noi»: una delle due foto del negozio spezza il testo prima dell'ultimo
+   paragrafo; quella che resta a lato, da sola, prende il formato verticale della foto. */
+.prose > .marchio-foto {
+  margin: 28px 0;
+}
+
+.marchio-ambiente > .marchio-foto--21:only-child {
+  aspect-ratio: 3 / 4;
+}
+
 /* Nella hero la foto riempie la riga che le lascia la griglia, senza rapporto imposto */
 .marchio-foto--hero {
   min-height: 0;

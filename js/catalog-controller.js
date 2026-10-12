@@ -21,7 +21,7 @@
   // Foto vera solo per i marchi con `photos: true` in catalog-data.js; gli altri, e i prodotti
   // con image null, restano sul segnaposto.
   const productMarkup = (product, photos) => `
-    <li class="product-card" data-product-source="${escapeHtml(product.source)}">
+    <li class="product-card">
       <figure>
         <img src="${escapeHtml((window.catalogBase || "") + (photos && product.image ? product.image : "images/placeholder-di-nucci.png"))}" alt="${photos && product.image ? escapeHtml(product.alt) : ""}" loading="lazy" decoding="async">
         <span class="product-brand-badge" aria-hidden="true">${escapeHtml(product.badge)}</span>

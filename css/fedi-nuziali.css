@@ -658,6 +658,11 @@
   aspect-ratio: 3 / 2;
 }
 
+/* 12/10/2026 — la foto del banco è verticale: nel riquadro 3:2 si inquadra il bancone */
+.prezzo__foto img {
+  object-position: center 62%;
+}
+
 /* Doppia linea (leva 4.2), identica a quella di anelli-fidanzamento: divide l'incisione dal
    prezzo dentro la stessa sezione. */
 .double-line {
@@ -1202,6 +1207,18 @@
 
 /* Tablet: l'aside della hero scende sotto il copy, i due marchi affiancati */
 @media (max-width: 900px) {
+  /* 12/10/2026 — #prezzo a una colonna: il box «Si parte da» viene subito dopo il testo sul
+     prezzo, prima dell'incisione (che altrimenti gli sta sopra). */
+  #prezzo .split--data > div:first-child {
+    display: contents;
+  }
+
+  #prezzo .double-line,
+  #prezzo .subhead,
+  #prezzo .subhead + .prose {
+    order: 1;
+  }
+
   /* A una colonna la collocazione esplicita non serve piu': stessa specificita' delle regole
      che la fissano, altrimenti restano due colonne. */
   .split--brand > .brand-gallery,
@@ -1225,7 +1242,7 @@
   .hero--fedi .hero__aside {
     display: grid;
     grid-column: 1;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     margin: 0;
     padding: 0 7vw 48px;
     gap: 14px;
@@ -1405,7 +1422,11 @@
     gap: 28px;
   }
 
-  .split--photo-first .split__figure {
+  /* 12/10/2026 — a una colonna le foto vengono prima del testo: anche la galleria dei marchi
+     (POLELLO come UNOAERRE) e le foto del negozio, con le recensioni sotto il testo. */
+  .split--photo-first .split__figure,
+  .split--photo-first .brand-gallery,
+  .split--shop .split__stack {
     order: -1;
   }
 
@@ -1538,15 +1559,15 @@
    su due colonne. */
 .laboratorio-grid {
   display: grid;
-  grid-template-columns: 480px 1fr;
+  grid-template-columns: minmax(0, 480px) minmax(0, 1fr);
   align-items: start;
-  column-gap: 120px;
+  column-gap: clamp(48px, 8vw, 120px);
 }
 
 /* 11/10/2026 — titolo su tre righe al massimo: stessa colonna di style.css sopra i 1440px */
 @media (min-width: 1440px) {
   .laboratorio-grid {
-    grid-template-columns: 560px 1fr;
+    grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
   }
 }
 
@@ -1556,7 +1577,7 @@
 
 .lavorazioni {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   gap: 16px;
@@ -1702,7 +1723,7 @@
    desktop (due sopra, una sotto), non collassa a colonna unica. */
 @media (max-width: 900px) {
   .laboratorio-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     row-gap: 48px;
   }
 
