@@ -26,13 +26,15 @@
   text-underline-offset: 4px;
 }
 
-.contact-section--contatti .contact-lines a:not(.contact-lines__whatsapp):hover,
-.contact-section--contatti .contact-lines a:not(.contact-lines__whatsapp):focus-visible {
+.contact-section--contatti .contact-lines a:not(.contact-lines__whatsapp, .contact-lines__social):hover,
+.contact-section--contatti .contact-lines a:not(.contact-lines__whatsapp, .contact-lines__social):focus-visible {
   text-decoration: underline;
 }
 
-/* WhatsApp: solo icona, ma l'area cliccabile resta 44x44 (WCAG 2.5.5) anche senza il box intorno. */
-.contact-section--contatti .contact-lines__whatsapp {
+/* WhatsApp, Instagram e Facebook: solo icona, ma l'area cliccabile resta 44x44 (WCAG 2.5.5) anche senza il box intorno.
+   I due social stanno in una riga sola dietro «Seguici»: due righe di testo spingevano i pulsanti sotto la piega su telefono. */
+.contact-section--contatti .contact-lines__whatsapp,
+.contact-section--contatti .contact-lines__social {
   width: 44px;
   height: 44px;
   margin-left: 14px;
@@ -41,13 +43,28 @@
   transition: color 180ms ease;
 }
 
-.contact-section--contatti .contact-lines__whatsapp svg {
+.contact-section--contatti .contact-lines__whatsapp svg,
+.contact-section--contatti .contact-lines__social svg {
   width: 22px;
   height: 22px;
 }
 
+.contact-section--contatti .contact-lines__social svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.contact-section--contatti .contact-lines__social + .contact-lines__social {
+  margin-left: 4px;
+}
+
 .contact-section--contatti .contact-lines__whatsapp:hover,
-.contact-section--contatti .contact-lines__whatsapp:focus-visible {
+.contact-section--contatti .contact-lines__whatsapp:focus-visible,
+.contact-section--contatti .contact-lines__social:hover,
+.contact-section--contatti .contact-lines__social:focus-visible {
   color: var(--gold);
 }
 
