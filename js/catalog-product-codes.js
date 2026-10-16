@@ -43,7 +43,7 @@
 
         const title = cleanTitle(product.title, code);
         product.title = title;
-        product.alt = `${title}, ${brand.name}`;
+        product.alt = `${title} - ${category.name} ${brand.name}`;
       });
     });
   });

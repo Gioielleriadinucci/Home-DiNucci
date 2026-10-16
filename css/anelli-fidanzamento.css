@@ -1301,7 +1301,9 @@
   flex-shrink: 0;
 }
 
-.lavorazione span {
+.lavorazione h3 {
+  margin: 0;
+  line-height: inherit;
   color: var(--ink);
   font-family: var(--font-display);
   font-size: 22px;
@@ -1546,7 +1548,7 @@
     padding: 20px;
   }
 
-  .lavorazione span {
+  .lavorazione h3 {
     font-size: 19px;
   }
 }

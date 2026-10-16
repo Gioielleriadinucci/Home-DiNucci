@@ -18,7 +18,7 @@
         title: item.title,
         image: item.image === null ? null : `${assetRoot}/${item.image || `${brandId}/${folder}/${pad(index + 1)}.webp`}`,
         collection: item.collection || collection,
-        alt: `${item.title}, ${brand}`,
+        alt: `${item.title} - ${name} ${brand}`,
         source: item.source || source,
         badge: brand
       };

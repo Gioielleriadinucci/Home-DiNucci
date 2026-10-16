@@ -18,7 +18,7 @@
       title: item.title,
       image: item.image ? `images/catalog-brands/${item.image}` : null,
       collection: category.collection,
-      alt: `${item.title}, ${brand.name}`,
+      alt: `${item.title} - ${category.name} ${brand.name}`,
       source: item.source || category.source || brand.source,
       badge: brand.name
     });

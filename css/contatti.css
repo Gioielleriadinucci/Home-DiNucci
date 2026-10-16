@@ -102,3 +102,9 @@
     line-height: 1.15;
   }
 }
+
+/* 16/10/2026 — card «Fedi nuziali» e «Anelli di fidanzamento»: foto in scorrimento con il carosello
+   delle fedi in home (data-feature-carousel in main.js). Il binario delle slide è assoluto. */
+.hub-card__media[data-feature-carousel] {
+  position: relative;
+}
