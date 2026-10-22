@@ -4076,6 +4076,10 @@ h2 em {
     font-size: calc(clamp(2rem, 9.5vw, 2.85rem) - 7px);
   }
 
+  #catalog-title em {
+    display: block;
+  }
+
   .catalog-intro__description {
     font-size: 1rem;
     line-height: 1.5;

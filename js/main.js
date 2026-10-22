@@ -934,7 +934,7 @@
       review.insertAdjacentElement("beforebegin", cardTitle);
     }
 
-    const fullText = review.textContent.trim().replace(/\s+/g, " ");
+    const fullText = review.textContent.trim().replace(/[^\S\u00a0]+/g, " ");
     review.textContent = fullText;
     review.dataset.fullText = fullText;
 
