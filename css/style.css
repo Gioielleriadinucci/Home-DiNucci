@@ -1712,6 +1712,12 @@ h2 em {
   object-position: 68% center;
 }
 
+/* Miluna: la foto di campagna si porta a sinistra e in alto, cosi' la mano con l'anello sta al
+   centro della cornice e non finisce sotto la fascia del nome. */
+[data-catalog-brand="miluna"] .catalog-exhibitor__cover > img {
+  object-position: 8% 12%;
+}
+
 .catalog-exhibitor__wash {
   position: absolute;
   inset: 0;
