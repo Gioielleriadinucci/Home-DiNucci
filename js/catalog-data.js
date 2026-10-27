@@ -39,40 +39,42 @@
       name: "MILUNA",
       source: milunaSource,
       page: "pagine/marchi/miluna.html",
+      photos: true,
+      // Miluna: immagine coperta da copyright, ammessa online fino a dicembre 2027. Da sostituire dopo.
       cover: {
-        image: `${assetRoot}/miluna/cover-licensed.jpg`,
-        alt: "Immagine evocativa di una donna con filo di perle",
+        image: `${assetRoot}/miluna/pagine/fidanz-7-5.webp`,
+        alt: "Coppia che si abbraccia, lei con un anello di fidanzamento Miluna al dito",
         source: ""
       },
       categories: [
         makeCategory("MILUNA", "miluna", "gemma-del-cielo", "Gemma del Cielo", "Gemma del Cielo", milunaSource, "Linea riconoscibile in argento, topazi bianchi e Gemma del Cielo.", [
           "Anello con Gemma del Cielo ovale e topazi bianchi",
-          "Bracciale con Gemma del Cielo a cuore e topazi bianchi",
           "Bracciale con Gemma del Cielo ovale e topazi bianchi",
+          "Bracciale con Gemma del Cielo a cuore e topazi bianchi",
           "Collana con Gemma del Cielo a cuore e topazi bianchi"
         ]),
         makeCategory("MILUNA", "miluna", "perle-oriente", "Fili di perle Oriente", "Perle Oriente", "", "Il filo di perle è una specializzazione centrale e storica di Miluna.", [
           "Collana di perle Oriente con chiusura in oro bianco 40 cm",
-          "Collana di perle Oriente con distanziali in oro e diamanti",
+          "Collana lunga di perle Oriente a filo singolo",
           "Filo di perle Oriente 40 cm con chiusura in oro bianco",
           "Filo di perle Oriente 45 cm con chiusura in oro bianco"
         ]),
         makeCategory("MILUNA", "miluna", "bracciali-di-perle", "Bracciali di perle", "Perle Oriente", "", "Categoria dedicata alle variazioni di chiusura e centrale.", [
           "Bracciale di perle con dischi di diamanti e oro bianco",
           "Bracciale di perle Oriente con chiusura in oro bianco",
-          "Bracciale di perle Oriente con centrale e giro di diamanti"
+          "Bracciale di perle Oriente a filo singolo con chiusura in oro"
         ]),
         makeCategory("MILUNA", "miluna", "anelli-con-perle", "Anelli con perle", "Perle", "", "La perla diventa protagonista in anelli verificati in oro o argento.", [
-          "Anello Anastasia con perla Oriente e topazi taglio goccia",
-          "Anello Andromeda con perla Oriente circondata da topazi bianchi",
-          "Anello Andromeda con quattro perle Oriente e topazi bianchi",
-          "Anello Celestia con perla Oriente, Gemma del Cielo e topazio bianco"
+          "Anello con perla Oriente e diamanti a grappolo in oro bianco",
+          "Anello con perla Oriente circondata da diamanti in oro bianco",
+          "Anello con perla Oriente e piccoli diamanti laterali in oro bianco",
+          "Anello con perla Oriente e fascia di diamanti in oro bianco"
         ]),
         makeCategory("MILUNA", "miluna", "orecchini-di-perle", "Orecchini di perle", "Perle", "", "Modelli a lobo, cerchio e pendenti con perle Oriente verificati sul catalogo ufficiale.", [
-          "Orecchini a cerchio Eclissi con perle Oriente e topazi",
-          "Orecchini a cerchio Venere con perle Oriente e pavé di topazi",
-          "Orecchini a lobo Celestia con perle Oriente e Gemma del Cielo",
-          "Orecchini Anastasia pendenti con perle Oriente e topazi"
+          "Orecchini con perle Oriente e spirale di diamanti in oro bianco",
+          "Orecchini pendenti con perle Oriente e barretta di diamanti in oro bianco",
+          "Orecchini con perle Oriente e corona di diamanti in oro bianco",
+          "Orecchini con perle Oriente circondate da diamanti in oro bianco"
         ]),
         makeCategory("MILUNA", "miluna", "gioielli-con-diamanti", "Gioielli con diamanti", "Diamanti", milunaSource, "Selezione generale e non duplicata di anelli, collane, bracciali e orecchini con diamanti.", [
           { title: "Anello rivière con cinque diamanti a scalare", image: "miluna/diamanti-iconici/01.webp" },

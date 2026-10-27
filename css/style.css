@@ -794,9 +794,10 @@ h2 em {
     object-position: center 18%;
   }
 
-  /* Home: la foto e' gia' tagliata sopra l'insegna (fuori l'antifurto), si parte dal bordo alto */
-  #home .hero__aside img {
-    object-position: center top;
+  /* Home e Storia: l'ingresso va centrato nel riquadro (foto 860x1471, insegna al 27%) */
+  #home .hero__aside img,
+  #inizio .hero__aside img {
+    object-position: center;
   }
 }
 

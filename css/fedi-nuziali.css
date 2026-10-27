@@ -1677,10 +1677,12 @@
   min-width: 0;
 }
 
-/* Taglio e filo blu di .momento__figure e delle altre cornici della pagina: niente ombra,
-   niente velatura, il bordo teal si vede nell'inset di 1px del carosello. */
+/* Taglio degli angoli come .momento__figure e le altre cornici della pagina: niente ombra,
+   niente velatura, niente filo teal. */
 .miluna-sposa__item .feature-photo__image {
-  background: rgba(69, 156, 175, 0.9);
+  /* 27/10/2026 — fondo bianco al posto del teal: il filo da 1px si vedeva solo su alto e sinistra
+     (il nastro delle slide è alto e largo quanto il riquadro, non 2px in meno) e lungo il taglio. */
+  background: var(--white);
   clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
 }
 
@@ -1696,9 +1698,11 @@
   content: none;
 }
 
+/* 27/10/2026 — il nastro delle slide combacia con il riquadro (era rientrato di 1px ma largo come
+   lui: la slide vicina faceva capolino di 1px da un lato). Il taglio lo fa già il riquadro. */
 .miluna-sposa__item .feature-photo__slides {
-  inset: 1px;
-  clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+  inset: 0;
+  clip-path: none;
 }
 
 .miluna-sposa__item p {

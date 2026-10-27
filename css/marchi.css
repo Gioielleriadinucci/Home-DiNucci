@@ -229,9 +229,10 @@
   min-height: 0;
 }
 
-/* L'ingresso e' tagliato sopra l'insegna (fuori l'antifurto): si parte dal bordo alto */
+/* L'ingresso va centrato nel riquadro: la foto nuova (860x1471) ha già l'insegna al 27% e la
+   porta intera, il bordo alto la tagliava sotto. */
 .marchio-foto--hero img {
-  object-position: center top;
+  object-position: center;
 }
 
 /* Le scritte non stanno in colonne strette: ogni blocco di testo riempie il contenitore che
@@ -397,6 +398,16 @@
 .marchio-segno--largo img {
   max-height: 120px;
   object-fit: contain;
+}
+
+/* Miluna: logo bianco su fondo pieno #5B9AC5. Il `darken` serve al logo scuro con fondo; qui
+   il logo è trasparente e darken lo farebbe sparire. */
+.marchio-segno--miluna::before {
+  background: #5b9ac5;
+}
+
+.marchio-segno--miluna img {
+  mix-blend-mode: normal;
 }
 
 @media (max-width: 780px) {

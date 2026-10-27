@@ -243,11 +243,21 @@
    altrimenti resta una fetta di sfondo. Miluna: il filo di perle e la mano con l'anello.
    Comete: le mani dell'artigiano e la stella di diamanti. */
 .brand-sign--miluna .brand-sign__photo {
-  object-position: center 48%;
+  object-position: center 42%;
 }
 
 .brand-sign--comete .brand-sign__photo {
   object-position: center 55%;
+}
+
+/* Miluna: logo bianco su fondo pieno #5B9AC5, al posto del pannello bianco. Stessa cornice e
+   stesso taglio degli altri riquadri; l'alone bianco sotto la firma qui laverebbe il logo. */
+.brand-sign--miluna .brand-sign__mark::before {
+  background: #5b9ac5;
+}
+
+.brand-sign--miluna .brand-sign__mark::after {
+  content: none;
 }
 
 /* Alone dietro la firma: stessa ricetta di .hero h1::before in style.css, con le opacita' alzate
@@ -615,7 +625,7 @@
 
 .feature-photo--brand h2 {
   margin: 0;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Su fondo chiaro l'em è teal, su fondo scuro è oro: la regola vale su tutto il sito.
