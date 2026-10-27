@@ -236,7 +236,8 @@
 
   /* Hero: una foto per categoria, cambio ogni 2,5 secondi */
   const heroSlides = [...document.querySelectorAll(".hero-slide")];
-  let heroIndex = 0;
+  // La prima foto la sceglie a caso lo script in pagina, subito dopo le slide: si riparte da quella.
+  let heroIndex = Math.max(0, heroSlides.findIndex((slide) => slide.classList.contains("is-active")));
   let heroTimer;
 
   // La prima foto e' l'unica necessaria al paint iniziale. Le successive vengono

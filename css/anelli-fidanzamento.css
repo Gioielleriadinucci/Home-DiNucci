@@ -623,6 +623,22 @@
   margin-bottom: 24px;
 }
 
+/* Miluna chiede il logo bianco su fondo blu #5B9AC5 ovunque compaia: nella scheda bianca va dentro
+   un riquadro blu, con lo stesso taglio d'angolo dei riquadri della testata. */
+.feature-photo--brand .brand-mark-box {
+  display: inline-flex;
+  margin-bottom: 24px;
+  padding: 14px 26px;
+  align-items: center;
+  background: #5b9ac5;
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.feature-photo--brand .brand-mark-box img {
+  width: auto;
+  height: 44px;
+}
+
 .feature-photo--brand h2 {
   margin: 0;
   white-space: normal;
