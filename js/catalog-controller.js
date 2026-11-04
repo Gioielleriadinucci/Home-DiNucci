@@ -1,7 +1,11 @@
 (() => {
   "use strict";
 
-  const brands = Array.isArray(window.catalogBrandData) ? window.catalogBrandData : [];
+  // Marchi nascosti finché non arrivano le foto (2026-11-04): toglili da qui per rimetterli.
+  const hiddenBrandIds = ["greggio", "ottaviani"];
+  const hiddenCategories = { unoaerre: ["cornici-argento"] };
+  const brands = (Array.isArray(window.catalogBrandData) ? window.catalogBrandData : []).filter((brand) => !hiddenBrandIds.includes(brand.id))
+    .map((brand) => ({ ...brand, categories: brand.categories.filter((cat) => !(hiddenCategories[brand.id] || []).includes(cat.id)) }));
   const catalogList = document.querySelector(".catalog-list--brands");
   if (!brands.length || !catalogList) return;
 
