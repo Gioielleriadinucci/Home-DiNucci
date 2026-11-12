@@ -562,3 +562,37 @@
     top: calc(100% + var(--hero-segno-h) + var(--hero-segno-gap));
   }
 }
+
+/* 12/11/2026 — Recensioni dei marchi: sotto il badge mancavano i due bottoni che le altre pagine
+   hanno (Matrimonio.com e Google). La riga è larga quanto il badge, così i bordi coincidono. */
+.marchio-recensioni .story-review {
+  margin-bottom: 16px;
+}
+
+.marchio-recensioni .marchio-recensioni__azioni {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: min(100%, 820px);
+  margin: 0 auto clamp(22px, 2.2vw, 32px);
+  gap: 12px;
+}
+
+.marchio-recensioni .marchio-recensioni__azioni .reviews-cta {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+/* 12/11/2026 — «Perché da noi»: la foto verticale usciva sotto l'ultima riga del testo. Da 901px
+   in su prende l'altezza del testo (al massimo il vecchio 3/4) invece di un'altezza sua. */
+@media (min-width: 901px) {
+  .marchio-split--stretta {
+    align-items: stretch;
+  }
+
+  .marchio-split--stretta .marchio-ambiente > .marchio-foto--21:only-child {
+    min-height: 320px;
+    max-height: calc(var(--marchio-aside, 380px) * 4 / 3);
+    aspect-ratio: auto;
+  }
+}

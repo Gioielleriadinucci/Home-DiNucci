@@ -652,6 +652,33 @@
   }
 }
 
+/* 12/11/2026 — mezzo schermo (781-1199px): sotto il voto i due bottoni prendevano solo la larghezza
+   del testo e restavano stretti a sinistra. Ora la riga è larga quanto il filo del voto e i bottoni
+   se la dividono (come in fedi e anelli). */
+@media (min-width: 781px) and (max-width: 1199px) {
+  .storia-recensioni .reviews-bar {
+    align-items: stretch;
+  }
+
+  .storia-recensioni .reviews-bar__heading {
+    flex: 1 1 100%;
+  }
+
+  .storia-recensioni .story-review__link {
+    width: 100%;
+  }
+
+  .storia-recensioni .reviews-bar__actions {
+    width: 100%;
+    gap: 16px;
+  }
+
+  .storia-recensioni .reviews-cta {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
 /* Sezione 8 — leve 6.1 e 7.1: la scheda a righe su panel bianco, si legge in venti secondi */
 .accesso {
   margin: 0;
@@ -817,6 +844,13 @@
     line-height: 1.55;
   }
 
+  /* 12/11/2026 - 17px: misura unica dei sottotesti su telefono (Simone, 12/11/2026): apertura della pagina e sottotesti dei titoli.
+     Il corpo del testo (.storia-prose p) e le card restano a 16px. */
+  .storia-prose .storia-lead,
+  .storia-heading .heading-ornament + p {
+    font-size: 17px;
+  }
+
   .heading-ornament--rombo {
     width: 108px;
   }
@@ -940,7 +974,7 @@
   }
 
   .oro-panel__testo {
-    font-size: 1rem;
+    font-size: 17px;
     line-height: 1.55;
   }
 

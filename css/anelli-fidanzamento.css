@@ -448,6 +448,30 @@
   }
 }
 
+/* 12/11/2026 — mezzo schermo (781-1300px): le cinque montature in colonna restavano schiacciate a
+   sinistra, con righe lunghissime sotto e tutto lo spazio a destra vuoto. Ora stanno in tre
+   colonne (3 + 2) allineate a sinistra, con un filetto azzurro sotto ogni voce (idea B scelta da
+   Simone). Le righe lunghe a sé stanti sono nascoste. Sotto i 781px resta la colonna con la riga,
+   sopra i 1300 la riga unica. */
+@media (min-width: 781px) and (max-width: 1300px) {
+  .profili {
+    justify-content: center;
+    column-gap: 32px;
+    row-gap: 0;
+  }
+
+  .profilo {
+    width: calc((100% - 64px) / 3);
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(69, 156, 175, 0.4);
+    justify-content: flex-start;
+  }
+
+  .profilo__divider {
+    display: none;
+  }
+}
+
 .profilo__head {
   display: flex;
   align-items: center;
@@ -779,6 +803,51 @@
   gap: 10px;
 }
 
+/* 12/11/2026 — mezzo schermo (781-1199px): sotto il voto i due bottoni prendevano solo la larghezza
+   del testo e restavano stretti a sinistra. Ora la riga è larga quanto il filo del voto e i bottoni
+   se la dividono. */
+@media (min-width: 781px) and (max-width: 1199px) {
+  .reviews-inline .reviews-bar {
+    align-items: stretch;
+  }
+
+  .reviews-inline .reviews-bar__heading {
+    flex: 1 1 100%;
+  }
+
+  .reviews-inline .story-review__link {
+    width: 100%;
+  }
+
+  .reviews-inline .reviews-bar__actions {
+    width: 100%;
+    gap: 16px;
+  }
+
+  .reviews-inline .reviews-cta {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* 12/11/2026 — mezzo schermo (901-1199px): il testo del negozio era molto più alto delle due foto.
+   La colonna foto ora è alta quanto il testo e le due foto si dividono l'altezza. */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .split--shop {
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .split--shop .split__stack {
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .split--shop .split__stack .split__figure {
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+}
+
 /* Sezione 10: FAQ in colonna da 680, accordion nativo */
 .faq-block__shell {
   width: 100%;
@@ -1000,26 +1069,52 @@
     gap: 36px;
   }
 
-  /* .profilo e .profilo__divider sono nel @media (max-width: 1300px) sopra .profili, cosi'
-     la stessa regola vale anche nella fascia 781-1300px e non solo sotto i 780. Sotto i 780
-     pero' il thumb scende a 56px e i 3px del divisorio sembrano troppo spessi in proporzione:
-     qui si riporta a 2px, per Simone il 17/09/2026. */
+  /* 12/11/2026 - telefono: l'elenco a sinistra con la foto da 56px stava male (Simone). Ora due
+     colonne con la foto tonda da 104px sopra il nome e un filetto azzurro sotto ogni voce: la stessa
+     disposizione del mezzo schermo, riportata a telefono (proposta A, scelta da Simone). Con un numero
+     dispari di voci l'ultima sta al centro. I filetti a se' stanti (.profilo__divider) non servono. */
+  .profili {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 14px;
+  }
+
+  .profilo {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(69, 156, 175, 0.4);
+  }
+
+  .profilo:nth-of-type(odd):last-of-type {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 7px);
+  }
+
   .profilo__divider {
-    height: 2px;
+    display: none;
   }
 
   .profilo__head {
-    gap: 18px;
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
   }
 
   .profilo__thumb {
-    width: 56px;
-    height: 56px;
-    flex-basis: 56px;
+    width: 104px;
+    height: 104px;
+    flex-basis: 104px;
   }
 
   .profilo h3 {
     font-size: 22px;
+  }
+
+  /* 12/11/2026 - 17px: misura unica dei sottotesti su telefono (Simone, 12/11/2026). Prima 20px anche su telefono. */
+  .section-open__lead {
+    font-size: 17px;
   }
 
   .metals {
@@ -1659,5 +1754,15 @@
 
   .panel--after {
     margin-top: 40px;
+  }
+}
+
+/* 12/11/2026 — mezzo schermo (901-1300px): il laboratorio aveva il testo largo 480px e quattro
+   box piccoli, con le scritte spezzate su due o tre righe. Ora i box hanno più spazio (la colonna
+   del testo si stringe) e le scritte si stendono. Richiesto da Simone. */
+@media (min-width: 901px) and (max-width: 1300px) {
+  .laboratorio-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    column-gap: 40px;
   }
 }

@@ -3610,7 +3610,7 @@ h2 em {
   }
 
   .catalog-intro__description {
-    font-size: 1rem;
+    font-size: 17px;
   }
 
   .catalog-list {
@@ -3853,7 +3853,7 @@ h2 em {
     margin-top: 9px;
     margin-right: auto;
     margin-left: 0;
-    font-size: clamp(0.96rem, 4.2vw, 1.08rem);
+    font-size: 17px;
     line-height: 1.38;
     text-align: left;
     isolation: isolate;
@@ -3953,12 +3953,19 @@ h2 em {
   }
 
   .duo-panel .section-heading h2 {
-    font-size: clamp(1.35rem, 6.7vw, 1.85rem);
+    font-size: clamp(1.3rem, 6.5vw, 1.85rem);
   }
 
   .duo-panel .section-heading > p:last-child {
-    font-size: 1rem;
+    font-size: 17px;
     line-height: 1.55;
+  }
+
+  /* 12/11/2026 - 17px: misura unica dei sottotesti su telefono (Simone, 12/11/2026). Questi due sottotesti prendevano il token --font-description (20px)
+     anche su telefono; la specificita' della seconda regola batte quella piu' bassa scritta dopo. */
+  .section-heading--center > p:last-child,
+  .laboratorio-grid .laboratorio-grid__intro > p:last-child {
+    font-size: 17px;
   }
 
   .finance-wrap {
@@ -4067,7 +4074,7 @@ h2 em {
   }
 
   .gold-banner__description {
-    font-size: 1rem;
+    font-size: 17px;
     line-height: 1.5;
   }
 
@@ -4088,7 +4095,7 @@ h2 em {
   }
 
   .catalog-intro__description {
-    font-size: 1rem;
+    font-size: 17px;
     line-height: 1.5;
   }
 
@@ -4251,7 +4258,7 @@ h2 em {
 
   .contact-intro {
     margin: 24px auto 22px;
-    font-size: 1rem;
+    font-size: 17px;
     line-height: 1.55;
   }
 
@@ -4559,6 +4566,13 @@ h2:not(.sr-only) {
   h2:not(.sr-only),
   .hero h1 {
     font-size: clamp(1.35rem, 6.7vw, 1.85rem);
+  }
+
+  /* 12/11/2026 — H2 su telefono: 3% più piccoli (6,5vw invece di 6,7vw). Titoli come «Scegliere le fedi
+     insieme» stavano nella riga per un pixel e andavano a capo con una parola sola: ora restano su una riga.
+     L'H1 della hero non cambia. */
+  h2:not(.sr-only) {
+    font-size: clamp(1.3rem, 6.5vw, 1.85rem);
   }
 }
 
@@ -5254,13 +5268,26 @@ h2:not(.sr-only) {
   line-height: 1.75;
 }
 
+/* 12/11/2026 — i numeri nelle risposte erano già link (WhatsApp e telefono) ma identici al testo:
+   ora si vedono, con lo stile dei link nel testo del sito (teal scuro e filo da 1px, come .prose a). */
+.faq-item__a p a {
+  color: var(--teal-dark);
+  border-bottom: 1px solid currentColor;
+  transition: color 180ms ease;
+}
+
+.faq-item__a p a:hover,
+.faq-item__a p a:focus-visible {
+  color: var(--teal);
+}
+
 /* 1) chi-siamo - link ai servizi */
 .service-link {
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }
 
-.service-link a {
+.service-link a:not(.feature-photo__cta) {
   display: inline-block;
   margin-bottom: 8px;
   color: var(--ink);
@@ -5274,8 +5301,8 @@ h2:not(.sr-only) {
   transition: color 180ms ease;
 }
 
-.service-link a:hover,
-.service-link a:focus-visible {
+.service-link a:not(.feature-photo__cta):hover,
+.service-link a:not(.feature-photo__cta):focus-visible {
   color: var(--teal-dark);
 }
 
@@ -5565,13 +5592,25 @@ h2:not(.sr-only) {
   line-height: 1.25;
 }
 
+/* Il link sta subito sotto il testo e ha lo stile dei link delle card della storia
+   (.feature-photo__cta, small-caps senza sottolineatura): 14px dal paragrafo come lì */
 .hub-card .service-link p {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
-.hub-card .service-link a {
-  margin: auto 0 0;
+.hub-card .service-link .feature-photo__cta {
   align-self: flex-start;
+}
+
+/* Come i link delle altre pagine (.duo-panel__link): al passaggio diventa oro e la freccia sale */
+.hub-card .service-link .feature-photo__cta:hover,
+.hub-card .service-link .feature-photo__cta:focus-visible {
+  color: var(--gold-dark);
+}
+
+.hub-card .service-link .feature-photo__cta:hover i,
+.hub-card .service-link .feature-photo__cta:focus-visible i {
+  transform: translate(2px, -2px);
 }
 
 /* 2) Sezione 3 - accordion a colonna centrata 900 */
@@ -5867,6 +5906,11 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
   white-space: nowrap;
 }
 
+/* 11/11/2026 — CTA su una riga anche fuori dall'hero (Richiedi una valutazione, Venite a trovarci in negozio) */
+.button {
+  white-space: nowrap;
+}
+
 @media (max-width: 780px) {
   /* Su telefono la hero ha la foto in cornice a destra: i bottoni restano larghi uguali,
      con meno spaziatura fra le lettere, e vanno a capo solo se il testo non ci sta. */
@@ -5931,10 +5975,235 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.76) 60%, rgba(255, 255, 255, 0) 100%);
   }
 
+  /* H1 e sottotitolo di fedi e anelli centrati come nelle altre hero (le CTA restano a sinistra, come ovunque) */
+  .hero--fedi h1,
+  .hero--fedi .hero__subheadline {
+    text-align: center;
+  }
+
+  .hero--fedi .hero__subheadline {
+    margin-inline: auto;
+  }
+
+  .hero--fedi h1::before,
+  .hero--fedi .hero__subheadline::before {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.76) 60%, rgba(255, 255, 255, 0) 100%);
+  }
+
   .hero:not(.hero--fedi) .hero__actions {
     position: absolute;
     top: 100%;
     left: 20px;
     margin: 0;
+  }
+}
+
+/* 12/11/2026 — mezzo schermo (home, 901-1300px). Dal giro delle pagine, richiesto da Simone.
+   1) Fedi / anelli: le due metà si toccavano al centro (testi e cartellini fino al filetto):
+      ora ogni metà ha un margine interno.
+   2) Storia: foto con le proporzioni dello schermo intero, blocco foto + testo centrato (spazi uguali a destra e a sinistra).
+   3) Compro oro: fascia troppo alta: meno altezza e meno spazio sopra e sotto.
+   4) Contatti: spostato più sotto, vale da 901px in su su home e marchi. */
+@media (min-width: 901px) and (max-width: 1300px) {
+  .duo-panel:first-child {
+    padding-right: 28px;
+    padding-left: 20px;
+  }
+
+  .duo-panel:last-child {
+    padding-right: 20px;
+    padding-left: 28px;
+  }
+
+  /* I due cartellini di ogni metà erano fissi a 260px e, nelle metà strette, si sovrapponevano
+     fra loro e a quelli dell'altra metà: ora prendono la larghezza della loro colonna e restano
+     quadrati. */
+  .duo-photos > .feature-photo,
+  .duo-photos .feature-photo__image {
+    width: 100%;
+  }
+
+  .duo-photos .feature-photo__image {
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  /* Il cartellino di Polello restava su una riga sola e allargava la sua scheda (più grande
+     della prima e fino al filetto blu): ora va a capo come gli altri. */
+  .duo-photos .feature-photo__note--polello {
+    width: 92%;
+    max-width: 38ch;
+    white-space: normal;
+  }
+
+  /* Tre righe di altezza per tutti i cartellini, così le quattro schede partono alla stessa quota. */
+  .duo-panel--fedi .feature-photo__note,
+  .duo-panel--fidanzamento .feature-photo__note {
+    min-height: 4.05em;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1300px) {
+  /* Storia: foto della stessa larghezza di prima (45% di quello che resta al 92%, cioè 38,7vw), ma
+     la colonna del testo prende la larghezza del testo e il blocco sta al centro: gli spazi a
+     destra e a sinistra sono uguali. Lo spostamento a destra di 10vw (regola «Chi siamo» sopra)
+     serve a bilanciare il blocco a schermo intero: qui, con il blocco già centrato, si toglie. */
+  .story-grid {
+    grid-template-columns: 38.7vw minmax(0, max-content);
+    column-gap: 6vw;
+    width: fit-content;
+    max-width: 92%;
+    margin-inline: auto;
+    transform: none;
+  }
+
+  .laboratorio-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    column-gap: 40px;
+  }
+
+  .gold-banner,
+  .gold-banner__content {
+    min-height: 0;
+  }
+
+  .gold-banner__content {
+    padding: 28px 0 24px;
+    row-gap: 14px;
+  }
+}
+
+/* 12/11/2026 — footer a mezzo schermo (981-1440px): sotto i 1180px il footer andava su tre colonne
+   con due colonne impilate e grandi vuoti, e da 1100 la colonna dei contatti finiva sopra «Il
+   negozio». Ora le cinque colonne stanno in riga fin da 981px: la colonna dei contatti ha la
+   larghezza del suo testo e resta dove nasce. Sotto i 981px resta l'impaginazione a tre colonne. */
+@media (min-width: 981px) and (max-width: 1440px) {
+  .footer-grid {
+    grid-template-columns: minmax(160px, 1.1fr) repeat(3, minmax(90px, 0.6fr)) max-content;
+  }
+
+  .footer-identity {
+    grid-row: auto;
+  }
+
+  .footer-contacts {
+    justify-self: start;
+    transform: none;
+  }
+}
+
+/* Fedi / anelli sotto i 1000px: il cartellino di Polello va su quattro righe. */
+@media (min-width: 901px) and (max-width: 1000px) {
+  .duo-panel--fedi .feature-photo__note,
+  .duo-panel--fidanzamento .feature-photo__note {
+    min-height: 5.4em;
+  }
+}
+
+/* 12/11/2026 — navbar a mezzo schermo (1021-1180px). Fra 1021 e 1180px le voci salivano a 16px
+   (11,8px nel resto del sito): il gruppo di sinistra toccava il logo e a destra restava vuoto.
+   Ora le voci sono più piccole e ogni gruppo occupa la sua metà: lo spazio fra le voci e il logo
+   è uguale a destra e a sinistra, e i margini esterni pure. */
+@media (min-width: 1021px) and (max-width: 1180px) {
+  .nav-link,
+  .nav-dropdown__trigger {
+    font-size: 0.78rem;
+    letter-spacing: 0.09em;
+  }
+}
+
+@media (min-width: 1021px) and (max-width: 1180px) {
+  .desktop-nav--left {
+    justify-content: space-between;
+    padding-right: 58px;
+  }
+
+  /* 12/11/2026 — a destra Catalogo era lontano da "Vieni a trovarci" (146px contro 86px fra le
+     voci di sinistra). Il vuoto che resta viene diviso: il logo ha 58px da ogni lato e il gruppo
+     di destra sta a filo del bordo. Lo spazio fra Catalogo e "Vieni a trovarci" è quello fra le
+     voci di sinistra più 60px (la differenza di larghezza fra i due gruppi): 46vw - 390px, cioè
+     metà della larghezza utile meno logo, voci e 58px dal logo. */
+  .desktop-nav--right {
+    justify-content: flex-end;
+    gap: calc(46vw - 390px);
+  }
+}
+
+/* 12/11/2026 — Catalogo in home.
+   1) Cambiando categoria l'altezza del blocco cambiava (i titoli delle schede vanno da 1 a 4 righe)
+      e con lei la foto di campagna a sinistra si allungava o si accorciava. Ora ogni titolo riserva
+      lo spazio per il numero massimo di righe che ha a quella larghezza: l'altezza non cambia più.
+   2) Miluna: il logo nella foto era tagliato a destra. Il logo sta a metà della foto (49%): la
+      cornice ora è centrata lì, il logo si vede intero e la foto non perde nessun lato importante. */
+@media (min-width: 781px) and (max-width: 1100px) {
+  .catalog-exhibitor--brand .product-card h4 {
+    min-height: 4.8em;
+  }
+}
+
+@media (min-width: 1101px) and (max-width: 1440px) {
+  .catalog-exhibitor--brand .product-card h4 {
+    min-height: 3.6em;
+  }
+}
+
+@media (min-width: 1441px) {
+  .catalog-exhibitor--brand .product-card h4 {
+    min-height: 2.4em;
+  }
+}
+
+[data-catalog-brand="miluna"] .catalog-exhibitor__cover > img {
+  object-position: 49% center;
+}
+
+/* 12/11/2026 — Sezione «Vieni a trovarci» di home e pagine dei marchi (da 901px in su).
+   L'altezza minima era 700px per un contenuto alto 360px: un vuoto enorme sopra e sotto i testi.
+   Ora la sezione prende l'altezza del contenuto, con la mappa più bassa e meno spazio ai bordi. */
+@media (min-width: 901px) {
+  .contact-section:not(.contact-section--contatti) {
+    min-height: 0;
+  }
+
+  .contact-section:not(.contact-section--contatti) .contact-layout {
+    padding: 44px 0;
+  }
+
+  .contact-section:not(.contact-section--contatti) .map-wrap {
+    height: 300px;
+  }
+
+  .contact-section:not(.contact-section--contatti) .contact-divider {
+    height: 280px;
+  }
+}
+
+/* 12/11/2026 — Da 781px in su:
+   1) home e storia: la sottotestata della hero cadeva sopra la foto del gioiello e il solo
+      text-shadow non bastava. Ora ha lo stesso alone bianco morbido che hanno già fedi e anelli.
+   2) Fedi / anelli in home: il titolo «Anelli di fidanzamento» (una riga sola) sporgeva a destra
+      della colonna. Ora il titolo sta al centro della sua metà, con lo spazio che avanza uguale
+      da entrambi i lati. */
+@media (min-width: 781px) {
+  .hero:not(.hero--fedi) .hero__subheadline {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+  }
+
+  .hero:not(.hero--fedi) .hero__subheadline::before {
+    position: absolute;
+    z-index: -1;
+    inset: -12px -26px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.55) 48%, rgba(255, 255, 255, 0) 78%);
+    content: "";
+    filter: blur(13px);
+    pointer-events: none;
+  }
+
+  .duo-panel .section-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
