@@ -5862,6 +5862,18 @@ img[src$="placeholder-di-nucci.png"][src$="placeholder-di-nucci.png"] {
   color: var(--ink);
 }
 
+/* 25/11/2026 — frase sotto le voci del laboratorio in home (Simone, piano top 3) */
+.lavorazione__testo {
+  min-width: 0;
+  text-align: left;
+}
+
+.lavorazione__testo p {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
 @media (max-width: 900px) {
   .laboratorio-grid {
     grid-template-columns: minmax(0, 1fr);
